@@ -12,13 +12,13 @@ window.onload = function start() {
 
 function report_menu_creation() {
     // populates the tab menu for the number of reports/incidents we have
-    var active = "list-group-item-dark";
+    var active = "active";
     for (i = 0; i < reports.length; i++){
         var link = "#";
         var id = "" + reports[i];
         var label = "" + reports[i];
         document.getElementById("reports_menu").innerHTML +=  "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action "+ active +"\" id=\"" + id + "\">" + label + "</a>";
-        active = "list-group-item-light";
+        active = "";
     }
 }
 
@@ -26,7 +26,7 @@ function table_population() {
     // populates the table with the data in values
     var report_table = document.getElementById("report_table");
     var values_count = 0;
-    for(var i = 0; i < 7; i++){
+    for(var i = 1; i < 8; i++){
         report_table.rows[i].cells[1].innerHTML = values[values_count];
         values_count++
     }
@@ -39,11 +39,9 @@ function on_tab_click(this_object) {
     for (var i = 0; i < reports.length; i++){
         var object_name = "Incident " + count;
         var object = document.getElementById(object_name);
-        $(object).removeClass("list-group-item-dark");
-        $(object).addClass("list-group-item-light");
+        $(object).removeClass("active");
         count++;
 
     }
-    $(this_object).removeClass("list-group-item-light");
-    $(this_object).addClass("list-group-item-dark");
+    $(this_object).addClass("active");
 }

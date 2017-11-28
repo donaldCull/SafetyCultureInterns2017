@@ -18,14 +18,14 @@
 <script src="js/incidents.js"></script>
 
 <!-- top page navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav_bar">
 
     <a class="navbar-brand" href="#">Insert Name Here</a>
 
     <ul class="navbar-nav mr-auto">
     </ul>
     <div class="dropdown">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             user@insnmhere.com.au
         </button>
@@ -48,10 +48,10 @@
             <!-- tab navigation-->
             <ul class="nav nav-tabs" id="nav_tabs">
                 <li class="nav-item">
-                    <a class="nav-link  text-secondary" href="index.html">Reports</a>
+                    <a class="nav-link" href="index.html">Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-dark" href="#">Incidents</a>
+                    <a class="nav-link active" href="#">Incidents</a>
                 </li>
 
             </ul>
@@ -71,6 +71,13 @@
 
                 <table class="table table-hover" id="report_table">
                     <tbody>
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Incident:</th>
+                        <th scope="col">#00001</th>
+
+                    </tr>
+                    </thead>
                     <tr>
                         <th scope="row">Serial:</th>
                         <td></td>
@@ -104,8 +111,8 @@
 
 
                 <div id="print_download_btns">
-                    <button type="button" class="btn btn-secondary disabled">Download</button>
-                    <button onclick="window.print();return false;" type="button" class="btn btn-secondary">Print
+                    <button type="button" class="btn btn-primary disabled">Download</button>
+                    <button onclick="window.print();return false;" type="button" class="btn btn-primary">Print
                     </button>
 
 

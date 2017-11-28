@@ -14,18 +14,19 @@
     <link href="css/print_report.css" rel="stylesheet" media="print">
 </head>
 
-<body>
+<body class="bg-light">
 <script src="js/index.js"></script>
 
+
 <!-- top page navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav_bar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav_bar">
 
     <a class="navbar-brand" href="#">Insert Name Here</a>
 
     <ul class="navbar-nav mr-auto">
     </ul>
     <div class="dropdown">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             user@insnmhere.com.au
         </button>
@@ -38,9 +39,11 @@
     </div>
 </nav>
 
+
 <!-- container for rest of main-->
 <div class="container-fluid" id="main_container">
     <div class="row">
+
 
         <!-- left side of page-->
         <div class="col-3" id="col4">
@@ -48,10 +51,10 @@
             <!-- tab navigation-->
             <ul class="nav nav-tabs" id="nav_tabs">
                 <li class="nav-item">
-                    <a class="nav-link active text-dark" href="#">Reports</a>
+                    <a class="nav-link active" href="#">Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="incidents.html">Incidents</a>
+                    <a class="nav-link" href="incidents.html">Incidents</a>
                 </li>
 
             </ul>
@@ -62,12 +65,13 @@
 
         </div>
 
+
         <!-- right side of page-->
         <div class="col-9" id="col8">
 
             <div id="data_table">
 
-                <table class="table table-hover" id="report_table">
+                <table class="table table-hover table-bordered" id="report_table">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Date</th>
@@ -129,8 +133,12 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- buttons below table -->
                 <div class="dropdown" id="sensor_select_btn">
-                    <button class="btn-sm btn-secondary dropdown-toggle" type="button" id="sensor_report_select"
+
+                    <!-- dropdown for sensors -->
+                    <button class="btn-sm btn-outline-primary dropdown-toggle" type="button" id="sensor_report_select"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Drinks Fridge
                     </button>
@@ -140,9 +148,11 @@
                     </div>
                 </div>
 
+
+                <!-- download and print buttons -->
                 <div id="print_download_btns">
-                    <button type="button" class="btn btn-secondary disabled">Download</button>
-                    <button onclick="window.print();return false;" type="button" class="btn btn-secondary">Print
+                    <button type="button" class="btn btn-primary disabled">Download</button>
+                    <button onclick="window.print();return false;" type="button" class="btn btn-primary">Print
                     </button>
 
 
@@ -154,6 +164,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
