@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://safetyculture.com/assets/images/twitter/twitter_mark.png">
+    <title>#Interns2017</title>
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- My css below -->
+    <link href="css/incidents.css" rel="stylesheet">
+    <link href="css/print_report.css" rel="stylesheet" media="print">
+</head>
+
+<body>
+<script src="js/incidents.js"></script>
+
+<!-- top page navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#">Insert Name Here</a>
+
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="dropdown">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            user@insnmhere.com.au
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Account Settings</a>
+            <a class="dropdown-item" href="#">User Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Log out</a>
+        </div>
+    </div>
+</nav>
+
+<!-- container for rest of main-->
+<div class="container-fluid" id="main_container">
+    <div class="row">
+
+        <!-- left side of page-->
+        <div class="col-3" id="col4">
+
+            <!-- tab navigation-->
+            <ul class="nav nav-tabs" id="nav_tabs">
+                <li class="nav-item">
+                    <a class="nav-link  text-secondary" href="index.html">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" href="#">Incidents</a>
+                </li>
+
+            </ul>
+
+            <!-- list of reports/incidents-->
+            <div class="list-group" id="reports_menu">
+            </div>
+
+        </div>
+
+        <!-- right side of page-->
+        <div class="col-9" id="col8">
+
+
+            <div id="data_table">
+
+
+                <table class="table table-hover" id="report_table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Serial:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Location:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Name:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date/Time incident:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Temperature:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date/Time resolved:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Temperature:</th>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div id="print_download_btns">
+                    <button type="button" class="btn btn-secondary disabled">Download</button>
+                    <button onclick="window.print();return false;" type="button" class="btn btn-secondary">Print
+                    </button>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+<!-- End of bootstrap scripts -->
+
+</body>
+</html>
