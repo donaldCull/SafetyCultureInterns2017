@@ -14,8 +14,8 @@ list_of_sql_queries = []
 sql_incomplete = "CREATE TABLE " + \
               "{}(pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID), " \
               "sens_serial VARCHAR(10), " \
-              "sens_date VARCHAR(10), " \
-              "sens_time VARCHAR(8), " \
+              "retrieved_date VARCHAR(10), " \
+              "retrieved_time VARCHAR(8), " \
               "sens_temp VARCHAR(5), " \
               "sens_humid VARCHAR(4));"
 
