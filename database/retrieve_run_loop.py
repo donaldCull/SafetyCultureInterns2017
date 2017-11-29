@@ -1,12 +1,14 @@
-import requests, time, json
 from datetime import datetime, timedelta
 
+import json
 import pymysql
+import requests
+import time
 
 run = True
-timezone_adjustment = -2
+timezone_adjustment = 10
 
-#sensor_serial: [date, time]
+# sensor_serial: [date, time]
 previous_time = {}
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
@@ -40,7 +42,6 @@ while run:
             response, sensor_scrap = request.text.split(",\"recent_reportings")
             acceptable_string = response + "}"
             sensor_individual_details = json.loads(acceptable_string)
-
 
             ###This is all just to makeup for timezone changes the API makes
             temp_date_time = str(sensor_individual_details['last_reported_at']).replace("T", " ")[:-5]
@@ -76,5 +77,5 @@ while run:
             else:
                 print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
-            # print(current_second)
+                # print(current_second)
     time.sleep(1)
