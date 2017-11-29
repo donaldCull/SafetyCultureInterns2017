@@ -2,15 +2,16 @@ import json
 import time
 from datetime import datetime, timedelta
 
+import pickle
+
 import requests
 
 from connection_information import connect
 
+previous_time = {}
+
 run = True
 timezone_adjustment = 10
-
-# sensor_serial: [date, time]
-previous_time = {}
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
@@ -24,11 +25,15 @@ while run:
     current_second = datetime.now().second
     # current_minute = datetime.datetime.now().minute
 
-    # print(current_minute)
 
     if current_second == 0 or current_second == 30:
         # if current_minute in five_minute_intervals:
         print("Running Code - " + str(datetime.now()))
+
+        #update previous_time.json file
+        with open("previous_times.txt", "wb") as myFile:
+            pickle.dump(previous_time, myFile)
+
 
         # run retrieval code
         for sensor_code in sensors.values():
@@ -67,6 +72,7 @@ while run:
                     sensor_individual_details['humidity'])
                 print(sql_execution_individual_sensor_table)
                 cursor.execute(sql_execution_individual_sensor_table)
+
 
                 previous_time[sensor_code] = [split_date, split_time]
 
