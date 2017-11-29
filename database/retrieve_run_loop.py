@@ -1,9 +1,10 @@
+import json
+import time
 from datetime import datetime, timedelta
 
-import json
-import pymysql
 import requests
-import time
+
+from connection_information import connect
 
 run = True
 timezone_adjustment = 10
@@ -14,12 +15,7 @@ previous_time = {}
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 
-connection = pymysql.connect(host="localhost",
-                             user="root", password="password", db="sensorsData",
-                             charset="utf8mb4",
-                             cursorclass=pymysql.cursors.DictCursor, autocommit=True)
-
-cursor = connection.cursor()
+cursor = connect
 
 for sensor_code in sensors.values():
     previous_time[sensor_code] = ''
