@@ -2,16 +2,33 @@
 // this will be replaces when we get the data dynamically
 var reports = ["Incident 1","Incident 2","Incident 3","Incident 4","Incident 5","Incident 6"];
 var values = ["4852F6TH01","Kitchen","Drinks Fridge","25/4/17 12:35:15","7.8","25/4/17 12:52:45","4.5"];
+var testReports;
 
 window.onload = function start() {
     // runs the following functions when the pages load
     report_menu_creation();
     table_population();
+    myFunc();
+    testFunc();
 
 };
 
-function myFunc(myObj) {
-    document.getElementById("name").innerHTML = myObj.name;
+function testFunc() {
+    document.getElementById("name").innerHTML = testReports[0]['incid_name'];
+}
+
+function myFunc() {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200){
+            testReports = JSON.parse(this.responseText);
+            // document.getElementById("name").innerHTML = testReports[0]['incid_name'];
+        }
+    };
+    xhttp.open("GET", "PHP/retrieve_incidents.php", true);
+    xhttp.send();
+    
 }
 
 function report_menu_creation() {
