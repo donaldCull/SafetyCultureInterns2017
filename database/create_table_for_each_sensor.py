@@ -1,6 +1,6 @@
 from connection_information import connect
 
-cursor = connect
+cursor = connect()
 
 sensor_codes = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 

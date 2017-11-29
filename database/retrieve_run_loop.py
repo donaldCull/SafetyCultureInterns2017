@@ -15,7 +15,7 @@ previous_time = {}
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 
-cursor = connect
+cursor = connect()
 
 for sensor_code in sensors.values():
     previous_time[sensor_code] = ''
@@ -28,7 +28,7 @@ while run:
 
     if current_second == 0 or current_second == 30:
         # if current_minute in five_minute_intervals:
-        print("Running Code")
+        print("Running Code - " + str(datetime.now()))
 
         # run retrieval code
         for sensor_code in sensors.values():

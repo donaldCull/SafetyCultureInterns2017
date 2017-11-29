@@ -3,7 +3,7 @@ import requests
 
 from connection_information import connect
 
-cursor = connect
+cursor = connect()
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
