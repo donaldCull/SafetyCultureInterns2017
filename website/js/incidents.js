@@ -10,6 +10,10 @@ window.onload = function start() {
 
 };
 
+function myFunc(myObj) {
+    document.getElementById("name").innerHTML = myObj.name;
+}
+
 function report_menu_creation() {
     // populates the tab menu for the number of reports/incidents we have
     var active = "active";
