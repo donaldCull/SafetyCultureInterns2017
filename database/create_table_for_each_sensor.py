@@ -1,7 +1,7 @@
 import pymysql
 
-connection = pymysql.connect(host="sqldb2.cbu5ypzkmdln.ap-southeast-2.rds.amazonaws.com",
-                             user="user", password="%T~wm]fK", db="sensorsData",
+connection = pymysql.connect(host="localhost",
+                             user="root", password="password", db="sensorsData",
                              charset="utf8mb4",
                              cursorclass=pymysql.cursors.DictCursor, autocommit=True)
 
@@ -13,9 +13,8 @@ list_of_sql_queries = []
 
 sql_incomplete = "CREATE TABLE " + \
               "{}(pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID), " \
-              "sens_serial VARCHAR(10), " \
-              "retrieved_date VARCHAR(10), " \
-              "retrieved_time VARCHAR(8), " \
+              "sensor_date VARCHAR(10), " \
+              "sensor_time VARCHAR(8), " \
               "sens_temp VARCHAR(5), " \
               "sens_humid VARCHAR(4));"
 

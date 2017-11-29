@@ -4,8 +4,8 @@ API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 sql_partial = 'INSERT INTO ' + '{} (sens_name, sens_serial, sens_location) VALUE ("{}", "{}", "{}");'
 
-connection = pymysql.connect(host="sqldb2.cbu5ypzkmdln.ap-southeast-2.rds.amazonaws.com",
-                             user="user", password="%T~wm]fK", db="sensorsData",
+connection = pymysql.connect(host="localhost",
+                             user="root", password="password", db="sensorsData",
                              charset="utf8mb4",
                              cursorclass=pymysql.cursors.DictCursor, autocommit=True)
 

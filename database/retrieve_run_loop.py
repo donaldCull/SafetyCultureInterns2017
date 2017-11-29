@@ -1,18 +1,19 @@
-import requests, time, json, datetime
+import requests, time, json
+from datetime import datetime, timedelta
+
 import pymysql
 
 run = True
-timezone_adjustment = 2
+timezone_adjustment = -2
 
+#sensor_serial: [date, time]
 previous_time = {}
-
-five_minute_intervals = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
 sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 
-connection = pymysql.connect(host="sqldb2.cbu5ypzkmdln.ap-southeast-2.rds.amazonaws.com",
-                             user="user", password="%T~wm]fK", db="sensorsData",
+connection = pymysql.connect(host="localhost",
+                             user="root", password="password", db="sensorsData",
                              charset="utf8mb4",
                              cursorclass=pymysql.cursors.DictCursor, autocommit=True)
 
@@ -22,15 +23,14 @@ for sensor_code in sensors.values():
     previous_time[sensor_code] = ''
 
 while run:
-    # current_second = datetime.datetime.now().second
-    current_minute = datetime.datetime.now().minute
+    current_second = datetime.now().second
+    # current_minute = datetime.datetime.now().minute
 
-    print(current_minute)
+    # print(current_minute)
 
-
-    # if current_second == 0 or current_second == 30:
-    if current_minute in five_minute_intervals:
-        # print(current_second)
+    if current_second == 0 or current_second == 30:
+        # if current_minute in five_minute_intervals:
+        print("Running Code")
 
         # run retrieval code
         for sensor_code in sensors.values():
@@ -40,37 +40,41 @@ while run:
             response, sensor_scrap = request.text.split(",\"recent_reportings")
             acceptable_string = response + "}"
             sensor_individual_details = json.loads(acceptable_string)
-            # print(sensor_individual_details)
 
-            # print(sensor_individual_details)
-            # previous_time[sensor_individual_details['serial_number']] = sensor_individual_details['last_reported_at']
 
-            server_side_reported_date = datetime.datetime.now()
-            # print(server_side_reported_date)
+            ###This is all just to makeup for timezone changes the API makes
+            temp_date_time = str(sensor_individual_details['last_reported_at']).replace("T", " ")[:-5]
+            # print(temp_date_time)
 
-            server_side_reported_date -= datetime.timedelta(hours=timezone_adjustment)
+            converted_date_time = datetime.strptime(temp_date_time, '%Y-%m-%d %H:%M:%S')
 
-            req_date, req_time = str(server_side_reported_date).split(" ")
+            time_adjusted = converted_date_time + timedelta(hours=timezone_adjustment)
+            # print(converted_date_time)
+            # print(time_adjusted)
 
-            # put back the new date and time as a tuple
-            sensor_individual_details['last_reported_at'] = server_side_reported_date
+            split_date, split_time = str(time_adjusted).split(" ")
+            # print(split_time, split_date)
+            ###End timezone adjustment
 
-            # print(int(cleaned_reported_date[1]))
+            ###Checking "previous_time" dictionary if time/date is the same, if not insert into database
+            if split_date and split_time not in previous_time[sensor_code]:
+                ###sql execution
+                sql_execution_individual_sensor_table = 'INSERT INTO ' + sensor_code + ' (sensor_date, sensor_time, ' \
+                                                                                       'sens_temp, sens_humid)' \
+                                                                                       ' VALUE ' \
+                                                                                       '("{}", "{}", "{}", "{}");' \
+                                                                                       ''.format(
+                    split_date,
+                    split_time,
+                    sensor_individual_details['temperature'],
+                    sensor_individual_details['humidity'])
+                print(sql_execution_individual_sensor_table)
+                cursor.execute(sql_execution_individual_sensor_table)
 
-            ###sql execution
-            sql_execution_individual_sensor_table = 'INSERT INTO ' + sensor_code + ' (sens_serial, ' \
-                                                                                   'retrieved_date, retrieved_time, ' \
-                                                                                   'sens_temp, sens_humid)' \
-                                                                                   ' VALUE ' \
-                                                                                   '("{}", "{}", "{}", "{}", "{}");' \
-                                                                                   ''.format(
-                sensor_individual_details['serial_number'],
-                req_date,
-                req_time,
-                sensor_individual_details['temperature'],
-                sensor_individual_details['humidity'])
-            print(sql_execution_individual_sensor_table)
-            cursor.execute(sql_execution_individual_sensor_table)
+                previous_time[sensor_code] = [split_date, split_time]
+
+            else:
+                print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
             # print(current_second)
-    time.sleep(60)
+    time.sleep(1)
