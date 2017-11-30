@@ -44,10 +44,29 @@ function table_population() {
     }
 }
 
+function retrieveReport(report_number) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200){
+            raw_data = JSON.parse(this.responseText);
+            callback();
+        }
+    };
+    xhttp.open("GET", "../PHP/retrieve_reports.php?q="+report_number, true);
+    xhttp.send();
+
+
+
+}
+
 function on_tab_click(this_object) {
     // currently changes the list button item state when clicked
     // will add functionality to get and display the correct data
+
     var count = 1;
+    // The count is the primary key of the report in the database
+    var id = this_object.id;
+    retrieveReport(id);
     for (var i = 0; i < reports.length; i++){
         var object_name = "report " + count;
         var object = document.getElementById(object_name);
