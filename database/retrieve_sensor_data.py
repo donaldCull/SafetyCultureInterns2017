@@ -18,8 +18,8 @@ cursor = connect()
 
 for sensor_code in sensors.values():
     previous_time_file = json.load(open("previous_time.json", "r"))
-    print(previous_time_file[sensor_code])
-    previous_time[sensor_code] = ''
+    # print(previous_time_file[sensor_code])
+    previous_time[sensor_code] = previous_time_file[sensor_code]
 
 while run:
     current_second = datetime.now().second
