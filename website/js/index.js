@@ -44,20 +44,20 @@ function table_population() {
     }
 }
 
-function retrieveReport(report_number) {
+function retrieveReport() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200){
             raw_data = JSON.parse(this.responseText);
+            document.getElementById("test-retrieve").innerHTML = raw_data;
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_reports.php?q="+report_number, true);
+    xhttp.open("GET", "../PHP/retrieve_reports.php?q="+1, true);
     xhttp.send();
-
-
-
 }
+
+
 
 function on_tab_click(this_object) {
     // currently changes the list button item state when clicked
