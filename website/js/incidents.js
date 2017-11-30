@@ -24,6 +24,14 @@ function load_data() {
     }
 
 
+    var active = "active";
+    for (i = 0; i < reports.length; i++){
+        var link = "#";
+        var id = "" + reports[i];
+        var label = "" + reports[i];
+        document.getElementById("reports_menu").innerHTML +=  "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action "+ active +"\" id=\"" + id + "\">" + label + "</a>";
+        active = "";
+    }
 
 // document.getElementById("test_output").innerHTML = reports;
 }
