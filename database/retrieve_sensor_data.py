@@ -1,5 +1,4 @@
 import json
-import time
 from datetime import datetime, timedelta
 
 import requests
@@ -21,62 +20,50 @@ for sensor_code in sensors.values():
     # print(previous_time_file[sensor_code])
     previous_time[sensor_code] = previous_time_file[sensor_code]
 
-while run:
-    current_second = datetime.now().second
-    # current_minute = datetime.datetime.now().minute
+print("\nRunning Code - " + str(datetime.now()))
 
-    if current_second == 0 or current_second == 30:
-        # if current_minute in five_minute_intervals:
-        print("\nRunning Code - " + str(datetime.now()))
+# run retrieval code
+for sensor_code in sensors.values():
+    request = requests.get('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
 
+    response, sensor_scrap = request.text.split(",\"recent_reportings")
+    acceptable_string = response + "}"
+    sensor_individual_details = json.loads(acceptable_string)
 
+    ###This is all just to makeup for timezone changes the API makes
+    temp_date_time = str(sensor_individual_details['last_reported_at']).replace("T", " ")[:-5]
+    # print(temp_date_time)
 
+    converted_date_time = datetime.strptime(temp_date_time, '%Y-%m-%d %H:%M:%S')
 
-        # run retrieval code
-        for sensor_code in sensors.values():
-            # print('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
-            request = requests.get('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
+    time_adjusted = converted_date_time + timedelta(hours=timezone_adjustment)
+    # print(converted_date_time)
+    # print(time_adjusted)
 
-            response, sensor_scrap = request.text.split(",\"recent_reportings")
-            acceptable_string = response + "}"
-            sensor_individual_details = json.loads(acceptable_string)
+    split_date, split_time = str(time_adjusted).split(" ")
+    # print(split_time, split_date)
+    ###End timezone adjustment
 
-            ###This is all just to makeup for timezone changes the API makes
-            temp_date_time = str(sensor_individual_details['last_reported_at']).replace("T", " ")[:-5]
-            # print(temp_date_time)
+    ###Checking "previous_time" dictionary if time/date is the same, if not insert into database
+    if split_date and split_time not in previous_time[sensor_code]:
+        ###sql execution
+        sql_execution_individual_sensor_table = 'INSERT INTO ' + sensor_code + ' (sensor_date, sensor_time, ' \
+                                                                               'sens_temp, sens_humid)' \
+                                                                               ' VALUE ' \
+                                                                               '("{}", "{}", "{}", "{}");' \
+                                                                               ''.format(
+            split_date,
+            split_time,
+            sensor_individual_details['temperature'],
+            sensor_individual_details['humidity'])
+        print(sql_execution_individual_sensor_table)
+        cursor.execute(sql_execution_individual_sensor_table)
 
-            converted_date_time = datetime.strptime(temp_date_time, '%Y-%m-%d %H:%M:%S')
+        previous_time[sensor_code] = [split_date, split_time]
 
-            time_adjusted = converted_date_time + timedelta(hours=timezone_adjustment)
-            # print(converted_date_time)
-            # print(time_adjusted)
+    else:
+        print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
-            split_date, split_time = str(time_adjusted).split(" ")
-            # print(split_time, split_date)
-            ###End timezone adjustment
-
-            ###Checking "previous_time" dictionary if time/date is the same, if not insert into database
-            if split_date and split_time not in previous_time[sensor_code]:
-                ###sql execution
-                sql_execution_individual_sensor_table = 'INSERT INTO ' + sensor_code + ' (sensor_date, sensor_time, ' \
-                                                                                       'sens_temp, sens_humid)' \
-                                                                                       ' VALUE ' \
-                                                                                       '("{}", "{}", "{}", "{}");' \
-                                                                                       ''.format(
-                    split_date,
-                    split_time,
-                    sensor_individual_details['temperature'],
-                    sensor_individual_details['humidity'])
-                print(sql_execution_individual_sensor_table)
-                cursor.execute(sql_execution_individual_sensor_table)
-
-
-                previous_time[sensor_code] = [split_date, split_time]
-
-            else:
-                print("Most Recent API call for " + sensor_code + " existed within the database already.")
-
-        # update previous_time.json file
-        with open("previous_time.json", "w") as file:
-            json.dump(previous_time, file)
-    time.sleep(1)
+# update previous_time.json file
+with open("previous_time.json", "w") as file:
+    json.dump(previous_time, file)
