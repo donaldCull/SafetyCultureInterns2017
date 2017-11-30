@@ -2,33 +2,34 @@
 // this will be replaces when we get the data dynamically
 var reports = ["Incident 1","Incident 2","Incident 3","Incident 4","Incident 5","Incident 6"];
 var values = ["4852F6TH01","Kitchen","Drinks Fridge","25/4/17 12:35:15","7.8","25/4/17 12:52:45","4.5"];
-var testReports;
+var testReports = "Hello world";
 
 window.onload = function start() {
     // runs the following functions when the pages load
     report_menu_creation();
     table_population();
-    myFunc();
-    testFunc();
+    myFunc(function() {
+        testFunc();
+    });
+
 
 };
 
 function testFunc() {
-    document.getElementById("name").innerHTML = testReports[0]['incid_name'];
+    document.getElementById("test_output").innerHTML = testReports[1].pID;
 }
 
-function myFunc() {
 
+function myFunc(callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200){
+        if (this.readyState === 4 && this.status === 200){
             testReports = JSON.parse(this.responseText);
-            // document.getElementById("name").innerHTML = testReports[0]['incid_name'];
+            callback();
         }
     };
-    xhttp.open("GET", "PHP/retrieve_incidents.php", true);
+    xhttp.open("GET", "../PHP/retrieve_Incidents.php", true);
     xhttp.send();
-    
 }
 
 function report_menu_creation() {
@@ -65,4 +66,5 @@ function on_tab_click(this_object) {
 
     }
     $(this_object).addClass("active");
+
 }
