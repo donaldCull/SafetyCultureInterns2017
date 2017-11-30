@@ -6,15 +6,28 @@
  * Time: 4:42 PM
  */
 // get the q parameter from URL
-//$q = $_REQUEST["q"];
+include "inc/dbInfo.inc";
+
+$q = $_REQUEST["q"];
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
-$sql = "SELECT * FROM Report WHERE pID=1";
+$sql = "SELECT * FROM Report WHERE pID=$q";
 
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-mysqli_free_result($result);
+//$result = mysqli_query($conn, $sql);
 
-$myJSON = json_encode($row);
+$results_array = array();
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()){
+    $results_array[] = $row;
+}
+$myJSON = json_encode($results_array);
 echo $myJSON;
+
+
+
+//$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+//mysqli_free_result($result);
+//
+//$myJSON = json_encode($row);
+//echo $myJSON;
