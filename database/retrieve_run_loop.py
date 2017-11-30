@@ -2,8 +2,6 @@ import json
 import time
 from datetime import datetime, timedelta
 
-import pickle
-
 import requests
 
 from connection_information import connect
@@ -19,20 +17,19 @@ sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fr
 cursor = connect()
 
 for sensor_code in sensors.values():
+    previous_time_file = json.load(open("previous_time.json", "r"))
+    print(previous_time_file[sensor_code])
     previous_time[sensor_code] = ''
 
 while run:
     current_second = datetime.now().second
     # current_minute = datetime.datetime.now().minute
 
-
     if current_second == 0 or current_second == 30:
         # if current_minute in five_minute_intervals:
-        print("Running Code - " + str(datetime.now()))
+        print("\nRunning Code - " + str(datetime.now()))
 
-        #update previous_time.json file
-        with open("previous_times.txt", "wb") as myFile:
-            pickle.dump(previous_time, myFile)
+
 
 
         # run retrieval code
@@ -79,5 +76,7 @@ while run:
             else:
                 print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
-                # print(current_second)
+        # update previous_time.json file
+        with open("previous_time.json", "w") as file:
+            json.dump(previous_time, file)
     time.sleep(1)
