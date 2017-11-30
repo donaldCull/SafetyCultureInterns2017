@@ -1,4 +1,4 @@
-#DROP DATABASE sensorsData;
+DROP DATABASE sensorsData;
 CREATE DATABASE sensorsData; 
 USE sensorsData;
 
