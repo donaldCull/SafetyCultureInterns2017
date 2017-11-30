@@ -1,30 +1,39 @@
 // storage for the number of reports and its data
 // this will be replaces when we get the data dynamically
-var reports = ["Incident 1","Incident 2","Incident 3","Incident 4","Incident 5","Incident 6"];
-var values = ["4852F6TH01","Kitchen","Drinks Fridge","25/4/17 12:35:15","7.8","25/4/17 12:52:45","4.5"];
-var testReports = "Hello world";
+var raw_data;
+var reports = [];
+var values = [];
+
+
 
 window.onload = function start() {
     // runs the following functions when the pages load
-    report_menu_creation();
-    table_population();
-    myFunc(function() {
-        testFunc();
+    get_reports(function() {
+        load_data();
     });
 
 
 };
 
-function testFunc() {
-    document.getElementById("test_output").innerHTML = testReports[1].pID;
+//document.getElementById("test_output").innerHTML = raw_data.length;
+
+
+function load_data() {
+    for (var i = 0; i < raw_data.length; i++){
+        reports[i] = raw_data[i].pID;
+    }
+
+
+
+// document.getElementById("test_output").innerHTML = reports;
 }
 
 
-function myFunc(callback) {
+function get_reports(callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200){
-            testReports = JSON.parse(this.responseText);
+            raw_data = JSON.parse(this.responseText);
             callback();
         }
     };
@@ -59,7 +68,7 @@ function on_tab_click(this_object) {
     // will add functionality to get and display the correct data
     var count = 1;
     for (var i = 0; i < reports.length; i++){
-        var object_name = "Incident " + count;
+        var object_name = reports[i];
         var object = document.getElementById(object_name);
         $(object).removeClass("active");
         count++;
