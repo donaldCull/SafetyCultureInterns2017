@@ -25,6 +25,14 @@ function get_sensor_names() {
     for (var i = 0; i < report_dates.length; i++){
         sensors[i] = (Object.keys(report_data)[i])
     }
+
+    for (i = 0; i < sensors.length; i++){
+        var id = sensors[i];
+        var label = sensors[i];
+
+        document.getElementById("sensor_list_dropdown").innerHTML += "<a id='"+ id +"' class='dropdown-item' href='#'>"+ label + "</a>";
+    }
+
 }
 
 function getting_num_reports(callback) {
@@ -48,7 +56,7 @@ function report_menu_creation() {
     var active = "active";
     for (var i = 0; i < report_dates.length; i++){
         var link = "#";
-        var id = "" + report_dates[i].report_date;
+        var id = "" + (Object.keys(report_dates)[i]);
         var label = "" + report_dates[i].report_date;
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action "+ active +"\" id=\"" + id + "\">" + label + "</a>";
         active = "";
@@ -78,7 +86,7 @@ function on_tab_click(this_object) {
 
     // The count is the primary key of the report in the database
     for (var i = 0; i < report_dates.length; i++){
-        var object_name = report_dates[i].report_date;
+        var object_name = i;
         var object = document.getElementById(object_name);
         $(object).removeClass("active");
 
@@ -86,14 +94,10 @@ function on_tab_click(this_object) {
     }
     $(this_object).addClass("active");
 
-    // get the report
-    var count = 1;
-    for (i = 0; i < report_dates.length; i++){
-        if(this_object.id == report_dates[i].report_date){
-            report_id = count
-        }
-        count++;
-    }
+
+    report_id = parseInt(this_object.id);
+    report_id += 1;
+
 
 
     retrieveReport(function() {
@@ -116,7 +120,5 @@ function update_table() {
         report_table.rows[7].cells[i].innerHTML = report_data.Sensor_1.Sunday[count];
         count++;
     }
-
-
 
 }
