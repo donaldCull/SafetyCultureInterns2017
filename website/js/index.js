@@ -24,8 +24,16 @@ window.onload = function start() {
 
 function get_sensor_names() {
 
-    for (var i = 0; i < report_dates.length; i++){
-        sensors[i] = (Object.keys(report_data)[i])
+    var count = 0;
+    while (true){
+
+        if((Object.keys(report_data)[count]) == undefined){
+            break;
+        }
+        else {
+            sensors[count] = (Object.keys(report_data)[count]);
+        }
+        count++;
     }
 
     for (i = 0; i < sensors.length; i++){
