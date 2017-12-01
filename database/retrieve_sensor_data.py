@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 import requests
 
-from connection_information import connect
+from database.connection_information import connect
 
 previous_time = {}
 timezone_adjustment = 10
