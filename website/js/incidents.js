@@ -5,45 +5,37 @@ var reports = [];
 var values = [];
 
 
-
 window.onload = function start() {
     // runs the following functions when the pages load
-    get_reports(function() {
+    get_reports(function () {
         load_data();
         update_table(0);
     });
-
-
 };
-
-//document.getElementById("test_output").innerHTML = raw_data.length;
 
 
 function load_data() {
-    for (var i = 0; i < raw_data.length; i++){
+    for (var i = 0; i < raw_data.length; i++) {
         reports[i] = raw_data[i].pID;
     }
 
     var active = "active";
-    for (i = 0; i < reports.length; i++){
+    for (i = 0; i < reports.length; i++) {
         var link = "#";
         var id = "" + reports[i];
-        var label = "" + reports[i];
-        document.getElementById("reports_menu").innerHTML +=  "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action "+ active +"\" id=\"" + id + "\">" + label + "</a>";
+        var label = "#00" + reports[i];
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action " + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
-
-
 
 
 // document.getElementById("test_output").innerHTML = reports;
 }
 
-
 function get_reports(callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200){
+        if (this.readyState === 4 && this.status === 200) {
             raw_data = JSON.parse(this.responseText);
             callback();
         }
@@ -52,33 +44,11 @@ function get_reports(callback) {
     xhttp.send();
 }
 
-function report_menu_creation() {
-    // populates the tab menu for the number of reports/incidents we have
-    var active = "active";
-    for (i = 0; i < reports.length; i++){
-        var link = "#";
-        var id = "" + reports[i];
-        var label = "" + reports[i];
-        document.getElementById("reports_menu").innerHTML +=  "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action "+ active +"\" id=\"" + id + "\">" + label + "</a>";
-        active = "";
-    }
-}
-
-function table_population() {
-    // populates the table with the data in values
-    var report_table = document.getElementById("report_table");
-    var values_count = 0;
-    for(var i = 1; i < 8; i++){
-        report_table.rows[i].cells[1].innerHTML = values[values_count];
-        values_count++
-    }
-}
-
 function on_tab_click(this_object) {
     // currently changes the list button item state when clicked
     // will add functionality to get and display the correct data
     var count = 0;
-    for (var i = 0; i < reports.length; i++){
+    for (var i = 0; i < reports.length; i++) {
         var object_name = reports[i];
         var object = document.getElementById(object_name);
         $(object).removeClass("active");
@@ -91,17 +61,16 @@ function on_tab_click(this_object) {
     // update table based on selection
 
     var ob_id = this_object.id;
-    ob_id -=1;
+    ob_id -= 1;
 
     update_table(ob_id);
-
 
 
 }
 
 function update_table(ob_id) {
     var report_table = document.getElementById("report_table");
-    report_table.rows[0].cells[1].innerHTML = "#00000" + raw_data[ob_id].pID;
+    report_table.rows[0].cells[1].innerHTML = raw_data[ob_id].pID;
     report_table.rows[1].cells[1].innerHTML = raw_data[ob_id].incid_serial;
     report_table.rows[2].cells[1].innerHTML = raw_data[ob_id].incid_location;
     report_table.rows[3].cells[1].innerHTML = raw_data[ob_id].incid_name;
