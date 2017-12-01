@@ -1,18 +1,6 @@
 // storage for the number of reports and its data
 // this will be replaces when we get the data dynamically
-var reports = ["report 1","report 2","report 3","report 4","report 5","report 6","report 7","report 8",
-    "report 9","report 10","report 11","report 12","report 13","report 14","report 15","report 16",
-    "report 17","report 18","report 19","report 20","report 21","report 22","report 23","report 24","report 25"];
 
-var values = [
-    1.1,4.2,3.5,2.4,
-    2.8,2.4,4.4,4.2,
-    1.7,4.8,3.6,5.1,
-    3.8,2.4,1.5,4.9,
-    2.1,5.6,3.5,1.7,
-    5.3,2.2,4.1,2.6,
-    4.3,2.9,1.3,1.2
-];
 
 window.onload = function start() {
     // runs the following functions when the pages load
@@ -49,7 +37,8 @@ function retrieveReport() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200){
             raw_data = JSON.parse(this.responseText);
-            document.getElementById("test-retrieve").innerHTML = raw_data;
+            report_data = JSON.parse(raw_data[0].report_json);
+            //document.getElementById("test_output").innerHTML = raw_data[0].report_json;
             callback();
         }
     };
