@@ -4,6 +4,7 @@ var report_dates = [];
 var report_data;
 var report_id = 1;
 var sensors = [];
+var current_sensor = "Sensor_1";
 
 window.onload = function start() {
     // runs the following functions when the pages load
@@ -20,6 +21,7 @@ window.onload = function start() {
 
 };
 
+
 function get_sensor_names() {
 
     for (var i = 0; i < report_dates.length; i++){
@@ -30,10 +32,11 @@ function get_sensor_names() {
         var id = sensors[i];
         var label = sensors[i];
 
-        document.getElementById("sensor_list_dropdown").innerHTML += "<a id='"+ id +"' class='dropdown-item' href='#'>"+ label + "</a>";
+        document.getElementById("sensor_list_dropdown").innerHTML += "<a id='"+ id +"' onclick='on_sensor_click(this)' class='dropdown-item' href='#'>"+ label + "</a>";
     }
-
+    current_sensor = sensors[0];
 }
+
 
 function getting_num_reports(callback) {
     var xhttp = new XMLHttpRequest();
@@ -78,7 +81,6 @@ function retrieveReport(callback) {
 }
 
 
-
 function on_tab_click(this_object) {
     // currently changes the list button item state when clicked
     // will add functionality to get and display the correct data
@@ -86,10 +88,8 @@ function on_tab_click(this_object) {
 
     // The count is the primary key of the report in the database
     for (var i = 0; i < report_dates.length; i++){
-        var object_name = i;
-        var object = document.getElementById(object_name);
+        var object = document.getElementById(i);
         $(object).removeClass("active");
-
 
     }
     $(this_object).addClass("active");
@@ -106,19 +106,24 @@ function on_tab_click(this_object) {
 
 }
 
+
 function update_table() {
     var report_table = document.getElementById("report_table");
-
     var count = 0;
     for (var i = 1; i < 5; i++){
-        report_table.rows[1].cells[i].innerHTML = report_data.Sensor_1.Monday[count];
-        report_table.rows[2].cells[i].innerHTML = report_data.Sensor_1.Tuesday[count];
-        report_table.rows[3].cells[i].innerHTML = report_data.Sensor_1.Wednsday[count];
-        report_table.rows[4].cells[i].innerHTML = report_data.Sensor_1.Thursday[count];
-        report_table.rows[5].cells[i].innerHTML = report_data.Sensor_1.Friday[count];
-        report_table.rows[6].cells[i].innerHTML = report_data.Sensor_1.Saturday[count];
-        report_table.rows[7].cells[i].innerHTML = report_data.Sensor_1.Sunday[count];
+        report_table.rows[1].cells[i].innerHTML = report_data[current_sensor]["Monday"][count];
+        report_table.rows[2].cells[i].innerHTML = report_data["Sensor_1"]["Tuesday"][count];
+        report_table.rows[3].cells[i].innerHTML = report_data["Sensor_1"]["Wednsday"][count];
+        report_table.rows[4].cells[i].innerHTML = report_data["Sensor_1"]["Thursday"][count];
+        report_table.rows[5].cells[i].innerHTML = report_data["Sensor_1"]["Friday"][count];
+        report_table.rows[6].cells[i].innerHTML = report_data["Sensor_1"]["Saturday"][count];
+        report_table.rows[7].cells[i].innerHTML = report_data["Sensor_1"]["Sunday"][count];
         count++;
     }
 
+}
+
+function on_sensor_click(object) {
+    current_sensor = object.id;
+    update_table();
 }
