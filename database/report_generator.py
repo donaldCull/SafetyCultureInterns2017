@@ -43,17 +43,21 @@ for sensor_date in dict_of_values['49C2A9TH01']:
     sensor_1_times.append(sensor_date['sensor_time'])
     sensor_1_temps.append(sensor_date['sens_temp'])
 
-# sensor_2_dates = []
-# sensor_2_times = []
-# for sensor_date in dict_of_values['4852F6TH01']:
-#     sensor_2_dates.append(sensor_date['sensor_date'])
-#     sensor_2_times.append(sensor_date['sensor_time'])
-#
-# sensor_3_dates = []
-# sensor_3_times = []
-# for sensor_date in dict_of_values['4852F6TH01']:
-#     sensor_3_dates.append(sensor_date['sensor_date'])
-#     sensor_3_times.append(sensor_date['sensor_time'])
+sensor_2_dates = []
+sensor_2_times = []
+sensor_2_temps = []
+for sensor_date in dict_of_values['4852F6TH01']:
+    sensor_2_dates.append(sensor_date['sensor_date'])
+    sensor_2_times.append(sensor_date['sensor_time'])
+    sensor_2_temps.append(sensor_date['sens_temp'])
+
+sensor_3_dates = []
+sensor_3_times = []
+sensor_3_temps = []
+for sensor_date in dict_of_values['49C013TH01']:
+    sensor_3_dates.append(sensor_date['sensor_date'])
+    sensor_3_times.append(sensor_date['sensor_time'])
+    sensor_3_temps.append(sensor_date['sens_temp'])
 
 # print(sensor_1_times)
 
@@ -72,12 +76,17 @@ times = [4, 8, 12, 16, 20, 24]
 
 
 # todo find times in the first sensor that are closest to these time intervals
-closest_times = []
+sensor1_closest_times = []
+sensor2_closest_times = []
+sensor3_closest_times = []
 for time in times:
-    closest_times.append(min(sensor_1_times, key=lambda x: abs(x - datetime.timedelta(hours=time))))
+    sensor1_closest_times.append(min(sensor_1_times, key=lambda x: abs(x - datetime.timedelta(hours=time))))
+    sensor2_closest_times.append(min(sensor_2_times, key=lambda x: abs(x - datetime.timedelta(hours=time))))
+    sensor3_closest_times.append(min(sensor_3_times, key=lambda x: abs(x - datetime.timedelta(hours=time))))
 
 
-
+# print(sensor2_closest_times)
+# print(sensor3_closest_times)
 
     # print(closest_times)
 # print(closest_times[-1])
@@ -86,9 +95,20 @@ for time in times:
 
 
 # todo find the index of the these closest times in the data and retrieve date and temp
-for closest_time in closest_times:
+for closest_time in sensor1_closest_times:
     selected_index = sensor_1_times.index(closest_time)
     print("Selected time: {} {} {}".format(sensor_1_dates[selected_index], sensor_1_times[selected_index], sensor_1_temps[selected_index]) )
+
+print()
+for closest_time in sensor2_closest_times:
+    selected_index = sensor_2_times.index(closest_time)
+    print("Selected time: {} {} {}".format(sensor_2_dates[selected_index], sensor_2_times[selected_index], sensor_2_temps[selected_index]) )
+
+print()
+
+for closest_time in sensor3_closest_times:
+    selected_index = sensor_3_times.index(closest_time)
+    print("Selected time: {} {} {}".format(sensor_3_dates[selected_index], sensor_3_times[selected_index], sensor_3_temps[selected_index]) )
 
 
 
