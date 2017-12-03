@@ -1,3 +1,5 @@
+# takes CSV data from connectSense which has a different time signature
+# Changes the time to match DB date/time signature and writes to new CSV
 import csv
 from dateutil import parser
 altered_csv = []
@@ -5,7 +7,7 @@ with open('49C2A9TH01-Ambient-temp.csv') as csvfile:
 
     readCSV = csv.reader(csvfile, delimiter=',')
     # Consume headers line
-    next(readCSV)
+    altered_csv.append(next(readCSV))
     for row in readCSV:
         # get date/time as correct format
         altered_time = parser.parse(row[0])
@@ -17,12 +19,3 @@ with open('49C2A9TH01-Ambient-temp.csv') as csvfile:
 with open('49C2A9TH01-Ambient-temp-altered.csv', 'w' ) as writeFile:
     writer = csv.writer(writeFile)
     writer.writerows(altered_csv)
-
-# print(row1)
-# print(row2)
-# date = row2[0]
-# dt = parser.parse(date)
-# # extract_date = arrow.get(date, 'YYYY-MMM-DD HH:mm:ss')
-# # extract_date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
-# print(date)
-# print(dt)
