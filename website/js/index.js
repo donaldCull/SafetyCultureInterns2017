@@ -1,5 +1,4 @@
 // storage for the number of reports and its data
-// this will be replaces when we get the data dynamically
 var report_dates = [];
 var report_data;
 var report_id = 1;
@@ -10,11 +9,11 @@ window.onload = function start() {
     // runs the following functions when the pages load
 
     getting_num_reports(function () {
-        get_sensor_names();
+        create_sensor_dropdown();
         report_menu_creation()
     });
 
-    retrieveReport(function () {
+    get_report(function () {
         update_table();
     })
 
@@ -22,8 +21,23 @@ window.onload = function start() {
 };
 
 
-function get_sensor_names() {
+function getting_num_reports(callback) {
+    // gets the number of reports that there are in the database
+    // in the form of the each report date
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            report_dates = JSON.parse(this.responseText);
+            callback();
+        }
+    };
+    xhttp.open("GET", "../PHP/retrieve_number_of_reports.php", true);
+    xhttp.send();
+}
 
+
+function create_sensor_dropdown() {
+    // gets the names of each of the sensors in the data
     var count = 0;
     while (true) {
 
@@ -36,6 +50,7 @@ function get_sensor_names() {
         count++;
     }
 
+    // creates the items in the sensor dropdown box
     for (i = 0; i < sensors.length; i++) {
         var id = sensors[i];
         var label = sensors[i];
@@ -46,23 +61,8 @@ function get_sensor_names() {
 }
 
 
-function getting_num_reports(callback) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            report_dates = JSON.parse(this.responseText);
-            callback();
-        }
-    };
-    xhttp.open("GET", "../PHP/retrieve_number_of_reports.php", true);
-    xhttp.send();
-
-
-}
-
-
 function report_menu_creation() {
-    // populates the tab menu for the number of reports/incidents we have
+    // creates the side menu items based on the number of reports we have
     var active = "active";
     for (var i = 0; i < report_dates.length; i++) {
         var link = "#";
@@ -74,7 +74,7 @@ function report_menu_creation() {
 }
 
 
-function retrieveReport(callback) {
+function get_report(callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -89,11 +89,7 @@ function retrieveReport(callback) {
 
 
 function on_tab_click(this_object) {
-    // currently changes the list button item state when clicked
-    // will add functionality to get and display the correct data
-
-
-    // The count is the primary key of the report in the database
+    // changes the list button item state when clicked
     for (var i = 0; i < report_dates.length; i++) {
         var object = document.getElementById(i);
         $(object).removeClass("active");
@@ -101,19 +97,17 @@ function on_tab_click(this_object) {
     }
     $(this_object).addClass("active");
 
-
+    // updates the reports table
     report_id = parseInt(this_object.id);
     report_id += 1;
-
-
-    retrieveReport(function () {
+    get_report(function () {
         update_table();
     })
-
 }
 
 
 function update_table() {
+    // a stupid way to update the table, but it works so...
     var report_table = document.getElementById("report_table");
     var count = 0;
     for (var i = 1; i < 5; i++) {
@@ -126,8 +120,8 @@ function update_table() {
         report_table.rows[7].cells[i].innerHTML = report_data[current_sensor]["Sunday"][count];
         count++;
     }
-
 }
+
 
 function on_sensor_click(object) {
     current_sensor = object.id;
