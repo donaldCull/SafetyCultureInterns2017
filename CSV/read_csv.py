@@ -3,7 +3,7 @@
 import csv
 from dateutil import parser
 altered_csv = []
-with open('49C2A9TH01-Ambient-temp.csv') as csvfile:
+with open('4852F6TH01-Drinks-fridge.csv') as csvfile:
 
     readCSV = csv.reader(csvfile, delimiter=',')
     # Consume headers line
@@ -16,6 +16,6 @@ with open('49C2A9TH01-Ambient-temp.csv') as csvfile:
         altered_csv.append(row)
 
 
-with open('49C2A9TH01-Ambient-temp-altered.csv', 'w' ) as writeFile:
+with open('4852F6TH01-Drinks-fridge-altered.csv', 'w' ) as writeFile:
     writer = csv.writer(writeFile)
     writer.writerows(altered_csv)
