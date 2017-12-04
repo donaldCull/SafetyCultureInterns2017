@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,20 +13,20 @@
     <link href="css/print_report.css" rel="stylesheet" media="print">
 </head>
 
-<body>
-<script src="js/index.js"></script>
+<body class="bg-light">
+
 
 <!-- top page navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav_bar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav_bar">
 
-    <a class="navbar-brand" href="#">Insert Name Here</a>
+    <a class="navbar-brand" href="#">TempSpace</a>
 
     <ul class="navbar-nav mr-auto">
     </ul>
     <div class="dropdown">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            user@insnmhere.com.au
+            user@tempspace.com.au
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Account Settings</a>
@@ -38,9 +37,11 @@
     </div>
 </nav>
 
+
 <!-- container for rest of main-->
 <div class="container-fluid" id="main_container">
     <div class="row">
+
 
         <!-- left side of page-->
         <div class="col-3" id="col4">
@@ -48,26 +49,27 @@
             <!-- tab navigation-->
             <ul class="nav nav-tabs" id="nav_tabs">
                 <li class="nav-item">
-                    <a class="nav-link active text-dark" href="#">Reports</a>
+                    <a class="nav-link active" href="#">Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="incidents.html">Incidents</a>
+                    <a class="nav-link" href="incidents.html">Incidents</a>
                 </li>
 
             </ul>
 
-            <!-- list of reports/incidents-->
+            <!-- list of report_id_list/incidents-->
             <div class="list-group" id="reports_menu">
             </div>
 
         </div>
+
 
         <!-- right side of page-->
         <div class="col-9" id="col8">
 
             <div id="data_table">
 
-                <table class="table table-hover" id="report_table">
+                <table class="table table-hover table-bordered" id="report_table">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Date</th>
@@ -129,20 +131,25 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- buttons below table -->
                 <div class="dropdown" id="sensor_select_btn">
-                    <button class="btn-sm btn-secondary dropdown-toggle" type="button" id="sensor_report_select"
+
+                    <!-- dropdown for sensors -->
+                    <button class="btn-sm btn-outline-primary dropdown-toggle" type="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Drinks Fridge
+                        Sensors
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Ambient Temperature</a>
-                        <a class="dropdown-item" href="#">Food Fridge</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="sensor_list_dropdown">
+
                     </div>
                 </div>
 
+
+                <!-- download and print buttons -->
                 <div id="print_download_btns">
-                    <button type="button" class="btn btn-secondary disabled">Download</button>
-                    <button onclick="window.print();return false;" type="button" class="btn btn-secondary">Print
+                    <button type="button" class="btn btn-primary disabled">Download</button>
+                    <button onclick="window.print();return false;" type="button" class="btn btn-primary">Print
                     </button>
 
 
@@ -153,18 +160,16 @@
 
         </div>
     </div>
+
 </div>
 
+
+<script src="js/index.js"></script>
 <!-- Bootstrap scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="bootstrap/assets/js/vendor/popper.min.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- End of bootstrap scripts -->
 
 </body>
