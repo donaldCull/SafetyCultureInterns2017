@@ -26,7 +26,7 @@ for sensor_code in sensors.values():
     cursor.execute(sql_to_execute)
     results = cursor.fetchall()
     dict_of_values[sensor_code] = results
-    # print(dict_of_values[sensor_code])
+    #print(dict_of_values[sensor_code])
 
 # print(list_of_values['49C2A9TH01'][0]['sensor_time'])
 # variable = dict_of_values['49C2A9TH01'][0]['sensor_time']
@@ -97,23 +97,18 @@ for time in times:
 # todo find the index of the these closest times in the data and retrieve date and temp
 for closest_time in sensor1_closest_times:
     selected_index = sensor_1_times.index(closest_time)
-    print("Selected time: {} {} {}".format(sensor_1_dates[selected_index], sensor_1_times[selected_index], sensor_1_temps[selected_index]) )
+    #print("Selected time: {} {} {}".format(sensor_1_dates[selected_index], sensor_1_times[selected_index], sensor_1_temps[selected_index]) )
 
 print()
 for closest_time in sensor2_closest_times:
     selected_index = sensor_2_times.index(closest_time)
-    print("Selected time: {} {} {}".format(sensor_2_dates[selected_index], sensor_2_times[selected_index], sensor_2_temps[selected_index]) )
+    #print("Selected time: {} {} {}".format(sensor_2_dates[selected_index], sensor_2_times[selected_index], sensor_2_temps[selected_index]) )
 
 print()
 
 for closest_time in sensor3_closest_times:
     selected_index = sensor_3_times.index(closest_time)
-    print("Selected time: {} {} {}".format(sensor_3_dates[selected_index], sensor_3_times[selected_index], sensor_3_temps[selected_index]) )
-
-
-
-
-
+    #print("Selected time: {} {} {}".format(sensor_3_dates[selected_index], sensor_3_times[selected_index], sensor_3_temps[selected_index]) )
 
 # print(closest_time)
 
@@ -131,3 +126,17 @@ for closest_time in sensor3_closest_times:
 # print(list(dict_of_values['4852F6TH01'].values()))
 # print(list_of_values.keys())
 
+#TODO: Rewrite code to get this data (scalable) from the sensors and generate the JSON string to be input into the database.
+#{_SENSOR_CODE_:{"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[], "Saturday":[], "Sunday":[]}
+
+# Global variables - Overridden each loop
+sensor_dates = []
+sensor_times = []
+sensor_temps = []
+
+# Looping through every sensor in the "sensors" Dict
+for sensor_code in sensors.values():
+    # Seperate dates, times and temps, maintaining order - from oldest to newest - in new lists
+    # sensor_dates = [], sensor_times = [], sensor_temps = []
+    for data in dict_of_values[sensor_code]:
+        print(data)
