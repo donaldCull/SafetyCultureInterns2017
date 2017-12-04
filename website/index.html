@@ -22,6 +22,12 @@
     <a class="navbar-brand" href="#">TempSpace</a>
 
     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">Reports<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="incidents.html">Incidents</a>
+        </li>
     </ul>
     <div class="dropdown">
         <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -46,16 +52,7 @@
         <!-- left side of page-->
         <div class="col-3" id="col4">
 
-            <!-- tab navigation-->
-            <ul class="nav nav-tabs" id="nav_tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="incidents.html">Incidents</a>
-                </li>
 
-            </ul>
 
             <!-- list of report_id_list/incidents-->
             <div class="list-group" id="reports_menu">
@@ -132,18 +129,6 @@
                     </tbody>
                 </table>
 
-                <!-- buttons below table -->
-                <div class="dropdown" id="sensor_select_btn">
-
-                    <!-- dropdown for sensors -->
-                    <button class="btn-sm btn-outline-primary dropdown-toggle" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sensors
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="sensor_list_dropdown">
-
-                    </div>
-                </div>
 
 
                 <!-- download and print buttons -->
