@@ -3,6 +3,7 @@ var raw_data;
 var report_id_list = [];
 
 
+
 window.onload = function start() {
     // runs the following functions when the pages load
     get_raw_data(function () {

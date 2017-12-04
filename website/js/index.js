@@ -11,7 +11,7 @@ window.onload = function start() {
     get_report(function () {
         getting_num_reports(function () {
             get_sensor_names();
-            sensor_menu_creation()
+            report_menu_creation();
 
 
         });
@@ -67,8 +67,7 @@ function get_report(callback) {
 
 function report_menu_creation() {
     // creates the side menu items based on the number of reports we have
-    document.getElementById("reports_menu").innerHTML += "<a onclick='sensor_menu_creation()' class='list-group-item list-group-item-action'>Back</a>";
-
+    document.getElementById("reports_menu").innerHTML = "";
     var active = "";
     for (var i = 0; i < report_dates.length; i++) {
         var link = "#";
@@ -81,21 +80,28 @@ function report_menu_creation() {
 
 function sensor_menu_creation() {
     document.getElementById("reports_menu").innerHTML = "";
-    var active = "";
+    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action\">Back</a>";
+    var active = "active";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
         var label = "" + sensors[i];
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action " + active + "\" id=\"" + id + "\">" + label + "</a>";
-
+        active = "";
     }
 }
 
 
 function on_sensor_click(this_object) {
-    document.getElementById("reports_menu").innerHTML = "";
+    for (var i = 0; i < sensors.length; i++) {
+        var object = document.getElementById(sensors[i]);
+        $(object).removeClass("active");
+    }
+    $(this_object).addClass("active");
+
+
     current_sensor = this_object.id;
-    report_menu_creation();
+
     update_table();
 
 
@@ -104,19 +110,17 @@ function on_sensor_click(this_object) {
 
 function on_tab_click(this_object) {
     // changes the list button item state when clicked
-    for (var i = 0; i < report_dates.length; i++) {
-        var object = document.getElementById(i);
-        $(object).removeClass("active");
 
-    }
-    $(this_object).addClass("active");
+    sensor_menu_creation();
 
     // updates the reports table
+    current_sensor = sensors[0];
     report_id = parseInt(this_object.id);
     report_id += 1;
     get_report(function () {
         update_table();
-    })
+    });
+
 }
 
 
