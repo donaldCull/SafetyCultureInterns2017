@@ -1,7 +1,7 @@
 // storage for the IDs of reports and its data
 var raw_data;
 var sensors = [];
-var unique_sensors = [];
+
 
 
 
@@ -44,16 +44,27 @@ function update_table(ob_id) {
 }
 
 function sensors_menu() {
+    var add = true;
+    sensors.push(raw_data[0].incid_serial);
+    for (var g = 0; g < raw_data.length; g++){
+        add = true;
 
-    for (var x = 0; x < raw_data.length; x++){
+        for (var x = 0; x < sensors.length; x++){
+            console.log("Hello: g:"  + g + " x:" + x);
 
-        for (var y = 0; y < sensors.length; y++){
-
+            if (sensors[x] === raw_data[g].incid_serial){
+                add = false;
+            }
         }
 
 
-
+        if (add){
+            sensors.push(raw_data[g].incid_serial)
+        }
     }
+
+
+
 
 
 
