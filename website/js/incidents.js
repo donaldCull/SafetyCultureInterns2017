@@ -46,8 +46,16 @@ function update_table(ob_id) {
 function sensors_menu() {
 
     for (var x = 0; x < raw_data.length; x++){
-        sensors[x] = raw_data[x].incid_serial;
+
+        for (var y = 0; y < sensors.length; y++){
+
+        }
+
+
+
     }
+
+
 
 
     for (var i = 0; i < raw_data.length; i++){
