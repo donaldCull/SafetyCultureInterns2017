@@ -77,34 +77,84 @@ function create_menu() {
 function update_table() {
     document.getElementById("data_table").innerHTML = "";
     console.log("HELLO WORLD");
+
+
+
+
+    // creates table
     var table = document.createElement("TABLE");
     var thead = document.createElement("THEAD");
-    var tr = document.createElement("TR");
-    var td = document.createElement("TD");
-
-
-
+    var tbody = document.createElement("TBODY");
     table.setAttribute("id", "report_table");
     thead.setAttribute("id", "report_table_head");
-    tr.setAttribute("id", "report_table_head_tr");
+    tbody.setAttribute("id", "report_table_tbody");
     document.getElementById("data_table").appendChild(table);
     document.getElementById("report_table").appendChild(thead);
+    document.getElementById("report_table").appendChild(tbody);
+
+
+
+    // table headings
+    var thead = document.createElement("THEAD");
+    thead.setAttribute("id", "report_table_head");
+    document.getElementById("report_table_tbody").appendChild(thead);
+
+
+    var tr = document.createElement("TR");
+    tr.setAttribute("id", "report_table_head_tr");
     document.getElementById("report_table_head").appendChild(tr);
 
+    var theader1 = document.createElement("TH");
+    var x = document.createTextNode("Incident: ");
+    theader1.appendChild(x);
+    document.getElementById("report_table_head_tr").appendChild(theader1);
+
+    var theader2 = document.createElement("TH");
+    x = document.createTextNode("#0000" + raw_data[current_report].pID);
+    theader2.appendChild(x);
+    document.getElementById("report_table_head_tr").appendChild(theader2);
+
+
+    // row 1
+    var tr1 = document.createElement("TR");
+    tr1.setAttribute("id", "tr1");
+    document.getElementById("report_table_tbody").appendChild(tr1);
 
     var th1 = document.createElement("TH");
-    var x = document.createTextNode("Incident: ");
+    x = document.createTextNode("Serial:");
     th1.appendChild(x);
-    document.getElementById("report_table_head_tr").appendChild(th1);
+    document.getElementById("tr1").appendChild(th1);
+
+    var td1 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_serial);
+    td1.appendChild(x);
+    document.getElementById("tr1").appendChild(td1);
+
+    // row 2
+    var tr2 = document.createElement("TR");
+    tr2.setAttribute("id", "tr2");
+    document.getElementById("report_table_tbody").appendChild(tr2);
 
     var th2 = document.createElement("TH");
-    x = document.createTextNode("#0000" + raw_data[current_report].pID);
+    x = document.createTextNode("Location:");
     th2.appendChild(x);
-    document.getElementById("report_table_head_tr").appendChild(th2);
+    document.getElementById("tr2").appendChild(th2);
+
+    var td2 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_location);
+    td2.appendChild(x);
+    document.getElementById("tr2").appendChild(td2);
 
 
 
-    $(report_table).addClass("table table-hover");
+
+
+
+
+
+
+
+    $(report_table).addClass("table table-hover table-bordered");
     $(report_table_head).addClass("thead-light");
 
 }
@@ -133,7 +183,7 @@ function on_report_click(obj) {
     // changes the list button item state when clicked
     current_report = obj.id;
     current_report -= 1;
-    for (var i = 0; i < raw_data.length; i++) {
+    for (var i = 0; i < raw_data.length+1; i++) {
         var object = document.getElementById("" + i);
         $(object).removeClass("active");
     }
