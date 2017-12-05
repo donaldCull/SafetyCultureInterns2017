@@ -28,3 +28,10 @@
 #sensor_select_btn{
     float: left;
 }
+
+#data_table_no_data_selected{
+    text-align: center;
+    margin-right: 15%;
+    margin-top: 10%;
+    color: #C2C2C2;
+}

@@ -76,8 +76,6 @@ function create_menu() {
 
 function update_table() {
     document.getElementById("data_table").innerHTML = "";
-    console.log("HELLO WORLD");
-
 
     // creates table
     var table = document.createElement("TABLE");
@@ -93,11 +91,6 @@ function update_table() {
 
 
     // table headings
-    var thead = document.createElement("THEAD");
-    thead.setAttribute("id", "report_table_head");
-    document.getElementById("report_table_tbody").appendChild(thead);
-
-
     var tr = document.createElement("TR");
     tr.setAttribute("id", "report_table_head_tr");
     document.getElementById("report_table_head").appendChild(tr);
