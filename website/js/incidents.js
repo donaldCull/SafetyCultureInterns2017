@@ -61,6 +61,7 @@ function sensors_menu() {
 function create_menu() {
     // creates the initial menu for each individual sensor
     document.getElementById("reports_menu").innerHTML = "";
+    document.getElementById("data_table").innerHTML = "<p>Select a item from <<<</p>";
 
     // create menu items
     for (var i = 0; i < sensors.length; i++){
@@ -74,17 +75,37 @@ function create_menu() {
 
 
 function update_table() {
-    // a stupid way to update the table, but it works so...
-    var report_table = document.getElementById("report_table");
-    report_table.rows[0].cells[1].innerHTML = raw_data[current_report].pID;
-    report_table.rows[1].cells[1].innerHTML = raw_data[current_report].incid_serial;
-    report_table.rows[2].cells[1].innerHTML = raw_data[current_report].incid_location;
-    report_table.rows[3].cells[1].innerHTML = raw_data[current_report].incid_name;
-    report_table.rows[4].cells[1].innerHTML = raw_data[current_report].incid_date_start;
-    report_table.rows[5].cells[1].innerHTML = raw_data[current_report].incid_time_start;
-    report_table.rows[6].cells[1].innerHTML = raw_data[current_report].incid_temp;
-    report_table.rows[7].cells[1].innerHTML = raw_data[current_report].incid_date_stop;
-    report_table.rows[8].cells[1].innerHTML = raw_data[current_report].incid_time_stop;
+    document.getElementById("data_table").innerHTML = "";
+    console.log("HELLO WORLD");
+    var table = document.createElement("TABLE");
+    var thead = document.createElement("THEAD");
+    var tr = document.createElement("TR");
+    var td = document.createElement("TD");
+
+
+
+    table.setAttribute("id", "report_table");
+    thead.setAttribute("id", "report_table_head");
+    tr.setAttribute("id", "report_table_head_tr");
+    document.getElementById("data_table").appendChild(table);
+    document.getElementById("report_table").appendChild(thead);
+    document.getElementById("report_table_head").appendChild(tr);
+
+
+    var th1 = document.createElement("TH");
+    var x = document.createTextNode("Incident: ");
+    th1.appendChild(x);
+    document.getElementById("report_table_head_tr").appendChild(th1);
+
+    var th2 = document.createElement("TH");
+    x = document.createTextNode("#0000" + raw_data[current_report].pID);
+    th2.appendChild(x);
+    document.getElementById("report_table_head_tr").appendChild(th2);
+
+
+
+    $(report_table).addClass("table table-hover");
+    $(report_table_head).addClass("thead-light");
 
 }
 
