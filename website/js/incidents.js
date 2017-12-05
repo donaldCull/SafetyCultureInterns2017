@@ -61,7 +61,7 @@ function sensors_menu() {
 function create_menu() {
     // creates the initial menu for each individual sensor
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("data_table").innerHTML = "<p>Select a item from <<<</p>";
+    document.getElementById("data_table").innerHTML = "<p id=\"data_table_no_data_selected\">No data selected<br>Please select from menu</p>";
 
     // create menu items
     for (var i = 0; i < sensors.length; i++){
@@ -77,8 +77,6 @@ function create_menu() {
 function update_table() {
     document.getElementById("data_table").innerHTML = "";
     console.log("HELLO WORLD");
-
-
 
 
     // creates table
@@ -146,11 +144,66 @@ function update_table() {
     document.getElementById("tr2").appendChild(td2);
 
 
+    // row 3
+    var tr3 = document.createElement("TR");
+    tr3.setAttribute("id", "tr3");
+    document.getElementById("report_table_tbody").appendChild(tr3);
+
+    var th3 = document.createElement("TH");
+    x = document.createTextNode("Device:");
+    th3.appendChild(x);
+    document.getElementById("tr3").appendChild(th3);
+
+    var td3 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_name);
+    td3.appendChild(x);
+    document.getElementById("tr3").appendChild(td3);
+
+    //row 4
+    var tr4 = document.createElement("TR");
+    tr4.setAttribute("id", "tr4");
+    document.getElementById("report_table_tbody").appendChild(tr4);
+
+    var th4 = document.createElement("TH");
+    x = document.createTextNode("Date/Time incident:");
+    th4.appendChild(x);
+    document.getElementById("tr4").appendChild(th4);
+
+    var td4 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_date_start + " / " + raw_data[current_report].incid_time_start);
+    td4.appendChild(x);
+    document.getElementById("tr4").appendChild(td4);
 
 
+    // row 5
+    var tr5 = document.createElement("TR");
+    tr5.setAttribute("id", "tr5");
+    document.getElementById("report_table_tbody").appendChild(tr5);
 
+    var th5 = document.createElement("TH");
+    x = document.createTextNode("Temperature:");
+    th5.appendChild(x);
+    document.getElementById("tr5").appendChild(th5);
 
+    var td5 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_temp);
+    td5.appendChild(x);
+    document.getElementById("tr5").appendChild(td5);
 
+    // row 6
+    var tr6 = document.createElement("TR");
+    tr6.setAttribute("id", "tr6");
+    document.getElementById("report_table_tbody").appendChild(tr6);
+
+    var th6 = document.createElement("TH");
+    x = document.createTextNode("Date/Time resolved:");
+    th6.appendChild(x);
+    document.getElementById("tr6").appendChild(th6);
+
+    var td6 = document.createElement("TD");
+    x = document.createTextNode("" + raw_data[current_report].incid_date_stop + " / " + raw_data[current_report].incid_time_stop);
+    td6.appendChild(x);
+    document.getElementById("tr6").appendChild(td6);
 
 
 
