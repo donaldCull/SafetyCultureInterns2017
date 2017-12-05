@@ -1,10 +1,11 @@
 import json
 from datetime import datetime, timedelta
-import pandas as pd
 
 import requests
 
-from database.connection_information import connect
+import sys; sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/connection_information.py')
+
+from connection_information import connect
 
 previous_time = {}
 timezone_adjustment = 10
