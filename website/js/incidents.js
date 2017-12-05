@@ -198,6 +198,7 @@ function update_table() {
     td6.appendChild(x);
     document.getElementById("tr6").appendChild(td6);
 
+    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
 
 
     $(report_table).addClass("table table-hover table-bordered");

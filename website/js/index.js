@@ -366,6 +366,9 @@ function update_table() {
     td4_sun.appendChild(x);
     document.getElementById("tr_sun").appendChild(td4_sun);
 
+
+    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
+
     $(report_table).addClass("table table-hover table-bordered");
     $(report_table_head).addClass("thead-light");
 
