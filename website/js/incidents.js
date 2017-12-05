@@ -1,7 +1,8 @@
 // storage for the IDs of reports and its data
 var raw_data;
 var sensors = [];
-
+var sensor_info = [];
+var current_sensor;
 
 
 
@@ -44,36 +45,56 @@ function update_table(ob_id) {
 }
 
 function sensors_menu() {
+    // finds unique sensors
     var add = true;
     sensors.push(raw_data[0].incid_serial);
     for (var g = 0; g < raw_data.length; g++){
         add = true;
 
         for (var x = 0; x < sensors.length; x++){
-            console.log("Hello: g:"  + g + " x:" + x);
-
             if (sensors[x] === raw_data[g].incid_serial){
                 add = false;
             }
         }
-
-
         if (add){
             sensors.push(raw_data[g].incid_serial)
         }
     }
 
+    // get sensor info
+    for (var w = 0; w < sensors.length; w++){
+        for (g = 0; g < raw_data.length; g++){
+            if(sensors[w] === raw_data[g].incid_serial){
+                sensor_info[sensors[w]] = [raw_data[g].incid_location, raw_data[g].incid_name]
+            }
+        }
 
+    }
 
+    // create menu items
+    for (var i = 0; i < sensors.length; i++){
+        var link = "#";
+        var id = "" + sensors[i];
+        var label = "" + sensor_info[sensors[i]][0] + " - " + sensor_info[sensors[i]][1];
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>";
+    }
 
+}
 
-
+function on_sensor_click(this_object) {
+    document.getElementById("reports_menu").innerHTML = "";
+    current_sensor = this_object.id;
 
     for (var i = 0; i < raw_data.length; i++){
-        var link = "#";
-        var id = raw_data[i].incid_serial + " " + raw_data[i].pID;
-        var label = "" + raw_data[i].incid_location + " - " + raw_data[i].incid_name;
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_tab_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>";
+        if (raw_data[i].incid_serial === current_sensor){
+            var link = "#";
+            var id = "" + raw_data[i].pID;
+            var label = "" + raw_data[i].pID;
+            document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this_object)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
+        }
     }
+}
+
+function on_report_click(this_object) {
 
 }
