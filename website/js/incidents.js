@@ -6,14 +6,12 @@ var current_sensor;
 var current_report;
 
 
-
 window.onload = function start() {
     // runs the following functions when the pages load
     get_raw_data(function () {
         sensors_menu();
     });
 };
-
 
 
 function get_raw_data(callback) {
@@ -29,23 +27,8 @@ function get_raw_data(callback) {
     xhttp.send();
 }
 
-function update_table() {
-    // a stupid way to update the table, but it works so...
-    var report_table = document.getElementById("report_table");
-    report_table.rows[0].cells[1].innerHTML = raw_data[current_report].pID;
-    report_table.rows[1].cells[1].innerHTML = raw_data[current_report].incid_serial;
-    report_table.rows[2].cells[1].innerHTML = raw_data[current_report].incid_location;
-    report_table.rows[3].cells[1].innerHTML = raw_data[current_report].incid_name;
-    report_table.rows[4].cells[1].innerHTML = raw_data[current_report].incid_date_start;
-    report_table.rows[5].cells[1].innerHTML = raw_data[current_report].incid_time_start;
-    report_table.rows[6].cells[1].innerHTML = raw_data[current_report].incid_temp;
-    report_table.rows[7].cells[1].innerHTML = raw_data[current_report].incid_date_stop;
-    report_table.rows[8].cells[1].innerHTML = raw_data[current_report].incid_time_stop;
-
-}
 
 function sensors_menu() {
-
     // finds unique sensors
     var add = true;
     sensors.push(raw_data[0].incid_serial);
@@ -74,7 +57,9 @@ function sensors_menu() {
     create_menu();
 }
 
+
 function create_menu() {
+    // creates the initial menu for each individual sensor
     document.getElementById("reports_menu").innerHTML = "";
 
     // create menu items
@@ -87,7 +72,27 @@ function create_menu() {
 
 }
 
+
+function update_table() {
+    // a stupid way to update the table, but it works so...
+    var report_table = document.getElementById("report_table");
+    report_table.rows[0].cells[1].innerHTML = raw_data[current_report].pID;
+    report_table.rows[1].cells[1].innerHTML = raw_data[current_report].incid_serial;
+    report_table.rows[2].cells[1].innerHTML = raw_data[current_report].incid_location;
+    report_table.rows[3].cells[1].innerHTML = raw_data[current_report].incid_name;
+    report_table.rows[4].cells[1].innerHTML = raw_data[current_report].incid_date_start;
+    report_table.rows[5].cells[1].innerHTML = raw_data[current_report].incid_time_start;
+    report_table.rows[6].cells[1].innerHTML = raw_data[current_report].incid_temp;
+    report_table.rows[7].cells[1].innerHTML = raw_data[current_report].incid_date_stop;
+    report_table.rows[8].cells[1].innerHTML = raw_data[current_report].incid_time_stop;
+
+}
+
+
 function on_sensor_click(this_object) {
+    // function runs when the sensors button is clicked
+    // changes the active state of the other items and self
+    // updates the table getting the correct report
     document.getElementById("reports_menu").innerHTML = "";
     current_sensor = this_object.id;
 
@@ -102,7 +107,9 @@ function on_sensor_click(this_object) {
     }
 }
 
+
 function on_report_click(obj) {
+    // changes the list button item state when clicked
     current_report = obj.id;
     current_report -= 1;
     for (var i = 0; i < raw_data.length; i++) {
