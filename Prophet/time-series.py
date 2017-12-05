@@ -19,11 +19,11 @@ my_model.fit(df)
 
 future_dates = my_model.make_future_dataframe(periods=1, freq='D')
 future_dates.tail()
-# print(future_dates)
+print(future_dates)
 forecast = my_model.predict(future_dates)
 print(forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail())
 
 my_model.plot(forecast, uncertainty=True)
 
 my_model.plot_components(forecast)
-plt.show()
+# plt.show()
