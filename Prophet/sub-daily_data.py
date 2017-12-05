@@ -11,6 +11,7 @@ df['ds'] = pd.DatetimeIndex(df['ds'])
 # make a plot of the historical data
 threshold = 5.0
 ax = df.set_index('ds').plot(figsize=(12,8))
+# add a threshold line to historical data vis
 ax.axhline(y=threshold, color='r', linestyle='-')
 ax.set_ylabel('Temperature recordings')
 ax.set_xlabel('DateTime')
