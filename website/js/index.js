@@ -81,7 +81,7 @@ function report_menu_creation() {
 function sensor_menu_creation() {
     document.getElementById("reports_menu").innerHTML = "";
     document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action\">Back</a>";
-    var active = "active";
+    var active = "";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
@@ -118,7 +118,7 @@ function on_tab_click(this_object) {
     report_id = parseInt(this_object.id);
     report_id += 1;
     get_report(function () {
-        update_table();
+
     });
 
 }

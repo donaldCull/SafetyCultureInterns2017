@@ -105,5 +105,10 @@ function on_sensor_click(this_object) {
 function on_report_click(obj) {
     current_report = obj.id;
     current_report -= 1;
+    for (var i = 0; i < raw_data.length; i++) {
+        var object = document.getElementById("" + i);
+        $(object).removeClass("active");
+    }
+    $(obj).addClass("active");
     update_table();
 }
