@@ -3,7 +3,7 @@ var raw_data;
 var sensors = [];
 var sensor_info = [];
 var current_sensor;
-
+var current_report;
 
 
 
@@ -29,22 +29,23 @@ function get_raw_data(callback) {
     xhttp.send();
 }
 
-function update_table(ob_id) {
+function update_table() {
     // a stupid way to update the table, but it works so...
     var report_table = document.getElementById("report_table");
-    report_table.rows[0].cells[1].innerHTML = raw_data[ob_id].pID;
-    report_table.rows[1].cells[1].innerHTML = raw_data[ob_id].incid_serial;
-    report_table.rows[2].cells[1].innerHTML = raw_data[ob_id].incid_location;
-    report_table.rows[3].cells[1].innerHTML = raw_data[ob_id].incid_name;
-    report_table.rows[4].cells[1].innerHTML = raw_data[ob_id].incid_date_start;
-    report_table.rows[5].cells[1].innerHTML = raw_data[ob_id].incid_time_start;
-    report_table.rows[6].cells[1].innerHTML = raw_data[ob_id].incid_temp;
-    report_table.rows[7].cells[1].innerHTML = raw_data[ob_id].incid_date_stop;
-    report_table.rows[8].cells[1].innerHTML = raw_data[ob_id].incid_time_stop;
+    report_table.rows[0].cells[1].innerHTML = raw_data[current_report].pID;
+    report_table.rows[1].cells[1].innerHTML = raw_data[current_report].incid_serial;
+    report_table.rows[2].cells[1].innerHTML = raw_data[current_report].incid_location;
+    report_table.rows[3].cells[1].innerHTML = raw_data[current_report].incid_name;
+    report_table.rows[4].cells[1].innerHTML = raw_data[current_report].incid_date_start;
+    report_table.rows[5].cells[1].innerHTML = raw_data[current_report].incid_time_start;
+    report_table.rows[6].cells[1].innerHTML = raw_data[current_report].incid_temp;
+    report_table.rows[7].cells[1].innerHTML = raw_data[current_report].incid_date_stop;
+    report_table.rows[8].cells[1].innerHTML = raw_data[current_report].incid_time_stop;
 
 }
 
 function sensors_menu() {
+
     // finds unique sensors
     var add = true;
     sensors.push(raw_data[0].incid_serial);
@@ -70,6 +71,11 @@ function sensors_menu() {
         }
 
     }
+    create_menu();
+}
+
+function create_menu() {
+    document.getElementById("reports_menu").innerHTML = "";
 
     // create menu items
     for (var i = 0; i < sensors.length; i++){
@@ -85,16 +91,19 @@ function on_sensor_click(this_object) {
     document.getElementById("reports_menu").innerHTML = "";
     current_sensor = this_object.id;
 
+    document.getElementById("reports_menu").innerHTML += "<a onclick='create_menu()'  class=\"list-group-item list-group-item-action \">Back</a>"
     for (var i = 0; i < raw_data.length; i++){
         if (raw_data[i].incid_serial === current_sensor){
             var link = "#";
             var id = "" + raw_data[i].pID;
             var label = "" + raw_data[i].pID;
-            document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this_object)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
+            document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
         }
     }
 }
 
-function on_report_click(this_object) {
-
+function on_report_click(obj) {
+    current_report = obj.id;
+    current_report -= 1;
+    update_table();
 }
