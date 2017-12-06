@@ -6,6 +6,7 @@ var sensors = [];
 var current_sensor;
 var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 var raw_data;
+var dates_count = 0;
 
 window.onload = function start() {
     // runs the following functions when the pages load
@@ -100,6 +101,7 @@ function sensor_menu_creation() {
 
 
 function update_table() {
+    dates_count = 0;
     document.getElementById("data_table").innerHTML = "";
 
     // create table
@@ -172,7 +174,8 @@ function update_table() {
     }
 
 
-    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
+    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button " +
+        "onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
 
     $(report_table).addClass("table table-hover table-bordered");
     $(report_table_head).addClass("thead-light");
@@ -181,6 +184,7 @@ function update_table() {
 
 
 }
+
 
 function add_row(day) {
     var tr = "tr_" + day;
@@ -191,7 +195,11 @@ function add_row(day) {
 
     var th_mon = document.createElement("TH");
     x = document.createTextNode(day);
+    y = document.createElement("BR");
+    z = document.createTextNode(report_data.report_json["Dates"][dates_count]);
     th_mon.appendChild(x);
+    th_mon.appendChild(y);
+    th_mon.appendChild(z);
     document.getElementById(tr).appendChild(th_mon);
 
 
@@ -235,7 +243,10 @@ function add_row(day) {
         document.getElementById(tr).appendChild(cell_7);
     }
 
+    dates_count++;
+
 }
+
 
 function on_sensor_click(this_object) {
     // function runs when the sensors button is clicked
