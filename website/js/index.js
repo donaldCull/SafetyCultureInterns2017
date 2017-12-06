@@ -114,8 +114,61 @@ function update_table() {
     document.getElementById("report_table").appendChild(tbody);
 
 
-    for (var x = 0; x < days.length; x++){
-        add_row(days[x])
+
+
+    // table headings
+    var tr = document.createElement("TR");
+    tr.setAttribute("id", "report_table_head_tr");
+    document.getElementById("report_table_head").appendChild(tr);
+
+    var theader1 = document.createElement("TH");
+    var x = document.createTextNode("");
+    theader1.appendChild(x);
+    document.getElementById("report_table_head_tr").appendChild(theader1);
+
+
+
+    if (report_data.report_json.Times.length >= 2){
+        var theader2 = document.createElement("TH");
+        x = document.createTextNode(report_data.report_json.Times[0] + ":00");
+        theader2.appendChild(x);
+        document.getElementById("report_table_head_tr").appendChild(theader2);
+
+        var theader3 = document.createElement("TH");
+        x = document.createTextNode(report_data.report_json.Times[1] + ":00");
+        theader3.appendChild(x);
+        document.getElementById("report_table_head_tr").appendChild(theader3);
+    }
+
+    if (report_data.report_json.Times.length >= 3){
+        var theader4 = document.createElement("TH");
+        x = document.createTextNode(report_data.report_json.Times[2] + ":00");
+        theader4.appendChild(x);
+        document.getElementById("report_table_head_tr").appendChild(theader4);
+    }
+
+    if (report_data.report_json.Times.length >= 4){
+        var theader5 = document.createElement("TH");
+        x = document.createTextNode(report_data.report_json.Times[3] + ":00");
+        theader5.appendChild(x);
+        document.getElementById("report_table_head_tr").appendChild(theader5);
+    }
+
+    if (report_data.report_json.Times.length >= 5){
+
+    }
+
+    if (report_data.report_json.Times.length >= 6){
+
+    }
+
+
+
+
+
+
+    for (var o = 0; o < days.length; o++){
+        add_row(days[o])
     }
 
 
