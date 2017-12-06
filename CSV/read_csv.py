@@ -6,7 +6,7 @@ EMPTY = '--'
 csv_filenames = ['49C2A9TH01-as-of-20171206.csv', '49C013TH01-as-of-20171206.csv', '4852F6TH01-as-of-20171206.csv']
 altered_csv = []
 for csv_filename in csv_filenames:
-    with open(csv_filenames[0]) as csvfile:
+    with open(csv_filename) as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
         # Consume headers line
         next(readCSV)
