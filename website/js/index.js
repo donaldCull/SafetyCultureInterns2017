@@ -4,8 +4,8 @@ var report_data;
 var report_id = 1;
 var sensors = [];
 var current_sensor;
-var days = ["Monday","Tuesday","Wednsday","Thursday","Friday","Saturday","Sunday"];
-
+var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+var raw_data;
 
 window.onload = function start() {
     // runs the following functions when the pages load
@@ -37,15 +37,17 @@ function get_sensor_names() {
     // gets the names of each of the sensors in the data
     var count = 0;
     while (true) {
-
-        if ((Object.keys(report_data)[count]) == undefined) {
+        if ((Object.keys(report_data["report_json"])[count]) == undefined) {
             break;
         }
         else {
-            sensors[count] = (Object.keys(report_data)[count]);
+            sensors[count] = (Object.keys(report_data["report_json"])[count]);
         }
         count++;
     }
+    sensors.pop();
+    sensors.pop();
+
 }
 
 
@@ -54,8 +56,10 @@ function get_report(callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            var raw_data = JSON.parse(this.responseText);
-            report_data = JSON.parse(raw_data[0].report_json);
+            raw_data = JSON.parse(this.responseText);
+            report_data = raw_data[0];
+            report_data["report_json"] =  JSON.parse(report_data["report_json"]);
+
             callback();
         }
     };
@@ -138,42 +142,42 @@ function add_row(day) {
     document.getElementById(tr).appendChild(th_mon);
 
 
-    if (report_data[current_sensor][day].length >= 2){
+    if (report_data.report_json[current_sensor][day].length >= 2){
         var cell_2 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][0]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][0]);
         cell_2.appendChild(x);
         document.getElementById(tr).appendChild(cell_2);
 
         var cell_3 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][1]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][1]);
         cell_3.appendChild(x);
         document.getElementById(tr).appendChild(cell_3);
     }
 
-    if (report_data[current_sensor][day].length >= 3){
+    if (report_data.report_json[current_sensor][day].length >= 3){
         var cell_4 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][2]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][2]);
         cell_4.appendChild(x);
         document.getElementById(tr).appendChild(cell_4);
     }
 
-    if (report_data[current_sensor][day].length >= 4){
+    if (report_data.report_json[current_sensor][day].length >= 4){
         var cell_5 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][3]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][3]);
         cell_5.appendChild(x);
         document.getElementById(tr).appendChild(cell_5);
     }
 
-    if (report_data[current_sensor][day].length >= 5){
+    if (report_data.report_json[current_sensor][day].length >= 5){
         var cell_6 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][4]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][4]);
         cell_6.appendChild(x);
         document.getElementById(tr).appendChild(cell_6);
     }
 
-    if (report_data[current_sensor][day].length >= 6){
+    if (report_data.report_json[current_sensor][day].length >= 6){
         var cell_7 = document.createElement("TD");
-        x = document.createTextNode("" + report_data[current_sensor][day][5]);
+        x = document.createTextNode("" + report_data.report_json[current_sensor][day][5]);
         cell_7.appendChild(x);
         document.getElementById(tr).appendChild(cell_7);
     }
