@@ -209,13 +209,16 @@ for sensor_code in sensors.values():
                                        "Wednesday": wed_temps, "Thursday": thu_temps,
                                        "Friday": fri_temps,
                                        "Saturday": sat_temps, "Sunday": sun_temps}
+
         print(inserting_times)
 
 
 dict_for_inserting['Dates'] = [str(i.date()) for i in list_of_dates]
 dict_for_inserting['Times'] = times
 
-sql_for_inserting = 'INSERT INTO Report(report_date, report_json) VALUE ("{}", "{}")'.format("2017-12-07", dict_for_inserting)
+converted_dict = str(dict_for_inserting).replace("'", '"')
+
+sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format("2017-12-01", converted_dict)
 
 print(sql_for_inserting)
 cursor.execute(sql_for_inserting)
