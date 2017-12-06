@@ -1,3 +1,4 @@
+sensor_date_time = []
 import datetime
 
 import pandas as pd
@@ -35,7 +36,7 @@ for sensor_code in sensors.values():
     # print(dict_of_values[sensor_code])
 
 # Global variables - Overridden each loop
-sensor_date_time = []
+# sensor_date_time = []
 sensor_temp = []
 
 index_of_value = []
@@ -46,14 +47,22 @@ list_of_times = []  # list of times from sensor for that day
 new_list_of_times = []
 
 # lists for each day
-mon = []
-tue = []
-wed = []
-thu = []
-fri = []
-sat = []
-sun = []
+mon_temps = []
+tue_temps = []
+wed_temps = []
+thu_temps = []
+fri_temps = []
+sat_temps = []
+sun_temps = []
 inserting_times = []
+
+mon_times = []
+tue_times = []
+wed_times = []
+thu_times = []
+fri_times = []
+sat_times = []
+sun_times = []
 
 # Global Variables
 times = [0, 6, 12, 18]  # Generate Dynamically
@@ -66,14 +75,14 @@ for sensor_code in sensors.values():
     # index_of_value = [], indexes_for_sensor = [], list_of_times = []
 
     # reset lists for each day
-    mon.clear()
-    tue.clear()
-    wed.clear()
-    thu.clear()
-    fri.clear()
-    sat.clear()
-    sun.clear()
-    inserting_times.clear()
+    mon_temps.clear()
+    tue_temps.clear()
+    wed_temps.clear()
+    thu_temps.clear()
+    fri_temps.clear()
+    sat_temps.clear()
+    sun_temps.clear()
+
 
     for day in list_of_dates:
         print("\n" + "Date/Time: " + str(day.date()))
@@ -88,6 +97,7 @@ for sensor_code in sensors.values():
 
         list_of_times.clear()
         new_list_of_times.clear()
+        inserting_times.clear()
 
         for data in dict_of_temps[sensor_code]:
             # print(data['sensor_date_time'].date(), day.date())
@@ -119,8 +129,14 @@ for sensor_code in sensors.values():
             # print("List of times: " + str(new_list_of_times))
             # print("My time in seconds: " + str(datetime.timedelta(hours=my_times).seconds))
 
-            closest_time.append(
-                min(new_list_of_times, key=lambda x: abs(x - datetime.timedelta(hours=my_times).seconds)))
+            try:
+                nearest_time = min(new_list_of_times, key=lambda x: abs(x - datetime.timedelta(hours=my_times).seconds))
+                closest_time.append(nearest_time)
+                inserting_times.append(str(datetime.timedelta(0, int(nearest_time))))
+            except ValueError:
+                pass
+
+
             # print(closest_time)
 
         print("Times (Values): " + str(closest_time))
@@ -128,62 +144,78 @@ for sensor_code in sensors.values():
         # Take each time value and get index of it from sensor_date_time and then get ref
         print("Get indices of those values:")
 
-        test = new_list_of_times.index(closest_time[0])
-        print(test)
-        print(sensor_date_time[test], sensor_temp[test])
-        test_2 = new_list_of_times.index(closest_time[1])
-        print(test_2)
-        print(sensor_date_time[test_2], sensor_temp[test_2])
-        test_3 = new_list_of_times.index(closest_time[2])
-        print(test_3)
-        print(sensor_date_time[test_3], sensor_temp[test_3])
-        test_4 = new_list_of_times.index(closest_time[3])
-        print(test_4)
-        print(sensor_date_time[test_4], sensor_temp[test_4])
+        try:
+            first_time = new_list_of_times.index(closest_time[0])
+            print(first_time)
+            print(sensor_date_time[first_time], sensor_temp[first_time])
+            second_time = new_list_of_times.index(closest_time[1])
+            print(second_time)
+            print(sensor_date_time[second_time], sensor_temp[second_time])
+            third_time = new_list_of_times.index(closest_time[2])
+            print(third_time)
+            print(sensor_date_time[third_time], sensor_temp[third_time])
+            fourth_time = new_list_of_times.index(closest_time[3])
+            print(fourth_time)
+            print(sensor_date_time[fourth_time], sensor_temp[fourth_time])
+        except (ValueError, IndexError):
+            pass
 
-        if day.date().isoweekday() == 1: #monday
-            mon.append(sensor_temp[0])
-            mon.append(sensor_temp[1])
-            mon.append(sensor_temp[2])
-            mon.append(sensor_temp[3])
-        if day.date().isoweekday() == 2: #tuesday
-            tue.append(sensor_temp[0])
-            tue.append(sensor_temp[1])
-            tue.append(sensor_temp[2])
-            tue.append(sensor_temp[3])
-        if day.date().isoweekday() == 3: #wednesday
-            wed.append(sensor_temp[0])
-            wed.append(sensor_temp[1])
-            wed.append(sensor_temp[2])
-            wed.append(sensor_temp[3])
-        if day.date().isoweekday() == 4: #thursday
-            thu.append(sensor_temp[0])
-            thu.append(sensor_temp[1])
-            thu.append(sensor_temp[2])
-            thu.append(sensor_temp[3])
-        if day.date().isoweekday() == 5: #friday
-            fri.append(sensor_temp[0])
-            fri.append(sensor_temp[1])
-            fri.append(sensor_temp[2])
-            fri.append(sensor_temp[3])
-        if day.date().isoweekday() == 6: #saturday
-            sat.append(sensor_temp[0])
-            sat.append(sensor_temp[1])
-            sat.append(sensor_temp[2])
-            sat.append(sensor_temp[3])
-        if day.date().isoweekday() == 7: #sunday
-            sun.append(sensor_temp[0])
-            sun.append(sensor_temp[1])
-            sun.append(sensor_temp[2])
-            sun.append(sensor_temp[3])
+        try:
+            if day.date().isoweekday() == 1:  # monday
+                mon_temps.append(sensor_temp[first_time])
+                mon_temps.append(sensor_temp[second_time])
+                mon_temps.append(sensor_temp[third_time])
+                mon_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 2:  # tuesday
+                tue_temps.append(sensor_temp[first_time])
+                tue_temps.append(sensor_temp[second_time])
+                tue_temps.append(sensor_temp[third_time])
+                tue_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 3:  # wednesday
+                wed_temps.append(sensor_temp[first_time])
+                wed_temps.append(sensor_temp[second_time])
+                wed_temps.append(sensor_temp[third_time])
+                wed_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 4:  # thursday
+                thu_temps.append(sensor_temp[first_time])
+                thu_temps.append(sensor_temp[second_time])
+                thu_temps.append(sensor_temp[third_time])
+                thu_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 5:  # friday
+                fri_temps.append(sensor_temp[first_time])
+                fri_temps.append(sensor_temp[second_time])
+                fri_temps.append(sensor_temp[third_time])
+                fri_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 6:  # saturday
+                sat_temps.append(sensor_temp[first_time])
+                sat_temps.append(sensor_temp[second_time])
+                sat_temps.append(sensor_temp[third_time])
+                sat_temps.append(sensor_temp[fourth_time])
+
+            if day.date().isoweekday() == 7:  # sunday
+                sun_temps.append(sensor_temp[first_time])
+                sun_temps.append(sensor_temp[second_time])
+                sun_temps.append(sensor_temp[third_time])
+                sun_temps.append(sensor_temp[fourth_time])
+        except NameError:
+            pass
+
+        dict_for_inserting[sensor_code] = {"Monday": mon_temps, "Tuesday": tue_temps,
+                                       "Wednesday": wed_temps, "Thursday": thu_temps,
+                                       "Friday": fri_temps,
+                                       "Saturday": sat_temps, "Sunday": sun_temps}
+        print(inserting_times)
 
 
-    # format stuff from above into dict
-    # {_SENSOR_CODE_:{"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[], "Saturday":[], "Sunday":[]}
+dict_for_inserting['Dates'] = [str(i.date()) for i in list_of_dates]
+dict_for_inserting['Times'] = times
 
-    dict_for_inserting[sensor_code] = {"Monday": mon, "Tuesday": tue, "Wednesday": wed, "Thursday": thu,
-                                       "Friday": fri,
-                                       "Saturday": sat, "Sunday": sun, "Times": inserting_times}
+sql_for_inserting = 'INSERT INTO Report(report_date, report_json) VALUE ("{}", "{}")'.format("2017-12-07", dict_for_inserting)
 
-print("##")
-print(dict_for_inserting)
+print(sql_for_inserting)
+cursor.execute(sql_for_inserting)
