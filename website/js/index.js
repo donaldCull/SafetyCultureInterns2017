@@ -331,3 +331,9 @@ function on_search_dates_click() {
 
     }
 }
+
+function on_reset_serch_dates_click() {
+    search_dates = [];
+    search_dates = report_dates;
+    report_menu_creation();
+}
