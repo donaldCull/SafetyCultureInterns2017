@@ -52,8 +52,47 @@
         <!-- left side of page-->
         <div class="col-3" id="col4">
 
+            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-block btn-outline-primary" id="search_reports">Search Dates</button>
 
-            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Search Dates</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <div class="input-group input-group-sm" id="date_search_day_box">
+                                <span class="input-group-addon">Day:&nbsp&nbsp&nbsp&nbsp</span>
+                                <input type="text" class="form-control" id="date_search_day" aria-describedby="basic-addon3">
+                            </div>
+                                <div class="input-group input-group-sm" id="date_search_month_box">
+                                <span class="input-group-addon">Month:</span>
+                                <input type="text" class="form-control" id="date_search_month" aria-describedby="basic-addon3">
+                                </div>
+                                    <div class="input-group input-group-sm" id="date_search_year_box">
+                                <span class="input-group-addon">Year:&nbsp&nbsp&nbsp</span>
+                                <input type="text" class="form-control" id="date_search_year" aria-describedby="basic-addon3">
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-sm btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 
             <!-- list of report_id_list/incidents-->
