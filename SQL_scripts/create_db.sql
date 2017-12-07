@@ -12,7 +12,7 @@ CREATE TABLE DevicesList(
 CREATE TABLE Report(
 	pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID),
     report_date VARCHAR(10),
-    report_json VARCHAR(1000)	#string of cvs location, buld strings are bad form and files are impossible
+    report_json VARCHAR(2000)	#string of cvs location, buld strings are bad form and files are impossible
 );
 
 CREATE TABLE Incidents(

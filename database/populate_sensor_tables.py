@@ -1,19 +1,21 @@
 import csv
-from database.connection_information import connect
+from connection_information import connect
+
+csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv', 'altered-4852F6TH01-as-of-20171206.csv']
+table_names = ['49C2A9TH01', '49C013TH01', '4852F6TH01']
 
 cursor = connect()
-sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
 sql_partial = 'INSERT INTO ' + '{} (sensor_date_time, sensor_temp, sensor_humid) VALUE ("{}", "{}", "{}");'
-
-# for sensor_code in sensors.values():
-with open('../CSV/4852F6TH01-Drinks-fridge-altered.csv') as csvFile:
-    readCSV = csv.reader(csvFile)
-    # consumes header
-    next(readCSV)
-    for row_count, row in enumerate(readCSV):
-        date_time = row[0]
-        temp = row[1]
-        humidity = row[2]
-        sql_command = sql_partial.format(sensors["drinks_fridge"], date_time, temp,humidity)
-        print("row: {} - {}".format(row_count, sql_command))
-        cursor.execute(sql_command)
+table_count = 0
+for csv_filename in csv_filenames:
+    with open('../CSV/' + csv_filename) as csvFile:
+        readCSV = csv.reader(csvFile)
+        for row_count, row in enumerate(readCSV):
+            date_time = row[0]
+            temp = row[1]
+            humidity = row[2]
+            sql_command = sql_partial.format(table_names[table_count], date_time, temp,humidity)
+            print("row: {} - {}".format(row_count, sql_command))
+            cursor.execute(sql_command)
+    table_count += 1
+    print()

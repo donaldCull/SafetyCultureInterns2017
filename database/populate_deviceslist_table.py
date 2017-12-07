@@ -1,12 +1,13 @@
 import json
 import requests
 
-from database.connection_information import connect
+from connection_information import connect
+from sensor_dict_collection import ListOfSensors
 
 cursor = connect()
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
-sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
+sensors = ListOfSensors()
 sql_partial = 'INSERT INTO ' + '{} (sens_name, sens_serial, sens_location) VALUE ("{}", "{}", "{}");'
 
 for sensor_code in sensors.values():
