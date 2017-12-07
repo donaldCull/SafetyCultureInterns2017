@@ -25,6 +25,10 @@ sensor_code_select_sql = "SELECT sens_serial,sens_name, sens_location FROM Devic
 cursor.execute(sensor_code_select_sql)
 sensor_codes = cursor.fetchall()
 
+with open('sensor_details.txt', 'w') as file:
+    for sensor_code in sensor_codes:
+        file.write("{},{},{}\n".format(sensor_code['sens_serial'], sensor_code['sens_name'], sensor_code['sens_location']))
+
 # Sensor field names - pID, sensor_date_time, sensor_temp, sensor_humid
 sensor_details_select_sql = "SELECT sensor_date_time, sensor_temp FROM {}"
 # Select date and time from each sensor table

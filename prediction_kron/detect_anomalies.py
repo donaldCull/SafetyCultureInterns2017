@@ -4,6 +4,14 @@ from dateutil import parser
 
 sensor_filenames = []
 sensor_names = []
+sensors = {}
+
+with open('sensor_details.txt') as file:
+    sensor_details = file.readlines()
+    for line in sensor_details:
+        code, name, location = line.strip().split(',')
+        sensors[code] = name, location
+
 
 with open('sensor_filenames.csv') as file:
     reader = csv.reader(file)
@@ -45,12 +53,16 @@ for index, sensor_result in enumerate(range(len(sensor_means))):
 # search the sensor predictions to determine if there is a breach
 forecast_filenames = []
 forecasts = []
+anomaly_detected = False
+anomaly_email_template = ""
+incidents_to_insert = []
+incident = []
+
 with open('sensor_forecast_filenames.csv') as file:
     reader = csv.reader(file)
     for row in reader:
         forecast_filenames.append(str(row).lstrip('[').rstrip(']').strip("'"))
 
-threshold_counter = 0
 for index, forecast_filename in enumerate(forecast_filenames):
     with open(forecast_filename) as file:
         reader = csv.reader(file)
@@ -59,10 +71,39 @@ for index, forecast_filename in enumerate(forecast_filenames):
             row[0] = parser.parse(row[0])
             row[1] = float(row[1])
             forecasts.append(row)
-        for temp in forecasts:
-            if temp[1] >= thresholds[threshold_counter]:
-                print("Anomaly Predicted with {} on {} at {} with a temperature of {}".format(sensor_names[index],row[0].date(), row[0].time(),
-                                                                                    row[1]))
-    forecasts.clear()
-    threshold_counter += 1
 
+        for temp in forecasts:
+
+            if anomaly_detected and temp[1] < thresholds[index]:
+                end_detection_date = temp[0].date()
+                end_detection_time = temp[0].time()
+                incident.append(end_detection_date)
+                incident.append(end_detection_time)
+                anomaly_email_template += str(temp[0])
+                anomaly_detected = False
+                print(anomaly_email_template)
+                incidents_to_insert.append(str(incident)+'\n')
+                incident.clear()
+
+
+            if temp[1] >= thresholds[index]:
+                detected_sensor = sensor_names[index]
+                start_detection_date = temp[0].date()
+                start_detection_time = temp[0].time()
+                detected_temp = temp[1]
+                detected_sensor_name = sensors[detected_sensor][0]
+                detected_sensor_location = sensors[detected_sensor][1]
+                anomaly_email_template = "Anomaly Predicted with {} sensor ({}) located at {} on {} at {} with a temperature of {} and will be resolved at ".format(detected_sensor_name, detected_sensor, detected_sensor_location, start_detection_date, start_detection_time, detected_temp)
+                # pID, incid_serial, incid_location, incid_name, incid_date_start, incid_time_start, incid_temp, incid_date_stop, incid_time_stop
+                incident.append(detected_sensor)
+                incident.append(detected_sensor_location)
+                incident.append(detected_sensor_name)
+                incident.append(start_detection_date)
+                incident.append(start_detection_time)
+                incident.append(detected_temp)
+                anomaly_detected = True
+
+    forecasts.clear()
+
+with open('incidents_to_be_inserted.txt', 'w') as file:
+    file.writelines(incidents_to_insert)
