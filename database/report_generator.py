@@ -64,6 +64,8 @@ fri_times = []
 sat_times = []
 sun_times = []
 
+list_closest_times = []
+
 # Global Variables
 times = [0, 6, 12, 18]  # Generate Dynamically
 
@@ -96,6 +98,7 @@ for sensor_code in sensors.values():
 
         list_of_times.clear()
         new_list_of_times.clear()
+        list_closest_times.clear()
 
         for data in dict_of_temps[sensor_code]:
             # print(data['sensor_date_time'].date(), day.date())
@@ -142,64 +145,42 @@ for sensor_code in sensors.values():
         # print("Get indices of those values:")
 
         try:
-            first_time = new_list_of_times.index(closest_time[0])
-            # print(first_time)
-            # print(sensor_date_time[first_time], sensor_temp[first_time])
-            second_time = new_list_of_times.index(closest_time[1])
-            # print(second_time)
-            # print(sensor_date_time[second_time], sensor_temp[second_time])
-            third_time = new_list_of_times.index(closest_time[2])
-            # print(third_time)
-            # print(sensor_date_time[third_time], sensor_temp[third_time])
-            fourth_time = new_list_of_times.index(closest_time[3])
-            # print(fourth_time)
-            # print(sensor_date_time[fourth_time], sensor_temp[fourth_time])
+            for x, y in enumerate(closest_time):
+                list_closest_times.append(new_list_of_times.index(closest_time[int(x)]))
+
         except (ValueError, IndexError):
             pass
 
         try:
             if day.date().isoweekday() == 1:  # monday
-                mon_temps.append(sensor_temp[first_time])
-                mon_temps.append(sensor_temp[second_time])
-                mon_temps.append(sensor_temp[third_time])
-                mon_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(list_closest_times):
+                    mon_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 2:  # tuesday
-                tue_temps.append(sensor_temp[first_time])
-                tue_temps.append(sensor_temp[second_time])
-                tue_temps.append(sensor_temp[third_time])
-                tue_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(closest_time):
+                    tue_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 3:  # wednesday
-                wed_temps.append(sensor_temp[first_time])
-                wed_temps.append(sensor_temp[second_time])
-                wed_temps.append(sensor_temp[third_time])
-                wed_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(closest_time):
+                    wed_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 4:  # thursday
-                thu_temps.append(sensor_temp[first_time])
-                thu_temps.append(sensor_temp[second_time])
-                thu_temps.append(sensor_temp[third_time])
-                thu_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(closest_time):
+                    thu_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 5:  # friday
-                fri_temps.append(sensor_temp[first_time])
-                fri_temps.append(sensor_temp[second_time])
-                fri_temps.append(sensor_temp[third_time])
-                fri_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(closest_time):
+                    fri_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 6:  # saturday
-                sat_temps.append(sensor_temp[first_time])
-                sat_temps.append(sensor_temp[second_time])
-                sat_temps.append(sensor_temp[third_time])
-                sat_temps.append(sensor_temp[fourth_time])
+                for o, i in enumerate(closest_time):
+                    sat_temps.append(sensor_temp[list_closest_times[o]])
 
             if day.date().isoweekday() == 7:  # sunday
-                sun_temps.append(sensor_temp[first_time])
-                sun_temps.append(sensor_temp[second_time])
-                sun_temps.append(sensor_temp[third_time])
-                sun_temps.append(sensor_temp[fourth_time])
-        except NameError:
+                for o, i in enumerate(closest_time):
+                    sun_temps.append(sensor_temp[list_closest_times[o]])
+
+        except (NameError, TypeError):
             pass
 
         dict_for_inserting[sensor_code] = {"Monday": copy.deepcopy(mon_temps), "Tuesday": copy.deepcopy(tue_temps),
@@ -219,4 +200,4 @@ sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '
 
 print("\nSQL QUERY")
 print(sql_for_inserting)
-cursor.execute(sql_for_inserting)
+# cursor.execute(sql_for_inserting)
