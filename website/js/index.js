@@ -288,7 +288,27 @@ function on_search_dates_click() {
     var month = document.getElementById("date_search_month").value;
     var year = document.getElementById("date_search_year").value;
 
-    console.log(day);
-    console.log(month);
-    console.log(year);
+
+    for (var i = 0; i < report_dates.length; i++){
+        var report_year;
+        var report_month;
+        var report_day;
+        report_year = report_dates[i]["report_date"].charAt(0);
+        report_year += report_dates[i]["report_date"].charAt(1);
+        report_year += report_dates[i]["report_date"].charAt(2);
+        report_year += report_dates[i]["report_date"].charAt(3);
+        report_month = report_dates[i]["report_date"].charAt(5);
+        report_month += report_dates[i]["report_date"].charAt(6);
+        report_day = report_dates[i]["report_date"].charAt(8);
+        report_day += report_dates[i]["report_date"].charAt(9);
+        console.log(report_year);
+        console.log(report_month);
+        console.log(report_day);
+
+
+
+    }
+
+
+
 }
