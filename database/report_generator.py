@@ -173,4 +173,4 @@ sql_insert_report_incomplete = "INSERT INTO Report(report_date, report_json) VAL
 
 print("\nSQL QUERY")
 print(sql_insert_report_incomplete)
-cursor.execute(sql_for_inserting)
+cursor.execute(sql_insert_report_incomplete)
