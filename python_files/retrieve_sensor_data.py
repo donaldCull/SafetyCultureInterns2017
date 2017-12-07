@@ -20,7 +20,7 @@ cursor = connect()
 
 for sensor_code in sensors.values():
     previous_time_file = json.load(
-        open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/previous_time.json", "r"))
+        open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/python_files/previous_time.json", "r"))
     # print(previous_time_file[sensor_code])
     previous_time[sensor_code] = previous_time_file[sensor_code]
 
@@ -63,7 +63,7 @@ for sensor_code in sensors.values():
         print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
 # Update previous_time.json file with most recent datetime
-with open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/previous_time.json", "w") as file:
+with open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/python_files/previous_time.json", "w") as file:
     json.dump(previous_time, file)
 
 print(previous_time)
