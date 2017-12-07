@@ -1,4 +1,3 @@
-sensor_date_time = []
 import copy
 import datetime
 
@@ -7,44 +6,12 @@ import pandas as pd
 from connection_information import connect
 from sensor_dict_collection import ListOfSensors
 
-# TODO: Clean up imports/variables
-# TODO: Clean up print() statements
-
-cursor = connect()
-
-sensors = ListOfSensors()
-
-sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
-
-last_weeks_data = ""
-
-todays_date = datetime.datetime.now().date()
-seven_days_ago = todays_date - datetime.timedelta(days=7)
-list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()
-# print("Days: " + str(list_of_dates))
-dict_of_temps = {}
-
-dict_for_inserting = {}
-
-for sensor_code in sensors.values():
-    dict_of_temps[sensor_code] = []
-    dict_for_inserting[sensor_code] = []
-
-for sensor_code in sensors.values():
-    sql_to_execute = sql_get_dates_incomplete.format(sensor_code, seven_days_ago, todays_date)
-    # print(sql_to_execute)
-    # list_of_values[sensor_code] = cursor.execute(sql_to_execute)
-    cursor.execute(sql_to_execute)
-    results = cursor.fetchall()
-    dict_of_temps[sensor_code] = results
-    # print(dict_of_values[sensor_code])
-
-# Global variables - Overridden each loop
-# sensor_date_time = []
+# Lists that are used, are cleared frequently
 sensor_temp = []
 
 index_of_value = []
 indexes_for_sensor = []
+sensor_date_time = []
 
 closest_time = []
 list_of_times = []  # list of times from sensor for that day
@@ -69,17 +36,37 @@ sun_times = []
 
 list_closest_times = []
 
-# Global Variables
-times = [0, 6, 12, 18]  # Generate Dynamically
+last_weeks_data = ""
+dict_of_temps = {}
+dict_for_inserting = {}
+
+interval_times = [0, 6, 12, 18]  # TODO: Generate Dynamically
+
+sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
+
+cursor = connect()
+
+sensors = ListOfSensors()
+
+# Initialising dates
+todays_date = datetime.datetime.now().date()  # Date when script is run
+seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is run
+list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()  # A list of these dates
+
+# Initialising based stuff that has all the sensors
+for sensor_code in sensors.values():
+    dict_of_temps[sensor_code] = []
+    dict_for_inserting[sensor_code] = []
+    sql_to_execute = sql_get_dates_incomplete.format(sensor_code, seven_days_ago, todays_date)
+    cursor.execute(sql_to_execute)
+    results = cursor.fetchall()
+    dict_of_temps[sensor_code] = results
 
 # Looping through every sensor in the "sensors" Dict
 for sensor_code in sensors.values():
     print("\nFor sensor: " + sensor_code)
-    # Separate dates, times and temps, maintaining order - from oldest to newest - in new lists
-    # Reset/Clear sensor_dates = [], sensor_temps = [], closest_time = [],
-    # index_of_value = [], indexes_for_sensor = [], list_of_times = []
 
-    # reset lists for each day
+    # Clear lists for each day
     mon_temps.clear()
     tue_temps.clear()
     wed_temps.clear()
@@ -89,16 +76,14 @@ for sensor_code in sensors.values():
     sun_temps.clear()
 
     for day in list_of_dates:
-        # print("\n" + "Date: " + str(day.date()))
+        print("\n" + "Date: " + str(day.date()))
 
+        # Clearing more lists that will be looped through again
         sensor_date_time.clear()
         sensor_temp.clear()
-
         closest_time.clear()
-
         index_of_value.clear()
         indexes_for_sensor.clear()
-
         list_of_times.clear()
         new_list_of_times.clear()
         list_closest_times.clear()
@@ -109,29 +94,15 @@ for sensor_code in sensors.values():
                 sensor_date_time.append(data['sensor_date_time'])
                 sensor_temp.append(data['sensor_temp'])
 
-        for my_times in times:
-            # print("Get times for: " + str(my_times))
-            # Gets closest time for each sensor
-            # print(my_times)
-
+        for my_times in interval_times:
             for sensor_dt in sensor_date_time:
                 list_of_times.append(datetime.datetime.strftime(sensor_dt, "%H:%M:%S"))
 
-            # print(type(datetime.timedelta(hours=my_times).seconds))
-            # print(list_of_times)
-
             for line in list_of_times:
-                # print("line" + line)
                 new_line = datetime.datetime.strptime(line, "%H:%M:%S")
                 new_line_2 = datetime.timedelta(hours=new_line.hour, minutes=new_line.minute, seconds=new_line.second)
-                # print("newline" + str(new_line_2.total_seconds()))
-                # print(type(new_line_2))
 
                 new_list_of_times.append(new_line_2.total_seconds())
-            # print(new_list_of_times)
-
-            # print("List of times: " + str(new_list_of_times))
-            # print("My time in seconds: " + str(datetime.timedelta(hours=my_times).seconds))
 
             try:
                 nearest_time = min(new_list_of_times, key=lambda x: abs(x - datetime.timedelta(hours=my_times).seconds))
@@ -139,12 +110,9 @@ for sensor_code in sensors.values():
             except ValueError:
                 pass
 
-                # print(closest_time)
-
-        # print("Times (Values): " + str(closest_time))
-
-        # Take each time value and get index of it from sensor_date_time and then get ref
-        # print("Get indices of those values:")
+        # Prints closest time (in deltatime.seconds) to the intervals in "interval_times"
+        print("Times (intervals: " + str(interval_times))
+        print("Times (seconds):  " + str(closest_time))
 
         try:
             for x, y in enumerate(closest_time):
@@ -190,17 +158,19 @@ for sensor_code in sensors.values():
                                            "Wednesday": copy.deepcopy(wed_temps), "Thursday": copy.deepcopy(thu_temps),
                                            "Friday": copy.deepcopy(fri_temps),
                                            "Saturday": copy.deepcopy(sat_temps), "Sunday": copy.deepcopy(sun_temps)}
-        # print(dict_for_inserting)
-        # print()
 
+    # Prints dict as it's completed for each sensor
+    # print(dict_for_inserting)
+
+# Add dates and times to end of dictionary
 dict_for_inserting['Dates'] = [str(i.date()) for i in list_of_dates]
-dict_for_inserting['Times'] = times
+dict_for_inserting['Times'] = interval_times
 
 converted_dict = str(dict_for_inserting).replace("'", '"')
 
-sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format("2010-05-29",
-                                                                                             converted_dict)
+sql_insert_report_incomplete = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format(todays_date,
+                                                                                                        converted_dict)
 
 print("\nSQL QUERY")
-print(sql_for_inserting)
+print(sql_insert_report_incomplete)
 cursor.execute(sql_for_inserting)
