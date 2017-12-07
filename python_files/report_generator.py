@@ -79,14 +79,14 @@ for sensor_code in sensors.values():
         print("\n" + "Date: " + str(day.date()))
 
         # Clearing more lists that will be looped through again
-        sensor_date_time.clear()
-        sensor_temp.clear()
         closest_time.clear()
         index_of_value.clear()
         indexes_for_sensor.clear()
         list_of_times.clear()
-        new_list_of_times.clear()
         list_closest_times.clear()
+        new_list_of_times.clear()
+        sensor_date_time.clear()
+        sensor_temp.clear()
 
         for data in dict_of_temps[sensor_code]:
             # print(data['sensor_date_time'].date(), day.date())
