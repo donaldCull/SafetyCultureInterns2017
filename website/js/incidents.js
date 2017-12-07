@@ -69,7 +69,7 @@ function create_menu() {
         var id = "" + sensors[i];
         var label = "" + sensor_info[sensors[i]][0] + " - " + sensor_info[sensors[i]][1];
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" " +
-            "class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>";
+            "class=\"list-group-item list-group-item-action bg-light border-primary text-primary\" id=\"" + id + "\">" + label + "</a>";
     }
 
 }
@@ -217,14 +217,14 @@ function on_sensor_click(this_object) {
     current_sensor = this_object.id;
 
     document.getElementById("reports_menu").innerHTML += "<a onclick='create_menu()' " +
-        " class=\"list-group-item list-group-item-action \">Back</a>"
+        " class=\"list-group-item list-group-item-action bg-light border-primary text-primary \">Back</a>"
     for (var i = 0; i < raw_data.length; i++){
         if (raw_data[i].incid_serial === current_sensor){
             var link = "#";
             var id = "" + raw_data[i].pID;
             var label = "" + raw_data[i].incid_date_start;
             document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' " +
-                "href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
+                "href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary \" id=\"" + id + "\">" + label + "</a>"
         }
     }
 }

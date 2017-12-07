@@ -284,5 +284,11 @@ function on_report_click(this_object) {
 
 
 function on_search_dates_click() {
-    
+    var day  = document.getElementById("date_search_day").value;
+    var month = document.getElementById("date_search_month").value;
+    var year = document.getElementById("date_search_year").value;
+
+    console.log(day);
+    console.log(month);
+    console.log(year);
 }
