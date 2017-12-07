@@ -1,9 +1,8 @@
 sensor_date_time = []
+import copy
 import datetime
 
 import pandas as pd
-
-import copy
 
 from database.connection_information import connect
 
@@ -84,9 +83,8 @@ for sensor_code in sensors.values():
     sat_temps.clear()
     sun_temps.clear()
 
-
     for day in list_of_dates:
-        print("\n" + "Date: " + str(day.date()))
+        # print("\n" + "Date: " + str(day.date()))
 
         sensor_date_time.clear()
         sensor_temp.clear()
@@ -136,7 +134,7 @@ for sensor_code in sensors.values():
                 pass
 
 
-            # print(closest_time)
+                # print(closest_time)
 
         # print("Times (Values): " + str(closest_time))
 
@@ -205,19 +203,19 @@ for sensor_code in sensors.values():
             pass
 
         dict_for_inserting[sensor_code] = {"Monday": copy.deepcopy(mon_temps), "Tuesday": copy.deepcopy(tue_temps),
-                                       "Wednesday": copy.deepcopy(wed_temps), "Thursday": copy.deepcopy(thu_temps),
-                                       "Friday": copy.deepcopy(fri_temps),
-                                       "Saturday": copy.deepcopy(sat_temps), "Sunday": copy.deepcopy(sun_temps)}
+                                           "Wednesday": copy.deepcopy(wed_temps), "Thursday": copy.deepcopy(thu_temps),
+                                           "Friday": copy.deepcopy(fri_temps),
+                                           "Saturday": copy.deepcopy(sat_temps), "Sunday": copy.deepcopy(sun_temps)}
         # print(dict_for_inserting)
-        print()
-
+        # print()
 
 dict_for_inserting['Dates'] = [str(i.date()) for i in list_of_dates]
 dict_for_inserting['Times'] = times
 
 converted_dict = str(dict_for_inserting).replace("'", '"')
 
-sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format(todays_date, converted_dict)
+sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format(todays_date,
+                                                                                             converted_dict)
 
 print("\nSQL QUERY")
 print(sql_for_inserting)
