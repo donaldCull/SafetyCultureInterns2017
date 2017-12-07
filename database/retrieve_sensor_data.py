@@ -7,12 +7,13 @@ import requests
 from connection_information import connect
 from sensor_dict_collection import ListOfSensors
 
+# Local path, will have to be changed for the cron directory
 sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/')
 
 previous_time = {}
 timezone_adjustment = 10
 
-API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
+API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"  # TODO: Get from users tables in DB
 sensors = ListOfSensors()
 
 cursor = connect()
@@ -25,9 +26,7 @@ for sensor_code in sensors.values():
 
 print(previous_time)
 
-# print("\nRunning Code - " + str(datetime.now()))
-
-# run retrieval code
+# Loop for each sensor in "sensors" dictionary
 for sensor_code in sensors.values():
     request = requests.get('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
 
@@ -42,10 +41,8 @@ for sensor_code in sensors.values():
     converted_date_time = datetime.strptime(temp_date_time, '%Y-%m-%d %H:%M:%S')
 
     time_adjusted = converted_date_time + timedelta(hours=timezone_adjustment)
-    # print(converted_date_time)
-    # print(time_adjusted)
 
-    # Checking "previous_time" dictionary if time/date is the same, if not insert into database#
+    # Check "previous_time" dictionary if time/date is the same, if not, then insert into database#
     if datetime.strftime(time_adjusted, "%Y-%m-%d %H:%M:%S") not in previous_time[sensor_code]:
         # sql execution
         sql_execution_individual_sensor_table = 'INSERT INTO ' + sensor_code + ' (sensor_date_time, ' \
@@ -65,7 +62,7 @@ for sensor_code in sensors.values():
     else:
         print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
-# update previous_time.json file
+# Update previous_time.json file with most recent datetime
 with open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/previous_time.json", "w") as file:
     json.dump(previous_time, file)
 

@@ -1,5 +1,5 @@
 # Call this file to generate a dictionary of all sensors with temperature's and humidity's attached to them
-# Return dict of sensors: {"[SENSOR NAME]": "[SENSOR CODE]", "[SENSOR NAME]": "[SENSOR CODE]"}
+# Returns dict of sensors: {"[SENSOR NAME]": "[SENSOR CODE]", "[SENSOR NAME]": "[SENSOR CODE]"}
 
 import json
 
@@ -28,5 +28,5 @@ def ListOfSensors():
             # print(dictionary_from_requests[i]['serial_number'])
             sensor[dictionary_from_requests[i]['name']] = dictionary_from_requests[i]['serial_number']
 
-    print(sensor)
+    # print(sensor)
     return sensor

@@ -1,3 +1,6 @@
+# Contains database connection information
+# Call connection_information.connect() to establish connection
+
 import pymysql
 
 
