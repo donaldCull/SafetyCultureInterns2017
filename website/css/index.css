@@ -14,6 +14,7 @@
 #data_table{
     margin-right: 2%;
     margin-left: 2%;
+    display: block;
 }
 
 #sensor_report_select{
@@ -35,3 +36,9 @@
     margin-top: 10%;
     color: #C2C2C2;
 }
+
+
+#search_reports{
+    margin-bottom: 10px;
+}
+

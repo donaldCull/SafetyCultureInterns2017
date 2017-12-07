@@ -68,7 +68,8 @@ function create_menu() {
         var link = "#";
         var id = "" + sensors[i];
         var label = "" + sensor_info[sensors[i]][0] + " - " + sensor_info[sensors[i]][1];
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>";
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" " +
+            "class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>";
     }
 
 }
@@ -198,7 +199,8 @@ function update_table() {
     td6.appendChild(x);
     document.getElementById("tr6").appendChild(td6);
 
-    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
+    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\">" +
+        "<button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
 
 
     $(report_table).addClass("table table-hover table-bordered");
@@ -214,13 +216,15 @@ function on_sensor_click(this_object) {
     document.getElementById("reports_menu").innerHTML = "";
     current_sensor = this_object.id;
 
-    document.getElementById("reports_menu").innerHTML += "<a onclick='create_menu()'  class=\"list-group-item list-group-item-action \">Back</a>"
+    document.getElementById("reports_menu").innerHTML += "<a onclick='create_menu()' " +
+        " class=\"list-group-item list-group-item-action \">Back</a>"
     for (var i = 0; i < raw_data.length; i++){
         if (raw_data[i].incid_serial === current_sensor){
             var link = "#";
             var id = "" + raw_data[i].pID;
-            var label = "" + raw_data[i].pID;
-            document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
+            var label = "" + raw_data[i].incid_date_start;
+            document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' " +
+                "href=\"" + link + "\" class=\"list-group-item list-group-item-action \" id=\"" + id + "\">" + label + "</a>"
         }
     }
 }
