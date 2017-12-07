@@ -3,15 +3,18 @@ from datetime import datetime, timedelta
 
 import requests
 
-import sys; sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/connection_information.py')
+import sys;
+
+sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/connection_information.py')
 
 from connection_information import connect
+from database.sensor_dict_collection import ListOfSensors
 
 previous_time = {}
 timezone_adjustment = 10
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"
-sensors = {"ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}
+sensors = ListOfSensors()
 
 cursor = connect()
 

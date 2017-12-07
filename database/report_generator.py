@@ -5,11 +5,11 @@ import datetime
 import pandas as pd
 
 from database.connection_information import connect
+from database.sensor_dict_collection import ListOfSensors
 
 cursor = connect()
 
-sensors = {
-    "ambient_temp": "49C2A9TH01", "drinks_fridge": "4852F6TH01", "food_fridge": "49C013TH01"}  # Generate Dynamically
+sensors = ListOfSensors()
 
 sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
 
@@ -151,6 +151,7 @@ for sensor_code in sensors.values():
         except (ValueError, IndexError):
             pass
 
+        # TODO: Put this in another loop somehow, can see issue because each day has its own list of temps
         try:
             if day.date().isoweekday() == 1:  # monday
                 for o, i in enumerate(list_closest_times):
