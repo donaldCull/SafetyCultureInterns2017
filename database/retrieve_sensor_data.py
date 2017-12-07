@@ -1,14 +1,13 @@
 import json
+import sys
 from datetime import datetime, timedelta
 
 import requests
 
-import sys;
-
-sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/database/connection_information.py')
-
 from connection_information import connect
-from database.sensor_dict_collection import ListOfSensors
+from sensor_dict_collection import ListOfSensors
+
+sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/')
 
 previous_time = {}
 timezone_adjustment = 10

@@ -1,8 +1,8 @@
 import json
 import requests
 
-from database.connection_information import connect
-from database.sensor_dict_collection import ListOfSensors
+from connection_information import connect
+from sensor_dict_collection import ListOfSensors
 
 cursor = connect()
 

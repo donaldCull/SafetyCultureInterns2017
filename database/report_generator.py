@@ -4,8 +4,11 @@ import datetime
 
 import pandas as pd
 
-from database.connection_information import connect
-from database.sensor_dict_collection import ListOfSensors
+from connection_information import connect
+from sensor_dict_collection import ListOfSensors
+
+# TODO: Clean up imports/variables
+# TODO: Clean up print() statements
 
 cursor = connect()
 
@@ -47,7 +50,7 @@ closest_time = []
 list_of_times = []  # list of times from sensor for that day
 new_list_of_times = []
 
-# lists for each day
+# TODO: One list for temp and times?
 mon_temps = []
 tue_temps = []
 wed_temps = []
@@ -136,7 +139,6 @@ for sensor_code in sensors.values():
             except ValueError:
                 pass
 
-
                 # print(closest_time)
 
         # print("Times (Values): " + str(closest_time))
@@ -196,7 +198,7 @@ dict_for_inserting['Times'] = times
 
 converted_dict = str(dict_for_inserting).replace("'", '"')
 
-sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format(todays_date,
+sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format("2010-05-29",
                                                                                              converted_dict)
 
 print("\nSQL QUERY")

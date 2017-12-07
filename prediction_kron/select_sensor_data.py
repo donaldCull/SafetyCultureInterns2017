@@ -11,7 +11,7 @@ import csv
 # 10) Run locally every 5 minutes to test
 # 11) Make kron tab and integrate into webserver
 
-from database.connection_information import connect
+from connection_information import connect
 # DevicesList field names - pID, sens_name, sens_serial, sens_location
 
 cursor = connect()
