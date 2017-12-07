@@ -3,6 +3,8 @@ import datetime
 
 import pandas as pd
 
+import copy
+
 from database.connection_information import connect
 
 cursor = connect()
@@ -17,7 +19,7 @@ last_weeks_data = ""
 todays_date = datetime.datetime.now().date()
 seven_days_ago = todays_date - datetime.timedelta(days=7)
 list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()
-print("Days: " + str(list_of_dates))
+# print("Days: " + str(list_of_dates))
 dict_of_temps = {}
 
 dict_for_inserting = {}
@@ -54,7 +56,6 @@ thu_temps = []
 fri_temps = []
 sat_temps = []
 sun_temps = []
-inserting_times = []
 
 mon_times = []
 tue_times = []
@@ -85,7 +86,7 @@ for sensor_code in sensors.values():
 
 
     for day in list_of_dates:
-        print("\n" + "Date/Time: " + str(day.date()))
+        print("\n" + "Date: " + str(day.date()))
 
         sensor_date_time.clear()
         sensor_temp.clear()
@@ -97,7 +98,6 @@ for sensor_code in sensors.values():
 
         list_of_times.clear()
         new_list_of_times.clear()
-        inserting_times.clear()
 
         for data in dict_of_temps[sensor_code]:
             # print(data['sensor_date_time'].date(), day.date())
@@ -106,7 +106,7 @@ for sensor_code in sensors.values():
                 sensor_temp.append(data['sensor_temp'])
 
         for my_times in times:
-            print("Get times for: " + str(my_times))
+            # print("Get times for: " + str(my_times))
             # Gets closest time for each sensor
             # print(my_times)
 
@@ -132,31 +132,30 @@ for sensor_code in sensors.values():
             try:
                 nearest_time = min(new_list_of_times, key=lambda x: abs(x - datetime.timedelta(hours=my_times).seconds))
                 closest_time.append(nearest_time)
-                inserting_times.append(str(datetime.timedelta(0, int(nearest_time))))
             except ValueError:
                 pass
 
 
             # print(closest_time)
 
-        print("Times (Values): " + str(closest_time))
+        # print("Times (Values): " + str(closest_time))
 
         # Take each time value and get index of it from sensor_date_time and then get ref
-        print("Get indices of those values:")
+        # print("Get indices of those values:")
 
         try:
             first_time = new_list_of_times.index(closest_time[0])
-            print(first_time)
-            print(sensor_date_time[first_time], sensor_temp[first_time])
+            # print(first_time)
+            # print(sensor_date_time[first_time], sensor_temp[first_time])
             second_time = new_list_of_times.index(closest_time[1])
-            print(second_time)
-            print(sensor_date_time[second_time], sensor_temp[second_time])
+            # print(second_time)
+            # print(sensor_date_time[second_time], sensor_temp[second_time])
             third_time = new_list_of_times.index(closest_time[2])
-            print(third_time)
-            print(sensor_date_time[third_time], sensor_temp[third_time])
+            # print(third_time)
+            # print(sensor_date_time[third_time], sensor_temp[third_time])
             fourth_time = new_list_of_times.index(closest_time[3])
-            print(fourth_time)
-            print(sensor_date_time[fourth_time], sensor_temp[fourth_time])
+            # print(fourth_time)
+            # print(sensor_date_time[fourth_time], sensor_temp[fourth_time])
         except (ValueError, IndexError):
             pass
 
@@ -205,12 +204,12 @@ for sensor_code in sensors.values():
         except NameError:
             pass
 
-        dict_for_inserting[sensor_code] = {"Monday": mon_temps, "Tuesday": tue_temps,
-                                       "Wednesday": wed_temps, "Thursday": thu_temps,
-                                       "Friday": fri_temps,
-                                       "Saturday": sat_temps, "Sunday": sun_temps}
-
-        print(inserting_times)
+        dict_for_inserting[sensor_code] = {"Monday": copy.deepcopy(mon_temps), "Tuesday": copy.deepcopy(tue_temps),
+                                       "Wednesday": copy.deepcopy(wed_temps), "Thursday": copy.deepcopy(thu_temps),
+                                       "Friday": copy.deepcopy(fri_temps),
+                                       "Saturday": copy.deepcopy(sat_temps), "Sunday": copy.deepcopy(sun_temps)}
+        # print(dict_for_inserting)
+        print()
 
 
 dict_for_inserting['Dates'] = [str(i.date()) for i in list_of_dates]
@@ -218,7 +217,8 @@ dict_for_inserting['Times'] = times
 
 converted_dict = str(dict_for_inserting).replace("'", '"')
 
-sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format("2017-12-01", converted_dict)
+sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '{}')".format(todays_date, converted_dict)
 
+print("\nSQL QUERY")
 print(sql_for_inserting)
 cursor.execute(sql_for_inserting)
