@@ -200,4 +200,4 @@ sql_for_inserting = "INSERT INTO Report(report_date, report_json) VALUE ('{}', '
 
 print("\nSQL QUERY")
 print(sql_for_inserting)
-# cursor.execute(sql_for_inserting)
+cursor.execute(sql_for_inserting)
