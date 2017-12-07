@@ -43,7 +43,7 @@ for sensor_filename in sensor_filenames:
     two_std_dev = std_dev + std_dev
     two_std_devs.append(two_std_dev)
     threshold = sensor_mean + two_std_dev
-    thresholds.append(threshold)
+    thresholds.append(round(threshold, 2))
     sensor_temps.clear()
 
 for index, sensor_result in enumerate(range(len(sensor_means))):
@@ -55,8 +55,7 @@ forecast_filenames = []
 forecasts = []
 anomaly_detected = False
 anomaly_email_template = ""
-incidents_to_insert = []
-incident = []
+incident = {}
 
 with open('sensor_forecast_filenames.csv') as file:
     reader = csv.reader(file)
@@ -73,17 +72,18 @@ for index, forecast_filename in enumerate(forecast_filenames):
             forecasts.append(row)
 
         for temp in forecasts:
-
+# BUG ALERT !!!! if anomaly is in the last row end time and date will be from the next sensors date and time
             if anomaly_detected and temp[1] < thresholds[index]:
                 end_detection_date = temp[0].date()
                 end_detection_time = temp[0].time()
-                incident.append(end_detection_date)
-                incident.append(end_detection_time)
+                incident['end_date'] = end_detection_date
+                incident['end_time'] = end_detection_time
                 anomaly_email_template += str(temp[0])
                 anomaly_detected = False
                 print(anomaly_email_template)
-                incidents_to_insert.append(str(incident)+'\n')
+                print(incident)
                 incident.clear()
+                print(incident)
 
 
             if temp[1] >= thresholds[index]:
@@ -95,15 +95,12 @@ for index, forecast_filename in enumerate(forecast_filenames):
                 detected_sensor_location = sensors[detected_sensor][1]
                 anomaly_email_template = "Anomaly Predicted with {} sensor ({}) located at {} on {} at {} with a temperature of {} and will be resolved at ".format(detected_sensor_name, detected_sensor, detected_sensor_location, start_detection_date, start_detection_time, detected_temp)
                 # pID, incid_serial, incid_location, incid_name, incid_date_start, incid_time_start, incid_temp, incid_date_stop, incid_time_stop
-                incident.append(detected_sensor)
-                incident.append(detected_sensor_location)
-                incident.append(detected_sensor_name)
-                incident.append(start_detection_date)
-                incident.append(start_detection_time)
-                incident.append(detected_temp)
+                incident['sensor'] = detected_sensor
+                incident['location'] = detected_sensor_location
+                incident['name'] = detected_sensor_name
+                incident['start_date'] = start_detection_date
+                incident['start_time'] = start_detection_time
+                incident['temp'] = detected_temp
                 anomaly_detected = True
 
     forecasts.clear()
-
-with open('incidents_to_be_inserted.txt', 'w') as file:
-    file.writelines(incidents_to_insert)
