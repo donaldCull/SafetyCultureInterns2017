@@ -7,10 +7,8 @@ from dateutil import parser
 from connection_information import connect
 
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
-cwd = os.getcwd()
 
 def detect():
-    print(cwd)
     sensor_filenames = []
     sensor_names = []
     sensors = {}
@@ -66,8 +64,6 @@ def detect():
             forecast_filenames.append(str(row).lstrip('[').rstrip(']').strip("'"))
 
     for index, forecast_filename in enumerate(forecast_filenames):
-        print(forecast_filename)
-        print(os.path.dirname(__file__) + "/" + forecast_filename)
         with open(os.path.dirname(__file__) + "/" + forecast_filename) as file:
 
             reader = csv.reader(file)
