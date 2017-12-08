@@ -345,7 +345,7 @@ function on_search_dates_click() {
                 }
             }
             else {
-                if (parseInt(report_year) >= parseInt(search_year) && parseInt(report_month) >= parseInt(search_month)) {
+                if (parseInt(report_year) >= parseInt(search_year)) {
                     new_dates.push(report_dates[i]);
                 }
             }
@@ -362,7 +362,7 @@ function on_search_dates_click() {
                 }
             }
             else {
-                if (parseInt(report_year) <= parseInt(search_year) && parseInt(report_month) <= parseInt(search_month)) {
+                if (parseInt(report_year) <= parseInt(search_year)) {
                     new_dates.push(report_dates[i]);
                 }
             }
