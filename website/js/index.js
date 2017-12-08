@@ -303,12 +303,6 @@ function on_search_dates_click() {
     else if (search_month === "Nov"){search_month = "11"}
     else if (search_month === "Dec"){search_month = "12"}
 
-
-
-    console.log(search_par);
-    console.log(search_month);
-    console.log(search_year);
-
     var new_dates = [];
 
     for (var i = 0; i < report_dates.length; i++) {
@@ -322,19 +316,55 @@ function on_search_dates_click() {
         report_month += report_dates[i]["report_date"].charAt(6);
 
 
-        if(search_year === "Any"){
-            if (report_month === search_month) {
-                new_dates.push(report_dates[i]);
+        if (search_par === "Exactly"){
+            if(search_year === "Any"){
+                if (report_month === search_month) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else if (search_month === "Any"){
+                if (report_year === search_year) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else {
+                if (report_year === search_year && report_month === search_month) {
+                    new_dates.push(report_dates[i]);
+                }
             }
         }
-        else if (search_month === "Any"){
-            if (report_year === search_year) {
-                new_dates.push(report_dates[i]);
+        else if (search_par === "Before"){
+            if(search_year === "Any"){
+                if (parseInt(report_month) >= parseInt(search_month)) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else if (search_month === "Any"){
+                if (parseInt(report_year) >= parseInt(search_year)) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else {
+                if (parseInt(report_year) >= parseInt(search_year) && parseInt(report_month) >= parseInt(search_month)) {
+                    new_dates.push(report_dates[i]);
+                }
             }
         }
-        else {
-            if (report_year === search_year && report_month === search_month) {
-                new_dates.push(report_dates[i]);
+        else if (search_par === "After"){
+            if(search_year === "Any"){
+                if (parseInt(report_month) <= parseInt(search_month)) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else if (search_month === "Any"){
+                if (parseInt(report_year) <= parseInt(search_year)) {
+                    new_dates.push(report_dates[i]);
+                }
+            }
+            else {
+                if (parseInt(report_year) <= parseInt(search_year) && parseInt(report_month) <= parseInt(search_month)) {
+                    new_dates.push(report_dates[i]);
+                }
             }
         }
 
