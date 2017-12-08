@@ -322,18 +322,37 @@ function on_search_dates_click() {
         report_month += report_dates[i]["report_date"].charAt(6);
 
 
-        if (report_year === search_year && report_month === search_month) {
-            new_dates.push(report_dates[i]);
+        if(search_year === "Any"){
+            if (report_month === search_month) {
+                new_dates.push(report_dates[i]);
+            }
+        }
+        else if (search_month === "Any"){
+            if (report_year === search_year) {
+                new_dates.push(report_dates[i]);
+            }
+        }
+        else {
+            if (report_year === search_year && report_month === search_month) {
+                new_dates.push(report_dates[i]);
+            }
         }
 
 
 
     }
 
+    if (search_month === "Any" && search_year === "Any"){
+        search_dates = [];
+        search_dates = report_dates;
+        report_menu_creation();
+    }
+    else {
+        search_dates = [];
+        search_dates = new_dates;
+        report_menu_creation();
+    }
 
-    search_dates = [];
-    search_dates = new_dates;
-    report_menu_creation();
 
 }
 
