@@ -12,7 +12,7 @@ sql_partial = 'INSERT INTO ' + '{} (sens_name, sens_serial, sens_location) VALUE
 
 for sensor_code in sensors.values():
     # print('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
-    request = requests.get('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code))
+    request = requests.get('https://api.connectsense.com/v1/{}/devices/{}'.format(API_TOKEN, sensor_code), timeout=20)
 
     response, sensor_scrap = request.text.split(",\"recent_reportings")
     acceptable_string = response + "}"
