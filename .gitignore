@@ -1,4 +1,3 @@
-
-.idea
-.pyc
-
+*.pyc
+*.idea
+python_files/.DS_Store
