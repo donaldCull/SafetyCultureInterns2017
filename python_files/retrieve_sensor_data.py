@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 import os
 import requests
 
-from connection_information import connect
-from sensor_dict_collection import ListOfSensors
+from python_files.connection_information import connect
+from python_files.sensor_dict_collection import ListOfSensors
 
 # Local path, will have to be changed for the cron directory
 sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/www/data')

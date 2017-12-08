@@ -1,5 +1,5 @@
-from connection_information import connect
-from sensor_dict_collection import ListOfSensors
+from python_files.connection_information import connect
+from python_files.sensor_dict_collection import ListOfSensors
 
 cursor = connect()
 
