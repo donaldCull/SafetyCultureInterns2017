@@ -10,6 +10,7 @@ window.onload = function start() {
     // runs the following functions when the pages load
     get_raw_data(function () {
         sensors_menu();
+        document.getElementById("search_reports").style.visibility = "visible";
     });
 };
 
@@ -23,7 +24,7 @@ function get_raw_data(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_Incidents.php", true);
+    xhttp.open("GET", "../PHP/retrieve_Incidents.PHP", true);
     xhttp.send();
 }
 
@@ -184,20 +185,6 @@ function update_table() {
     td5.appendChild(x);
     document.getElementById("tr5").appendChild(td5);
 
-    // row 6
-    var tr6 = document.createElement("TR");
-    tr6.setAttribute("id", "tr6");
-    document.getElementById("report_table_tbody").appendChild(tr6);
-
-    var th6 = document.createElement("TH");
-    x = document.createTextNode("Date/Time resolved:");
-    th6.appendChild(x);
-    document.getElementById("tr6").appendChild(th6);
-
-    var td6 = document.createElement("TD");
-    x = document.createTextNode("" + raw_data[current_report].incid_date_stop + " / " + raw_data[current_report].incid_time_stop);
-    td6.appendChild(x);
-    document.getElementById("tr6").appendChild(td6);
 
     document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\">" +
         "<button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";

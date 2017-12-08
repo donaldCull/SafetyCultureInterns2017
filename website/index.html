@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,142 +10,55 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- My css below -->
     <link href="css/index.css" rel="stylesheet">
-    <link href="css/print_report.css" rel="stylesheet" media="print">
 </head>
 
-<body class="bg-light">
+<body class="bg-primary">
 
 
-<!-- top page navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav_bar">
+<div class="jumbotron bg-transparent text-light" id="jumbotron">
+    <h1 class="display-3">TempSpace</h1>
+    <p class="lead">The best temperature management system in the world</p>
+    <hr class="my-4">
 
-    <a class="navbar-brand" href="#">TempSpace</a>
+    <p class="lead">
 
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">Reports<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="incidents.html">Incidents</a>
-        </li>
-    </ul>
-    <div class="dropdown">
-        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            user@tempspace.com.au
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Account Settings</a>
-            <a class="dropdown-item" href="#">User Settings</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Log out</a>
+
+
+    <form id="sign_in_form">
+
+        <div class="form-group">
+            <label for="login_email">Email address</label>
+            <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp" placeholder="Email">
         </div>
-    </div>
-</nav>
-
-
-<!-- container for rest of main-->
-<div class="container-fluid" id="main_container">
-    <div class="row">
-
-
-        <!-- left side of page-->
-        <div class="col-3" id="col4">
-
-            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-block btn-outline-primary" id="search_reports">Search Dates</button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm " role="document">
-                    <div class="modal-content bg-light">
-                        <div class="modal-header">
-                            <h6 class="modal-title text-primary" id="exampleModalLabel">Search Dates</h6>
-
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="form-group">
-                                <select class="form-control form-control-sm" id="date_search_param">
-                                    <option>Exactly</option>
-                                    <option>After</option>
-                                    <option>Before</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <select class="form-control form-control-sm" id="date_search_month">
-                                    <option>Jan</option>
-                                    <option>Feb</option>
-                                    <option>Mar</option>
-                                    <option>Apr</option>
-                                    <option>May</option>
-                                    <option>Jun</option>
-                                    <option>Jul</option>
-                                    <option>Aug</option>
-                                    <option>Sep</option>
-                                    <option>Oct</option>
-                                    <option>Nov</option>
-                                    <option>Dec</option>
-                                    <option>Any</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <select class="form-control form-control-sm" id="date_search_year">
-                                    <option>2017</option>
-                                    <option>2016</option>
-                                    <option>2015</option>
-                                    <option>2014</option>
-                                    <option>2013</option>
-                                    <option>2012</option>
-                                    <option>2011</option>
-                                    <option>2010</option>
-                                    <option>Any</option>
-                                </select>
-                            </div>
-
-
-
-                        </div>
-                        <div class="modal-footer">
-
-                            <button type="button" onclick="on_reset_serch_dates_click()" data-dismiss="modal" class="btn btn-sm btn-primary">Reset</button>
-
-                            <button type="button" onclick="on_search_dates_click()" data-dismiss="modal" class="btn btn-sm btn-primary">Search</button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <!-- list of report_id_list/incidents-->
-            <div class="list-group" id="reports_menu">
-
-
-
-
-            </div>
-
+        <div class="form-group">
+            <label for="login_password">Password</label>
+            <input type="password" class="form-control" id="login_password" placeholder="Password">
         </div>
 
 
-        <!-- right side of page-->
-        <div class="col-9" id="col8">
-
-            <div id="data_table">
-                </div>
 
 
-            </div>
 
-        </div>
-    </div>
+        <button type="reset" class="btn btn-outline-light"  onclick="on_login_click()">Login</button>
+
+    <small id="error_text" class="form-text text-secondary">*email or password is wrong</small>
+
+    <small id="emailHelp" class="form-text text-light">New here? <a href="html/new_user.html" class="text-light">create an account</a></small>
+    </form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
 
 
 

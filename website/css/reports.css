@@ -3,24 +3,31 @@
     max-height: 500px;
 }
 
-
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
-
-}
-
 #col4{
     margin-top: 3%;
 }
-
 
 #col8{
     margin-top: 3%;
 }
 
 #data_table{
+    margin-right: 2%;
     margin-left: 2%;
+    display: block;
+}
+
+#sensor_report_select{
+    margin-bottom: 10px;
+}
+
+#print_download_btns{
+    float: right;
+    margin-right: 2%;
+}
+
+#sensor_select_btn{
+    float: left;
 }
 
 #data_table_no_data_selected{
@@ -30,6 +37,11 @@
     color: #C2C2C2;
 }
 
+
+#search_reports{
+    margin-bottom: 10px;
+    visibility: hidden;
+}
 #date_search_month_box{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -43,9 +55,4 @@
 #date_search_day_box{
 
     margin: auto;
-}
-
-#search_reports{
-    margin-bottom: 10px;
-    visibility: hidden;
 }

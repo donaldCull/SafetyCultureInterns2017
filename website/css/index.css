@@ -1,57 +1,12 @@
-#reports_menu{
-    overflow: scroll;
-    max-height: 500px;
-}
-
-#col4{
-    margin-top: 3%;
-}
-
-#col8{
-    margin-top: 3%;
-}
-
-#data_table{
-    margin-right: 2%;
-    margin-left: 2%;
-    display: block;
-}
-
-#sensor_report_select{
-    margin-bottom: 10px;
-}
-
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
-}
-
-#sensor_select_btn{
-    float: left;
-}
-
-#data_table_no_data_selected{
+#jumbotron{
+    margin: auto;
+    width: 50%;
     text-align: center;
-    margin-right: 15%;
-    margin-top: 10%;
-    color: #C2C2C2;
 }
-
-
-#search_reports{
-    margin-bottom: 10px;
-}
-#date_search_month_box{
-    padding-top: 10px;
-    padding-bottom: 10px;
-
+#sign_in_form{
+    width: 50%;
     margin: auto;
 }
-#date_search_year_box{
-
-    margin: auto;
-}
-#date_search_day_box{
-
-    margin: auto;
+#error_text{
+    visibility: hidden;
 }
