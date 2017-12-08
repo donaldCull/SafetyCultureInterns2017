@@ -2,13 +2,14 @@ import json
 import sys
 from datetime import datetime, timedelta
 
+import os
 import requests
 
 from connection_information import connect
 from sensor_dict_collection import ListOfSensors
 
 # Local path, will have to be changed for the cron directory
-sys.path.append('/Users/admin/PycharmProjects/SafetyCultureInterns2017/')
+sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/www/data')
 
 previous_time = {}
 timezone_adjustment = 10
@@ -20,7 +21,7 @@ cursor = connect()
 
 for sensor_code in sensors.values():
     previous_time_file = json.load(
-        open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/python_files/previous_time.json", "r"))
+        open(os.path.dirname(__file__) + "/previous_time.json", "r"))
     # print(previous_time_file[sensor_code])
     previous_time[sensor_code] = previous_time_file[sensor_code]
 
@@ -63,7 +64,7 @@ for sensor_code in sensors.values():
         print("Most Recent API call for " + sensor_code + " existed within the database already.")
 
 # Update previous_time.json file with most recent datetime
-with open("/Users/admin/PycharmProjects/SafetyCultureInterns2017/python_files/previous_time.json", "w") as file:
+with open(os.path.dirname(__file__) + "/previous_time.json", "w") as file:
     json.dump(previous_time, file)
 
 print(previous_time)

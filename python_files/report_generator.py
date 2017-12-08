@@ -50,7 +50,7 @@ sensors = ListOfSensors()
 
 # Initialising dates
 todays_date = datetime.datetime.now().date()  # Date when script is run
-seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is run
+seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is ru
 list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()  # A list of these dates
 
 # Initialising based stuff that has all the sensors
