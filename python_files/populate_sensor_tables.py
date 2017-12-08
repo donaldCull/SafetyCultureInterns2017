@@ -1,5 +1,5 @@
 import csv
-from python_files.connection_information import connect
+from connection_information import connect
 
 csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv', 'altered-4852F6TH01-as-of-20171206.csv']
 table_names = ['49C2A9TH01', '49C013TH01', '4852F6TH01']
