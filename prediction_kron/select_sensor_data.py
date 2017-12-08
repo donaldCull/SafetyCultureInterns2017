@@ -1,9 +1,14 @@
 import csv
+
+import os
 import pandas as pd
+import sys
 from fbprophet import Prophet
 from datetime import datetime, timedelta
-from database.connection_information import connect
-from prediction_kron.detect_anomalies import detect
+from connection_information import connect
+from detect_anomalies import detect
+sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
+
 
 # 9) If anomaly detected generate email
 # 10) Run locally every 5 minutes to test
@@ -18,7 +23,7 @@ sensor_code_select_sql = "SELECT sens_serial,sens_name, sens_location FROM Devic
 cursor.execute(sensor_code_select_sql)
 sensor_codes = cursor.fetchall()
 
-with open('sensor_details.txt', 'w') as file:
+with open(os.path.dirname(__file__) + '/sensor_details.txt', 'w') as file:
     for sensor_code in sensor_codes:
         file.write("{},{},{}\n".format(sensor_code['sens_serial'], sensor_code['sens_name'], sensor_code['sens_location']))
 
@@ -38,7 +43,7 @@ for sensor_code in sensor_codes:
         entry = [timestamp, temp]
         rows.append(entry)
 # write date and time into individual sensor csvs
-    with open(sensor_code['sens_serial']+'.csv' ,'w') as file:
+    with open(os.path.dirname(__file__) + '/' +sensor_code['sens_serial']+'.csv' ,'w') as file:
         sensor_file_names.append(sensor_code['sens_serial'] + '.csv')
         writer = csv.writer(file)
         for entry in range(len(rows)):
@@ -60,15 +65,15 @@ for sensor_file_name in sensor_file_names:
 
     # predictions stored in a csv file and overwritten each time? Or update a database with predictions
     # Write the date and temp to file
-    forecast.to_csv('Forecast-'+sensor_file_name, columns=('ds', 'yhat'), index_label=False, index=False,
+    forecast.to_csv(os.path.dirname(__file__) + '/Forecast-' + sensor_file_name, columns=('ds', 'yhat'), index_label=False, index=False,
                     header=('Timestamp', 'Temps'), float_format='%.2f')
     forecast_filenames.append(['Forecast-'+sensor_file_name])
 
-with open('sensor_forecast_filenames.csv' ,'w') as file:
+with open(os.path.dirname(__file__) + '/sensor_forecast_filenames.csv', 'w') as file:
     writer = csv.writer(file)
     writer.writerows(forecast_filenames)
 
-with open('sensor_filenames.csv', 'w') as file:
+with open(os.path.dirname(__file__) + '/sensor_filenames.csv', 'w') as file:
     writer = csv.writer(file)
     for sensor_file_name in sensor_file_names:
         writer.writerow([sensor_file_name])

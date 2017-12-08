@@ -1,12 +1,16 @@
 import csv
-import statistics
-
 import os
-from dateutil import parser
-from database.connection_information import connect
+import statistics
+import sys
 
+from dateutil import parser
+from connection_information import connect
+
+sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
+cwd = os.getcwd()
 
 def detect():
+    print(cwd)
     sensor_filenames = []
     sensor_names = []
     sensors = {}
@@ -30,7 +34,7 @@ def detect():
     std_devs = []
     # retrieve sensor temps from each sensor
     for sensor_filename in sensor_filenames:
-        with open(sensor_filename) as file:
+        with open(os.path.dirname(__file__) + "/" + sensor_filename) as file:
             reader = csv.reader(file)
             next(reader)
             for row in reader:
@@ -60,8 +64,12 @@ def detect():
         reader = csv.reader(file)
         for row in reader:
             forecast_filenames.append(str(row).lstrip('[').rstrip(']').strip("'"))
+
     for index, forecast_filename in enumerate(forecast_filenames):
-        with open(os.path.dirname(__file__) + "/" +forecast_filename) as file:
+        print(forecast_filename)
+        print(os.path.dirname(__file__) + "/" + forecast_filename)
+        with open(os.path.dirname(__file__) + "/" + forecast_filename) as file:
+
             reader = csv.reader(file)
             next(reader)
             for row in reader:

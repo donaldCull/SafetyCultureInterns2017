@@ -1,7 +1,8 @@
 import json
+
 import requests
 
-from database.connection_information import connect
+from prediction_kron.connection_information import connect
 
 cursor = connect()
 

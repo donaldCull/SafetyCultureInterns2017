@@ -1,5 +1,6 @@
 import csv
-from database.connection_information import connect
+
+from prediction_kron.connection_information import connect
 
 csv_filename = 'altered-49C013TH01-as-of-20171207.csv'
 table_name = '49C013TH01'
