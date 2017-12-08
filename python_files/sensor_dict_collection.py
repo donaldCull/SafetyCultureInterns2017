@@ -16,7 +16,7 @@ sensor = {}
 def ListOfSensors():
     cursor = connect()
 
-    request = requests.get(API_URL)
+    request = requests.get(API_URL, timeout=20)
 
     dictionary_from_requests = json.loads(request.text)
 
