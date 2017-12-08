@@ -286,50 +286,55 @@ function on_report_click(this_object) {
 
 
 function on_search_dates_click() {
-    var month = document.getElementById("date_search_month").value;
-    var year = document.getElementById("date_search_year").value;
+    var search_par = document.getElementById("date_search_param").value;
+    var search_month = document.getElementById("date_search_month").value;
+    var search_year = document.getElementById("date_search_year").value;
+
+    if (search_month === "Jan"){search_month = "1"}
+    else if (search_month === "Feb"){search_month = "2"}
+    else if (search_month === "Mar"){search_month = "3"}
+    else if (search_month === "Apr"){search_month = "4"}
+    else if (search_month === "May"){search_month = "5"}
+    else if (search_month === "Jun"){search_month = "6"}
+    else if (search_month === "Jul"){search_month = "7"}
+    else if (search_month === "Aug"){search_month = "8"}
+    else if (search_month === "Sep"){search_month = "9"}
+    else if (search_month === "Oct"){search_month = "10"}
+    else if (search_month === "Nov"){search_month = "11"}
+    else if (search_month === "Dec"){search_month = "12"}
 
 
-    if (year.length !== 4){
-        search_dates = [];
-        search_dates = report_dates;
-        report_menu_creation();
-    }
-    else {
 
-        var new_dates = [];
+    console.log(search_par);
+    console.log(search_month);
+    console.log(search_year);
 
-        for (var i = 0; i < report_dates.length; i++) {
-            var report_year;
-            var report_month;
-            report_year = report_dates[i]["report_date"].charAt(0);
-            report_year += report_dates[i]["report_date"].charAt(1);
-            report_year += report_dates[i]["report_date"].charAt(2);
-            report_year += report_dates[i]["report_date"].charAt(3);
-            report_month = report_dates[i]["report_date"].charAt(5);
-            report_month += report_dates[i]["report_date"].charAt(6);
+    var new_dates = [];
+
+    for (var i = 0; i < report_dates.length; i++) {
+        var report_year;
+        var report_month;
+        report_year = report_dates[i]["report_date"].charAt(0);
+        report_year += report_dates[i]["report_date"].charAt(1);
+        report_year += report_dates[i]["report_date"].charAt(2);
+        report_year += report_dates[i]["report_date"].charAt(3);
+        report_month = report_dates[i]["report_date"].charAt(5);
+        report_month += report_dates[i]["report_date"].charAt(6);
 
 
-            if (report_year === year) {
-                if (month.length === 2){
-                    if (report_month === month){
-                        new_dates.push(report_dates[i]);
-                    }
-                }
-                else {
-                    new_dates.push(report_dates[i]);
-                }
-
-            }
-
+        if (report_year === search_year && report_month === search_month) {
+            new_dates.push(report_dates[i]);
         }
 
-        search_dates = [];
-        search_dates = new_dates;
-        report_menu_creation();
 
 
     }
+
+
+    search_dates = [];
+    search_dates = new_dates;
+    report_menu_creation();
+
 }
 
 function on_reset_serch_dates_click() {
