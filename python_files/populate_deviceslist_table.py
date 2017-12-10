@@ -5,7 +5,6 @@ import requests
 from connection_information import connect
 from sensor_dict_collection import ListOfSensors
 
-
 cursor = connect()
 
 API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"

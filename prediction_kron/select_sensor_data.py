@@ -14,6 +14,7 @@ sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/predict
 # 10) Run locally every 5 minutes to test
 # 11) Make kron tab and integrate into webserver
 
+
 # DevicesList field names - pID, sens_name, sens_serial, sens_location
 
 DAYS_PRIOR = 14
