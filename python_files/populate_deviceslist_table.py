@@ -1,8 +1,10 @@
 import json
+
 import requests
 
 from connection_information import connect
 from sensor_dict_collection import ListOfSensors
+
 
 cursor = connect()
 

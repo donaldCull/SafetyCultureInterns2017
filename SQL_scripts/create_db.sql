@@ -23,6 +23,4 @@ CREATE TABLE Incidents(
     incid_date_start VARCHAR(10),
     incid_time_start VARCHAR(8),
     incid_temp VARCHAR(5),
-    incid_date_stop VARCHAR(10),
-    incid_time_stop VARCHAR(8)
 );
