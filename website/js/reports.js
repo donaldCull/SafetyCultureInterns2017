@@ -83,7 +83,7 @@ function report_menu_creation() {
         var link = "#";
         var id = "" + (Object.keys(search_dates)[i]);
         var label = "" + search_dates[i].report_date;
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary " + active + "\" id=\"" + id + "\">" + label + "</a>";
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary small " + active + "\" id=\"" + id + "\">" + label + "</a>";
     }
 }
 
@@ -91,13 +91,13 @@ function report_menu_creation() {
 function sensor_menu_creation() {
     // creates the menu items for each of the sensors we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-light border-primary text-primary \">Back</a>";
+    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-light border-primary small text-primary \">Back</a>";
     var active = "";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
         var label = "" + sensors[i];
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary " + active + "\" id=\"" + id + "\">" + label + "</a>";
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary small" + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
 }
