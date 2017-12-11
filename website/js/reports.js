@@ -191,7 +191,7 @@ function update_table() {
 function convert_time(time_24h) {
     var return_time;
 
-    if (time_24h > 0 && time_24h <= 12){
+    if (time_24h > 0 && time_24h < 12){
         return_time = time_24h + ":00am"
     }
     else if (time_24h > 12){
@@ -199,6 +199,9 @@ function convert_time(time_24h) {
         return_time = time_24h + ":00pm"
     }
     else if (time_24h === 0){
+        return_time = "12:00am"
+    }
+    else if (time_24h === 12){
         return_time = "12:00pm"
     }
 

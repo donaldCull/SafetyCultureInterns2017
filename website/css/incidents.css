@@ -3,13 +3,6 @@
     height: 93vh;
 }
 
-
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
-
-}
-
 #col4{
     padding-left: 0;
     padding-right: 0;
@@ -17,11 +10,13 @@
 
 
 #col8{
-    margin-top: 3%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #data_table{
-    margin-left: 2%;
+    text-align: center;
 }
 
 #data_table_no_data_selected{
@@ -40,13 +35,4 @@
 #date_search_year_box{
 
     margin: auto;
-}
-#date_search_day_box{
-
-    margin: auto;
-}
-
-#search_reports{
-    margin-bottom: 10px;
-    visibility: hidden;
 }

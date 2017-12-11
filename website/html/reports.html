@@ -52,10 +52,10 @@
         <!-- left side of page-->
         <div class="col-2" id="col4">
 
-            <!--<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-block btn-primary" id="search_reports">Search</button>-->
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-sm " role="document">
                     <div class="modal-content bg-light">
                         <div class="modal-header">
@@ -69,52 +69,39 @@
 
                             <div class="form-group">
                                 <select class="form-control form-control-sm" id="date_search_param">
-                                    <option>Exactly</option>
-                                    <option>After</option>
-                                    <option>Before</option>
+                                    <option>Exactly</option><option>After</option><option>Before</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <select class="form-control form-control-sm" id="date_search_month">
-                                    <option>Jan</option>
-                                    <option>Feb</option>
-                                    <option>Mar</option>
-                                    <option>Apr</option>
-                                    <option>May</option>
-                                    <option>Jun</option>
-                                    <option>Jul</option>
-                                    <option>Aug</option>
-                                    <option>Sep</option>
-                                    <option>Oct</option>
-                                    <option>Nov</option>
-                                    <option>Dec</option>
+                                    <option>Jan</option><option>Feb</option><option>Mar</option>
+                                    <option>Apr</option><option>May</option><option>Jun</option>
+                                    <option>Jul</option><option>Aug</option><option>Sep</option>
+                                    <option>Oct</option><option>Nov</option><option>Dec</option>
                                     <option>Any</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <select class="form-control form-control-sm" id="date_search_year">
-                                    <option>2017</option>
-                                    <option>2016</option>
-                                    <option>2015</option>
-                                    <option>2014</option>
-                                    <option>2013</option>
-                                    <option>2012</option>
-                                    <option>2011</option>
-                                    <option>2010</option>
-                                    <option>Any</option>
+                                    <option>2017</option><option>2016</option><option>2015</option>
+                                    <option>2014</option><option>2013</option><option>2012</option>
+                                    <option>2011</option><option>2010</option><option>Any</option>
                                 </select>
                             </div>
-
 
 
                         </div>
                         <div class="modal-footer">
 
-                            <button type="button" onclick="on_reset_serch_dates_click()" data-dismiss="modal" class="btn btn-sm btn-primary">Reset</button>
+                            <button type="button" onclick="on_reset_serch_dates_click()" data-dismiss="modal"
+                                    class="btn btn-sm btn-primary">Reset
+                            </button>
 
-                            <button type="button" onclick="on_search_dates_click()" data-dismiss="modal" class="btn btn-sm btn-primary">Search</button>
+                            <button type="button" onclick="on_search_dates_click()" data-dismiss="modal"
+                                    class="btn btn-sm btn-primary">Search
+                            </button>
 
                         </div>
                     </div>
@@ -122,35 +109,25 @@
             </div>
 
 
-
-
             <!-- list of report_id_list/incidents-->
             <div class="list-group-flush bg-primary " id="reports_menu">
-
-
-
             </div>
-
         </div>
-
 
         <!-- right side of page-->
         <div class="col" id="col8">
-
             <div id="data_table">
-                </div>
-
-
             </div>
-
         </div>
     </div>
-
+</div>
 
 
 <script src="../js/reports.js"></script>
 <!-- Bootstrap scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="../bootstrap/assets/js/vendor/popper.min.js"></script>
 <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
