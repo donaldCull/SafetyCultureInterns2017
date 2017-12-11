@@ -82,8 +82,8 @@ function report_menu_creation() {
     for (var i = 0; i < search_dates.length; i++) {
         var link = "#";
         var id = "" + (Object.keys(search_dates)[i]);
-        var label = "" + search_dates[i].report_date;
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-white text-primary small " + active + "\" id=\"" + id + "\">" + label + "</a>";
+        var label = "" + search_dates[i].report_date + " - #" + i;
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small " + active + "\" id=\"" + id + "\">" + label + "</a>";
     }
 }
 
@@ -91,13 +91,13 @@ function report_menu_creation() {
 function sensor_menu_creation() {
     // creates the menu items for each of the sensors we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-transparent border-white small text-primary \">Back</a>";
+    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-transparent border-light small text-light \">Back</a>";
     var active = "";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
         var label = "" + sensors[i];
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-white text-primary small" + active + "\" id=\"" + id + "\">" + label + "</a>";
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small" + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
 }
@@ -135,26 +135,26 @@ function update_table() {
 
     if (report_data.report_json.Times.length >= 2){
         var theader2 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[0] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[0]));
         theader2.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader2);
 
         var theader3 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[1] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[1]));
         theader3.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader3);
     }
 
     if (report_data.report_json.Times.length >= 3){
         var theader4 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[2] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[2]));
         theader4.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader4);
     }
 
     if (report_data.report_json.Times.length >= 4){
         var theader5 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[3] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[3]));
         theader5.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader5);
     }
@@ -177,10 +177,10 @@ function update_table() {
     }
 
 
-    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button " +
-        "onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
+    // document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button " +
+    //     "onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
 
-    $(report_table).addClass("table table-hover table-bordered");
+    $(report_table).addClass("table table-bordered");
     $(report_table_head).addClass("thead-light");
 
 
@@ -188,6 +188,22 @@ function update_table() {
 
 }
 
+function convert_time(time_24h) {
+    var return_time;
+
+    if (time_24h > 0 && time_24h <= 12){
+        return_time = time_24h + ":00am"
+    }
+    else if (time_24h > 12){
+        time_24h -= 12;
+        return_time = time_24h + ":00pm"
+    }
+    else if (time_24h === 0){
+        return_time = "12:00pm"
+    }
+
+    return return_time;
+}
 
 function add_row(day) {
     var tr = "tr_" + day;

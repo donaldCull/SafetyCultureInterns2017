@@ -1,48 +1,27 @@
 #reports_menu{
     overflow: scroll;
     height: 93vh;
-
 }
 
 #col4{
     padding-left: 0;
     padding-right: 0;
 }
-
 #col8{
-    margin-top: 3%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
-
 #data_table{
-    margin-right: 2%;
-    margin-left: 2%;
-    display: block;
+    text-align: center;
 }
 
-#sensor_report_select{
-    margin-bottom: 10px;
-}
-
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
-}
-
-#sensor_select_btn{
-    float: left;
-}
 
 #data_table_no_data_selected{
     text-align: center;
     margin-right: 15%;
     margin-top: 10%;
     color: #C2C2C2;
-}
-
-
-#search_reports{
-    margin-bottom: 10px;
-    visibility: hidden;
 }
 
 
