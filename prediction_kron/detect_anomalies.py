@@ -5,6 +5,7 @@ import sys
 
 from dateutil import parser
 from connection_information import connect
+from generate_email_alert import send_email
 
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 
@@ -85,6 +86,7 @@ def detect():
                     anomaly_email_template = "Anomaly Predicted with {} sensor ({}) located at {} on {} at {} with a temperature of {} and will be resolved at ".format(
                         detected_sensor_name, detected_sensor, detected_sensor_location, start_detection_date,
                         start_detection_time, detected_temp)
+                    send_email(anomaly_email_template)
                     cursor = connect()
                     complete_incident_sql = incomplete_incident_sql.format(detected_sensor, detected_sensor_location,
                                                                            detected_sensor_name, start_detection_date,
