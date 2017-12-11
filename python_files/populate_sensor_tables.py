@@ -1,8 +1,11 @@
+# Importing historic data into the database's device tables
+
 import csv
 
 from connection_information import connect
 
-csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv', 'altered-4852F6TH01-as-of-20171206.csv']
+csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv',
+                 'altered-4852F6TH01-as-of-20171206.csv']
 table_names = ['49C2A9TH01', '49C013TH01', '4852F6TH01']
 
 cursor = connect()
@@ -15,7 +18,7 @@ for csv_filename in csv_filenames:
             date_time = row[0]
             temp = row[1]
             humidity = row[2]
-            sql_command = sql_partial.format(table_names[table_count], date_time, temp,humidity)
+            sql_command = sql_partial.format(table_names[table_count], date_time, temp, humidity)
             print("row: {} - {}".format(row_count, sql_command))
             cursor.execute(sql_command)
     table_count += 1
