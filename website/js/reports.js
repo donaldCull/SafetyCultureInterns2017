@@ -32,7 +32,7 @@ function getting_num_reports(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_number_of_reports.PHP", true);
+    xhttp.open("GET", "../PHP/retrieve_number_of_reports.php", true);
     xhttp.send();
 }
 
@@ -67,7 +67,7 @@ function get_report(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_reports.PHP?q=" + report_id, true);
+    xhttp.open("GET", "../PHP/retrieve_reports.php?q=" + report_id, true);
     xhttp.send();
 }
 

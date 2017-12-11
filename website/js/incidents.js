@@ -24,7 +24,7 @@ function get_raw_data(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_Incidents.PHP", true);
+    xhttp.open("GET", "../PHP/retrieve_Incidents.php", true);
     xhttp.send();
 }
 
