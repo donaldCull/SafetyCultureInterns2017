@@ -25,7 +25,7 @@ def generate_report(user_id):
     list_of_times = []  # list of times from sensor for that day
     new_list_of_times = []
 
-    # TODO: One list for temp and times?
+    # TODO: List of lists?
     mon_temps = []
     tue_temps = []
     wed_temps = []
@@ -39,7 +39,7 @@ def generate_report(user_id):
     dict_of_temps = {}
     dict_for_inserting = {}
 
-    interval_times = retrieve_user_info.get_interval_times(user_id)
+    interval_times = retrieve_user_info.get_interval_times(user_id)  # [0, 6, 12 ,18]
     sensors = sensor_dictionaries.ListOfUserSensors(user_id)
 
     sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
@@ -47,7 +47,7 @@ def generate_report(user_id):
 
     # Initialising dates
     todays_date = datetime.datetime.now().date()  # Date when script is run
-    seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is ru
+    seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is run
     list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()  # A list of these dates
 
     # Initialising based stuff that has all the sensors # TODO: Sensor Code is a list for some reason, change to dict
@@ -63,7 +63,7 @@ def generate_report(user_id):
     for sensor_code in sensors.values():
         print("\nFor sensor: " + sensor_code)
 
-        # Clear lists for each day
+        # Clear lists for each day # TODO: Loop through list of lists to clear
         mon_temps.clear()
         tue_temps.clear()
         wed_temps.clear()
@@ -104,7 +104,7 @@ def generate_report(user_id):
 
                 try:
                     nearest_time = min(new_list_of_times,
-                                       key=lambda x: abs(x - datetime.timedelta(hours=my_times).seconds))
+                                       key=lambda x: abs(x - datetime.timedelta(hours=int(my_times)).seconds))
                     closest_time.append(nearest_time)
                 except ValueError:
                     pass

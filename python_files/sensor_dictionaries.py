@@ -4,16 +4,17 @@
 import json
 
 import requests
-from connection_information import connect
 
-sensor = {}
+from connection_information import connect
 
 cursor = connect()
 
+
 # Returns all sensors from Devices table TODO: actually get them from devices table
 def ListOfAllSensors(api_token):
-    API_URL = 'https://api.connectsense.com/v1/{}/devices/'.format(api_token)
-    request = requests.get(API_URL, timeout=20)
+    sensor = {}
+    api_url = 'https://api.connectsense.com/v1/{}/devices/'.format(api_token)
+    request = requests.get(api_url, timeout=20)
 
     dictionary_from_requests = json.loads(request.text)
 
@@ -31,8 +32,13 @@ def ListOfAllSensors(api_token):
 
 # Used for generating reports TODO: Get all sensors for one user
 def ListOfUserSensors(user_id):
-    sql_query_users_devices = "SELECT sensor_serial FROM Devices WHERE UserID = {}".format(user_id)
+    sql_query_users_devices = "SELECT sensor_serial, sensor_name FROM Devices WHERE UserID = {}".format(user_id)
     cursor.execute(sql_query_users_devices)
-    sensor = cursor.fetchall()
-    print(sensor)
-    return sensor
+    sensors = cursor.fetchall()
+    return_sensor = {}
+
+    for sensor in sensors:
+        return_sensor[sensor['sensor_name']] = sensor['sensor_serial']
+
+    print(return_sensor)
+    return return_sensor

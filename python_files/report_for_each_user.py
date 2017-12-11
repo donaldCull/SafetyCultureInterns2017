@@ -6,8 +6,8 @@ sql_retrieve_user_list = "SELECT UserID FROM Users"
 cursor = connection_information.connect()
 
 cursor.execute(sql_retrieve_user_list)
-result = cursor.fetchall()
-# print(result)
+users = cursor.fetchall()
 
-for dictionary in result:
+for dictionary in users:
+    # print(dictionary)
     report_generator.generate_report(dictionary['UserID'])
