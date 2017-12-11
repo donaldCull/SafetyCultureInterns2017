@@ -8,12 +8,16 @@ user = 'anomalydetection9@gmail.com'
 gpass = 'l23BXNQoDG7I'
 
 
-def send_email(message):
+def send_email(alerts):
     try:
         server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server_ssl.ehlo()
         server_ssl.login(user, gpass)
         msg = EmailMessage()
+        message = ""
+        for alert in alerts:
+            message += alert
+
         msg.set_content(message)
 
         # me == the sender's email address

@@ -58,6 +58,7 @@ def detect():
     # search the sensor predictions to determine if there is a breach
     forecast_filenames = []
     forecasts = []
+    anomaly_email_alerts = []
     incomplete_incident_sql = 'INSERT INTO Incidents (incid_serial, incid_location, incid_name, incid_date_start, incid_time_start, incid_temp) VALUE ("{}", "{}", "{}","{}", "{}", "{}");'
     with open(os.path.dirname(__file__) + '/sensor_forecast_filenames.csv') as file:
         reader = csv.reader(file)
@@ -83,10 +84,10 @@ def detect():
                     detected_temp = temp[1]
                     detected_sensor_name = sensors[detected_sensor][0]
                     detected_sensor_location = sensors[detected_sensor][1]
-                    anomaly_email_template = "Anomaly Predicted with {} sensor ({}) located at {} on {} at {} with a temperature of {} and will be resolved at ".format(
+                    anomaly_email_template = "Anomaly Predicted with {} sensor ({}) located at {} on {} at {} with a temperature of {}\n".format(
                         detected_sensor_name, detected_sensor, detected_sensor_location, start_detection_date,
                         start_detection_time, detected_temp)
-                    send_email(anomaly_email_template)
+                    anomaly_email_alerts.append(anomaly_email_template)
                     cursor = connect()
                     complete_incident_sql = incomplete_incident_sql.format(detected_sensor, detected_sensor_location,
                                                                            detected_sensor_name, start_detection_date,
@@ -94,6 +95,10 @@ def detect():
                     cursor.execute(complete_incident_sql)
 
         forecasts.clear()
+
+    if len(anomaly_email_alerts) != 0:
+        send_email(anomaly_email_alerts)
+
 
 if __name__ == '__main__':
     detect()
