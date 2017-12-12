@@ -71,6 +71,20 @@ function get_report(callback) {
     xhttp.send();
 }
 
+function get_sensors(callback) {
+    // get each sensor from the devicelist table
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            raw_data = JSON.parse(this.responseText);
+            callback();
+        }
+    };
+    xhttp.open("GET", "../PHP/retrieve_sensors.php", true);
+    xhttp.send();
+
+}
+
 
 function report_menu_creation() {
     // creates the side menu items based on the number of reports we have
