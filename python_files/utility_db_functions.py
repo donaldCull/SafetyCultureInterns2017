@@ -67,3 +67,12 @@ def ListOfUserSensors(user_id):
 
     print(return_sensor)
     return return_sensor
+
+
+def ListOfAllUsers():
+    sql_retrieve_user_list = "SELECT UserID FROM Users"
+
+    cursor.execute(sql_retrieve_user_list)
+    all_users = cursor.fetchall()
+    # print(type(all_users))
+    return all_users

@@ -4,8 +4,8 @@ import csv
 
 import utility_db_functions as udb
 
-csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv',
-                 'altered-4852F6TH01-as-of-20171206.csv']
+csv_filenames = ['altered-49C2A9TH01-as-of-20171212.csv', 'altered-49C013TH01-as-of-20171212.csv',
+                 'altered-4852F6TH01-as-of-20171212.csv']
 table_names = ['49C2A9TH01', '49C013TH01', '4852F6TH01']
 
 cursor = udb.connect()

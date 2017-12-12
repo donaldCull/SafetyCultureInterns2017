@@ -7,11 +7,6 @@ import utility_db_functions as udb
 
 cursor = udb.connect()
 
-sql_retrieve_user_list = "SELECT UserID FROM Users"
-
-cursor.execute(sql_retrieve_user_list)
-users = cursor.fetchall()
-
 
 # pass in userID when calling report generator function
 def generate_report(user_id):
@@ -175,6 +170,8 @@ def generate_report(user_id):
     print(sql_insert_report_complete)
     cursor.execute(sql_insert_report_complete)
 
+
+users = udb.ListOfAllUsers()
 
 for dictionary in users:
     # print(dictionary)

@@ -24,3 +24,10 @@ def create_table(user_id):
     for sql in list_of_sql_queries:
         print('Executing SQL query: "{}"'.format(sql))
         cursor.execute(sql)
+
+
+users = udb.ListOfAllUsers()
+
+for dictionary in users:
+    # print(dictionary)
+    create_table(dictionary['UserID'])
