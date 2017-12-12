@@ -1,11 +1,12 @@
 #reports_menu{
     overflow: scroll;
-    height: 93vh;
+    max-height: 87%;
 }
 
 #col4{
     padding-left: 0;
     padding-right: 0;
+    height: 93vh;
 }
 #col8{
     margin-top: 20px;
@@ -36,3 +37,12 @@
     margin: auto;
 }
 
+#reports_menu_buttons{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 8px;
+    padding-top: 5px;
+}
