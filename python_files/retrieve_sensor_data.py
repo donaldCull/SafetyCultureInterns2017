@@ -1,6 +1,5 @@
 # Set to run on the Crontab every minute.
 # Gets the most recent data from each sensor.
-# TODO: Get data from each sensor from each user.
 
 import json
 import os

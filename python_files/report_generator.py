@@ -25,7 +25,7 @@ def generate_report(user_id):
     list_of_times = []  # list of times from sensor for that day
     new_list_of_times = []
 
-    # TODO: List of lists?
+    # TODO: List of lists? (Tried)
     mon_temps = []
     tue_temps = []
     wed_temps = []
@@ -50,7 +50,7 @@ def generate_report(user_id):
     seven_days_ago = todays_date - datetime.timedelta(days=7)  # Date 7 days ago from when script is run
     list_of_dates = pd.date_range(seven_days_ago, periods=7).tolist()  # A list of these dates
 
-    # Initialising based stuff that has all the sensors # TODO: Sensor Code is a list for some reason, change to dict
+    # Initialising based stuff that has all the sensors #
     for sensor_code in sensors.values():
         dict_of_temps[sensor_code] = []
         dict_for_inserting[sensor_code] = []
@@ -63,7 +63,7 @@ def generate_report(user_id):
     for sensor_code in sensors.values():
         print("\nFor sensor: " + sensor_code)
 
-        # Clear lists for each day # TODO: Loop through list of lists to clear
+        # Clear lists for each day # TODO: Better way to clear?
         mon_temps.clear()
         tue_temps.clear()
         wed_temps.clear()
@@ -75,7 +75,7 @@ def generate_report(user_id):
         for day in list_of_dates:
             print("\n" + "Date: " + str(day.date()))
 
-            # Clearing more lists that will be looped through again
+            # Clearing more lists that will be looped through again # TODO: Same here, is there a better way to clear lots of lists.
             closest_time.clear()
             index_of_value.clear()
             indexes_for_sensor.clear()
@@ -120,7 +120,7 @@ def generate_report(user_id):
             except (ValueError, IndexError):
                 pass
 
-            # TODO: Put this in another loop
+            # TODO: Put this in another loop (tried, day_temps.append )
             try:
                 if day.date().isoweekday() == 1:  # monday
                     for o, i in enumerate(list_closest_times):

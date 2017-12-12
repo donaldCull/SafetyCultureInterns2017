@@ -10,7 +10,7 @@ from connection_information import connect
 cursor = connect()
 
 
-# Returns all sensors from Devices table TODO: actually get them from devices table
+# Returns all sensors from API for user specified (by passing in their api_token)
 def ListOfAllSensors(api_token):
     sensor = {}
     api_url = 'https://api.connectsense.com/v1/{}/devices/'.format(api_token)
@@ -30,7 +30,7 @@ def ListOfAllSensors(api_token):
     return sensor
 
 
-# Used for generating reports TODO: Get all sensors for one user
+# Used for generating reports
 def ListOfUserSensors(user_id):
     sql_query_users_devices = "SELECT sensor_serial, sensor_name FROM Devices WHERE UserID = {}".format(user_id)
     cursor.execute(sql_query_users_devices)
