@@ -4,19 +4,21 @@ var search_dates = [];
 var report_data;
 var report_id = 1;
 var sensors = [];
+var sensor_names;
 var current_sensor;
 var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 var raw_data;
 var dates_count = 0;
 
+
 window.onload = function start() {
     // runs the following functions when the pages load
-    get_report(function () {
+    get_sensors(function () {
         getting_num_reports(function () {
             get_sensor_names();
             search_dates = report_dates;
-            report_menu_creation();
-            document.getElementById("search_reports").style.visibility = "visible";
+            sensor_menu_creation()
+
         });
     });
 };
@@ -32,7 +34,7 @@ function getting_num_reports(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_number_of_reports.PHP", true);
+    xhttp.open("GET", "../PHP/retrieve_number_of_reports.php", true);
     xhttp.send();
 }
 
@@ -40,17 +42,15 @@ function getting_num_reports(callback) {
 function get_sensor_names() {
     // gets the names of each of the sensors in the data
     var count = 0;
-    while (true) {
-        if ((Object.keys(report_data["report_json"])[count]) == undefined) {
+    for (var i = 0; i < sensor_names.length; i++) {
+        if (sensor_names[count]["sens_serial"] === undefined){
             break;
         }
         else {
-            sensors[count] = (Object.keys(report_data["report_json"])[count]);
+            sensors[count] = sensor_names[count]["sens_serial"];
         }
         count++;
     }
-    sensors.pop();
-    sensors.pop();
 
 }
 
@@ -63,27 +63,42 @@ function get_report(callback) {
             raw_data = JSON.parse(this.responseText);
             report_data = raw_data[0];
             report_data["report_json"] =  JSON.parse(report_data["report_json"]);
-
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_reports.PHP?q=" + report_id, true);
+    xhttp.open("GET", "../PHP/retrieve_reports.php?q=" + report_id, true);
     xhttp.send();
+}
+
+
+function get_sensors(callback) {
+    // get each sensor from the devicelist table
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            sensor_names = JSON.parse(this.responseText);
+            callback();
+        }
+    };
+    xhttp.open("GET", "../PHP/retrieve_sensors.php", true);
+    xhttp.send();
+
 }
 
 
 function report_menu_creation() {
     // creates the side menu items based on the number of reports we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("data_table").innerHTML = "<p id=\"data_table_no_data_selected\">No data selected<br>Please select from menu</p>";
+    document.getElementById("reports_menu").innerHTML += "<a onclick='sensor_menu_creation()' class=\"list-group-item list-group-item-action bg-transparent border-light small text-light \">Back</a>";
+
 
 
     var active = "";
     for (var i = 0; i < search_dates.length; i++) {
         var link = "#";
         var id = "" + (Object.keys(search_dates)[i]);
-        var label = "" + search_dates[i].report_date;
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary " + active + "\" id=\"" + id + "\">" + label + "</a>";
+        var label = "" + search_dates[i].report_date + " - #" + i;
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small " + active + "\" id=\"" + id + "\">" + label + "</a>";
     }
 }
 
@@ -91,13 +106,14 @@ function report_menu_creation() {
 function sensor_menu_creation() {
     // creates the menu items for each of the sensors we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-light border-primary text-primary \">Back</a>";
+    document.getElementById("data_table").innerHTML = "<p id=\"data_table_no_data_selected\">No data selected<br>Please select from menu</p>";
+
     var active = "";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
-        var label = "" + sensors[i];
-        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary " + active + "\" id=\"" + id + "\">" + label + "</a>";
+        var label = "" + sensor_names[i]["sens_location"] + " - " + sensor_names[i]["sens_name"];
+        document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small" + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
 }
@@ -135,26 +151,26 @@ function update_table() {
 
     if (report_data.report_json.Times.length >= 2){
         var theader2 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[0] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[0]));
         theader2.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader2);
 
         var theader3 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[1] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[1]));
         theader3.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader3);
     }
 
     if (report_data.report_json.Times.length >= 3){
         var theader4 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[2] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[2]));
         theader4.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader4);
     }
 
     if (report_data.report_json.Times.length >= 4){
         var theader5 = document.createElement("TH");
-        x = document.createTextNode(report_data.report_json.Times[3] + ":00");
+        x = document.createTextNode(convert_time(report_data.report_json.Times[3]));
         theader5.appendChild(x);
         document.getElementById("report_table_head_tr").appendChild(theader5);
     }
@@ -177,15 +193,36 @@ function update_table() {
     }
 
 
-    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button " +
-        "onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
+    // document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\"><button " +
+    //     "onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
 
-    $(report_table).addClass("table table-hover table-bordered");
+    $(report_table).addClass("table table-bordered");
     $(report_table_head).addClass("thead-light");
 
 
 
 
+}
+
+
+function convert_time(time_24h) {
+    var return_time;
+
+    if (time_24h > 0 && time_24h < 12){
+        return_time = time_24h + ":00am"
+    }
+    else if (time_24h > 12){
+        time_24h -= 12;
+        return_time = time_24h + ":00pm"
+    }
+    else if (time_24h === 0){
+        return_time = "12:00am"
+    }
+    else if (time_24h === 12){
+        return_time = "12:00pm"
+    }
+
+    return return_time;
 }
 
 
@@ -261,10 +298,10 @@ function on_sensor_click(this_object) {
     }
     $(this_object).addClass("active");
 
-
     current_sensor = this_object.id;
 
-    update_table();
+    report_menu_creation();
+
 
 
 }
@@ -273,15 +310,15 @@ function on_sensor_click(this_object) {
 function on_report_click(this_object) {
     // changes the list button item state when clicked
 
-    sensor_menu_creation();
+
 
     // updates the reports table
-    current_sensor = sensors[0];
     report_id = parseInt(this_object.id);
     report_id += 1;
     get_report(function () {
-
+        update_table();
     });
+
 
 }
 
@@ -386,6 +423,7 @@ function on_search_dates_click() {
 
 
 }
+
 
 function on_reset_serch_dates_click() {
     search_dates = [];

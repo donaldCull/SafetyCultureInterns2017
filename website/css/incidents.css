@@ -1,26 +1,28 @@
 #reports_menu{
     overflow: scroll;
-    max-height: 500px;
+    max-height: 87%;
 }
 
-
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
-
+#nav_bar{
+    height: 60px;
 }
 
-#col4{
-    margin-top: 3%;
+#col4 {
+    padding-left: 0;
+    padding-right: 0;
+    height: -webkit-calc(100vh - 60px);
+    height: -moz-calc(100vh - 60px);
+    height: calc(100vh - 60px);
 }
-
 
 #col8{
-    margin-top: 3%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #data_table{
-    margin-left: 2%;
+    text-align: center;
 }
 
 #data_table_no_data_selected{
@@ -40,12 +42,13 @@
 
     margin: auto;
 }
-#date_search_day_box{
 
-    margin: auto;
-}
-
-#search_reports{
-    margin-bottom: 10px;
-    visibility: hidden;
+#reports_menu_buttons{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 8px;
+    padding-top: 5px;
 }

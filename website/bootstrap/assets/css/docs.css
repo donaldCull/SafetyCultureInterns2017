@@ -413,7 +413,7 @@
     font-weight: 500;
     color: #495057; }
     .bd-footer a:hover, .bd-footer a:focus {
-      color: #FF5600; }
+      color: #D65D28; }
   .bd-footer p {
     margin-bottom: 0; }
   @media (min-width: 576px) {
@@ -997,11 +997,11 @@
 
 .swatch-primary {
   color: #fff;
-  background-color: #FF5600; }
+  background-color: #D65D28; }
 
 .swatch-secondary {
   color: #111;
-  background-color: #ced4da; }
+  background-color: #D3D3D3; }
 
 .swatch-success {
   color: #fff;
@@ -1295,12 +1295,12 @@
 
 .anchorjs-link {
   font-weight: 400;
-  color: rgba(255, 86, 0, 0.5);
+  color: rgba(214, 93, 40, 0.5);
   -webkit-transition: color .16s linear;
   -o-transition: color .16s linear;
   transition: color .16s linear; }
   .anchorjs-link:hover {
-    color: #FF5600;
+    color: #D65D28;
     text-decoration: none; }
 
 .algolia-autocomplete {
