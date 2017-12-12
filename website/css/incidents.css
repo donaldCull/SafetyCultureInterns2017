@@ -3,11 +3,18 @@
     max-height: 87%;
 }
 
-#col4{
+#nav_bar{
+    height: 60px;
+}
+
+#col4 {
     padding-left: 0;
     padding-right: 0;
-    height: 93vh;
+    height: -webkit-calc(100vh - 60px);
+    height: -moz-calc(100vh - 60px);
+    height: calc(100vh - 60px);
 }
+
 #col8{
     margin-top: 20px;
     margin-left: 20px;
