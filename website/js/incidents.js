@@ -24,7 +24,7 @@ function get_raw_data(callback) {
             callback();
         }
     };
-    xhttp.open("GET", "../PHP/retrieve_Incidents.PHP", true);
+    xhttp.open("GET", "../PHP/retrieve_Incidents.php", true);
     xhttp.send();
 }
 
@@ -70,7 +70,7 @@ function create_menu() {
         var id = "" + sensors[i];
         var label = "" + sensor_info[sensors[i]][0] + " - " + sensor_info[sensors[i]][1];
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" " +
-            "class=\"list-group-item list-group-item-action bg-light border-primary text-primary\" id=\"" + id + "\">" + label + "</a>";
+            "class=\"list-group-item list-group-item-action bg-transparent border-light text-light small\" id=\"" + id + "\">" + label + "</a>";
     }
 
 }
@@ -186,10 +186,6 @@ function update_table() {
     document.getElementById("tr5").appendChild(td5);
 
 
-    document.getElementById("data_table").innerHTML += "<div id=\"print_download_btns\">" +
-        "<button onclick=\"window.print();return false;\" type=\"button\" class=\"btn btn-primary\">Print</button></div>";
-
-
     $(report_table).addClass("table table-hover table-bordered");
     $(report_table_head).addClass("thead-light");
 
@@ -204,14 +200,14 @@ function on_sensor_click(this_object) {
     current_sensor = this_object.id;
 
     document.getElementById("reports_menu").innerHTML += "<a onclick='create_menu()' " +
-        " class=\"list-group-item list-group-item-action bg-light border-primary text-primary \">Back</a>"
+        " class=\"list-group-item list-group-item-action bg-transparent border-light text-light small \">Back</a>";
     for (var i = 0; i < raw_data.length; i++){
         if (raw_data[i].incid_serial === current_sensor){
             var link = "#";
             var id = "" + raw_data[i].pID;
-            var label = "" + raw_data[i].incid_date_start;
+            var label = "" + raw_data[i].incid_date_start + " - #" + raw_data[i].pID;
             document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' " +
-                "href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-light border-primary text-primary \" id=\"" + id + "\">" + label + "</a>"
+                "href=\"" + link + "\" class=\"list-group-item small list-group-item-action bg-transparent border-light text-light small \" id=\"" + id + "\">" + label + "</a>"
         }
     }
 }

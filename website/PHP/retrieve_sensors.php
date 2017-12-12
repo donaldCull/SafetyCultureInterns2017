@@ -1,20 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: donald
- * Date: 30/11/2017
- * Time: 4:42 PM
- */
-// get the q parameter from URL
 include "inc/dbInfo.inc";
+/* Connect to MySQL and select the database. */
 
-$q = $_REQUEST["q"];
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
-$sql = "SELECT * FROM Report WHERE Report_ID=$q";
+$sql = "SELECT * FROM DevicesList";
 
-//$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql);
 
 $results_array = array();
 $result = $conn->query($sql);
@@ -24,10 +17,3 @@ while ($row = $result->fetch_assoc()){
 $myJSON = json_encode($results_array);
 echo $myJSON;
 
-
-
-//$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-//mysqli_free_result($result);
-//
-//$myJSON = json_encode($row);
-//echo $myJSON;
