@@ -10,17 +10,17 @@ var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunda
 var raw_data;
 var dates_count = 0;
 
+
 window.onload = function start() {
     // runs the following functions when the pages load
+    get_sensors(function () {
+        getting_num_reports(function () {
+            get_sensor_names();
+            search_dates = report_dates;
+            sensor_menu_creation()
 
-    get_sensors(function (){
-            getting_num_reports(function () {
-                get_sensor_names();
-                search_dates = report_dates;
-                sensor_menu_creation()
-
-            });
         });
+    });
 };
 
 
@@ -63,7 +63,6 @@ function get_report(callback) {
             raw_data = JSON.parse(this.responseText);
             report_data = raw_data[0];
             report_data["report_json"] =  JSON.parse(report_data["report_json"]);
-
             callback();
         }
     };
