@@ -1,6 +1,7 @@
 DROP DATABASE SenseTemp;
 CREATE DATABASE SenseTemp;
 USE SenseTemp;
+# USE sensorsData;
 
 CREATE TABLE Devices(
 	sensor_serial VARCHAR(10) NOT NULL, PRIMARY KEY (sensor_serial),
