@@ -8,9 +8,7 @@ from datetime import datetime, timedelta
 
 import requests
 
-import get_user_data
-from connect_to_db import connect
-from get_dictionaries import ListOfAllSensors
+import utility_db_functions as udb
 
 # Local path, will have to be changed for the cron directory
 sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/www/data')
@@ -18,10 +16,10 @@ sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/w
 previous_time = {}
 timezone_adjustment = 10  # TODO: automatically get right timezone
 
-API_TOKEN = get_user_data.get_api_token("1")
-sensors = ListOfAllSensors(API_TOKEN)
+API_TOKEN = udb.get_api_token("1")
+sensors = udb.ListOfAllSensors(API_TOKEN)
 
-cursor = connect()
+cursor = udb.connect()
 
 for sensor_code in sensors.values():
     previous_time_file = json.load(

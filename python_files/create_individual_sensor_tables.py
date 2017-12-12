@@ -1,14 +1,12 @@
 # Creates a table for each sensor for each User, pass in UserID
 
-import get_user_data
-from python_files.connect_to_db import connect
-from python_files.get_dictionaries import ListOfAllSensors
+import utility_db_functions as udb
 
-cursor = connect()
+cursor = udb.connect()
 
 
 def create_table(user_id):
-    sensor_codes = ListOfAllSensors(get_user_data.get_api_token(user_id))
+    sensor_codes = udb.ListOfAllSensors(udb.get_api_token(user_id))
 
     list_of_sql_queries = []
 

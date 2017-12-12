@@ -5,11 +5,9 @@ import datetime
 
 import pandas as pd
 
-import get_user_data
-import get_dictionaries
-from connect_to_db import connect
+import utility_db_functions as udb
 
-cursor = connect()
+cursor = udb.connect()
 
 
 # pass in userID when calling report generator function
@@ -39,8 +37,8 @@ def generate_report(user_id):
     dict_of_temps = {}
     dict_for_inserting = {}
 
-    interval_times = get_user_data.get_interval_times(user_id)  # [0, 6, 12 ,18]
-    sensors = get_dictionaries.ListOfUserSensors(user_id)
+    interval_times = udb.get_interval_times(user_id)  # [0, 6, 12 ,18]
+    sensors = udb.ListOfUserSensors(user_id)
 
     sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
     sql_insert_report_incomplete = "INSERT INTO Report(UserID, report_date, report_json) VALUE ('{}','{}', '{}')"

@@ -2,17 +2,15 @@ import json
 
 import requests
 
-import get_user_data
-from connect_to_db import connect
-from get_dictionaries import ListOfAllSensors
+import utility_db_functions as udb
 
-cursor = connect()
+cursor = udb.connect()
 
 user_id = 1
 
-api_token = get_user_data.get_api_token(user_id)
+api_token = udb.get_api_token(user_id)
 
-sensors = ListOfAllSensors(api_token)
+sensors = udb.ListOfAllSensors(api_token)
 sql_partial = 'INSERT INTO Devices (sensor_serial, UserID, sensor_name, sensor_location) VALUE ("{}", "{}", "{}", "{}");'
 
 for sensor_code in sensors.values():

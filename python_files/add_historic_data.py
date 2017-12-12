@@ -2,13 +2,13 @@
 
 import csv
 
-from connect_to_db import connect
+import utility_db_functions as udb
 
 csv_filenames = ['altered-49C2A9TH01-as-of-20171206.csv', 'altered-49C013TH01-as-of-20171206.csv',
                  'altered-4852F6TH01-as-of-20171206.csv']
 table_names = ['49C2A9TH01', '49C013TH01', '4852F6TH01']
 
-cursor = connect()
+cursor = udb.connect()
 sql_partial = 'INSERT INTO ' + '{} (sensor_date_time, sensor_temp, sensor_humid) VALUE ("{}", "{}", "{}");'
 table_count = 0
 for csv_filename in csv_filenames:
