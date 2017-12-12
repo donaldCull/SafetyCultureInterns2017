@@ -4,6 +4,7 @@ var search_dates = [];
 var report_data;
 var report_id = 1;
 var sensors = [];
+var sensor_names;
 var current_sensor;
 var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 var raw_data;
@@ -11,12 +12,16 @@ var dates_count = 0;
 
 window.onload = function start() {
     // runs the following functions when the pages load
-    get_report(function () {
-        getting_num_reports(function () {
-            get_sensor_names();
-            search_dates = report_dates;
-            report_menu_creation();
 
+    get_sensors(function (){
+        get_report(function () {
+            getting_num_reports(function () {
+
+                get_sensor_names();
+                search_dates = report_dates;
+                report_menu_creation();
+
+            });
         });
     });
 };
@@ -40,17 +45,15 @@ function getting_num_reports(callback) {
 function get_sensor_names() {
     // gets the names of each of the sensors in the data
     var count = 0;
-    while (true) {
-        if ((Object.keys(report_data["report_json"])[count]) == undefined) {
+    for (var i = 0; i < sensor_names.length; i++) {
+        if (sensor_names[count]["sens_serial"] === undefined){
             break;
         }
         else {
-            sensors[count] = (Object.keys(report_data["report_json"])[count]);
+            sensors[count] = sensor_names[count]["sens_serial"];
         }
         count++;
     }
-    sensors.pop();
-    sensors.pop();
 
 }
 
@@ -71,12 +74,13 @@ function get_report(callback) {
     xhttp.send();
 }
 
+
 function get_sensors(callback) {
     // get each sensor from the devicelist table
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            raw_data = JSON.parse(this.responseText);
+            sensor_names = JSON.parse(this.responseText);
             callback();
         }
     };
@@ -202,6 +206,7 @@ function update_table() {
 
 }
 
+
 function convert_time(time_24h) {
     var return_time;
 
@@ -221,6 +226,7 @@ function convert_time(time_24h) {
 
     return return_time;
 }
+
 
 function add_row(day) {
     var tr = "tr_" + day;
@@ -419,6 +425,7 @@ function on_search_dates_click() {
 
 
 }
+
 
 function on_reset_serch_dates_click() {
     search_dates = [];
