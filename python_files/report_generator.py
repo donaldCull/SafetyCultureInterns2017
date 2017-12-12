@@ -1,5 +1,3 @@
-# Report Generator, gets user_id from "report_for_each_user.py".
-
 import copy
 import datetime
 
@@ -8,6 +6,11 @@ import pandas as pd
 import utility_db_functions as udb
 
 cursor = udb.connect()
+
+sql_retrieve_user_list = "SELECT UserID FROM Users"
+
+cursor.execute(sql_retrieve_user_list)
+users = cursor.fetchall()
 
 
 # pass in userID when calling report generator function
@@ -171,3 +174,8 @@ def generate_report(user_id):
     print("\nSQL QUERY: ")
     print(sql_insert_report_complete)
     cursor.execute(sql_insert_report_complete)
+
+
+for dictionary in users:
+    # print(dictionary)
+    generate_report(dictionary['UserID'])
