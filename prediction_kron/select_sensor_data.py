@@ -19,8 +19,6 @@ sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/predict
 
 DAYS_PRIOR = 14
 tomorrows_date = datetime.now().date() + timedelta(days=1)
-print(tomorrows_date)
-# todays_date = datetime.now().date() + timedelta(days=1)
 two_weeks_ago = tomorrows_date - timedelta(days=DAYS_PRIOR)
 
 
@@ -60,7 +58,7 @@ for sensor_code in sensor_codes:
 forecast_filenames = []
 
 for sensor_file_name in sensor_file_names:
-    historical_sensor_data = pd.read_csv(sensor_file_name)
+    historical_sensor_data = pd.read_csv(os.path.dirname(__file__) + '/' + sensor_file_name)
 
     # change first column to datetime
     historical_sensor_data['ds'] = pd.DatetimeIndex(historical_sensor_data['ds'])
@@ -68,8 +66,8 @@ for sensor_file_name in sensor_file_names:
     # get all the data from yesterday to 2 weeks ago
     training_data = historical_sensor_data[(historical_sensor_data['ds'] < str(yesterday))]
     training_data.to_csv(os.path.dirname(__file__) + '/' + sensor_file_name, index_label=False, index=False, header=('Timestamp', 'Temps'))
-    # get all the data from today
-    testing_data = historical_sensor_data[(historical_sensor_data['ds'] > str(yesterday))]
+    # get all the data
+    testing_data = historical_sensor_data
 
     testing_model = Prophet(changepoint_prior_scale=0.01).fit(testing_data)
     # produce timestamps 4hrs into the future with 5 minute increments
@@ -77,7 +75,6 @@ for sensor_file_name in sensor_file_names:
     # use the model to predict temps for these times
     forecast = testing_model.predict(future_times)
 
-    # predictions stored in a csv file and overwritten each time? Or update a database with predictions
     # Write the date and temp to file
     forecast.to_csv(os.path.dirname(__file__) + '/Forecast-' + sensor_file_name, columns=('ds', 'yhat'), index_label=False, index=False,
                     header=('Timestamp', 'Temps'), float_format='%.2f')

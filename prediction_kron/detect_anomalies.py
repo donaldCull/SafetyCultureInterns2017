@@ -89,6 +89,7 @@ def detect():
                         start_detection_time, detected_temp)
                     anomaly_email_alerts.append(anomaly_email_template)
                     cursor = connect()
+                    print(anomaly_email_template)
                     complete_incident_sql = incomplete_incident_sql.format(detected_sensor, detected_sensor_location,
                                                                            detected_sensor_name, start_detection_date,
                                                                            start_detection_time, detected_temp)
