@@ -8,7 +8,7 @@ cursor = udb.connect()
 
 user_id = 1
 
-api_token = udb.get_api_token(user_id)
+api_token = udb.GetApiToken(user_id)
 
 sensors = udb.ListOfAllSensors(api_token)
 sql_partial = 'INSERT INTO Devices (sensor_serial, UserID, sensor_name, sensor_location) VALUE ("{}", "{}", "{}", "{}");'

@@ -6,7 +6,7 @@ cursor = udb.connect()
 
 
 def create_table(user_id):
-    sensor_codes = udb.ListOfAllSensors(udb.get_api_token(user_id))
+    sensor_codes = udb.ListOfAllSensors(udb.GetApiToken(user_id))
 
     list_of_sql_queries = []
 

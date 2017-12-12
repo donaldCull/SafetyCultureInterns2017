@@ -16,7 +16,7 @@ sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/w
 previous_time = {}
 timezone_adjustment = 10  # TODO: automatically get right timezone
 
-API_TOKEN = udb.get_api_token("1")
+API_TOKEN = udb.GetApiToken("1")
 sensors = udb.ListOfAllSensors(API_TOKEN)
 
 cursor = udb.connect()

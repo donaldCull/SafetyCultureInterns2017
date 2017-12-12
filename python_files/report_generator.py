@@ -37,7 +37,7 @@ def generate_report(user_id):
     dict_of_temps = {}
     dict_for_inserting = {}
 
-    interval_times = udb.get_interval_times(user_id)  # [0, 6, 12 ,18]
+    interval_times = udb.GetIntervalTimes(user_id)  # [0, 6, 12 ,18]
     sensors = udb.ListOfUserSensors(user_id)
 
     sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"

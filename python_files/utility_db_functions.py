@@ -16,7 +16,7 @@ def connect():
 cursor = connect()
 
 
-def get_interval_times(user_id):
+def GetIntervalTimes(user_id):
     sql_select_intervals_from_user = "SELECT intervals FROM Users WHERE UserID = {}".format(str(user_id))
 
     cursor.execute(sql_select_intervals_from_user)
@@ -25,7 +25,7 @@ def get_interval_times(user_id):
     return intervals[0]['intervals'].split(",")
 
 
-def get_api_token(user_id):
+def GetApiToken(user_id):
     sql_select_api_token_from_user = "SELECT api_token FROM Users WHERE UserID = {}".format(str(user_id))
 
     # print(sql_select_api_token_from_user)
