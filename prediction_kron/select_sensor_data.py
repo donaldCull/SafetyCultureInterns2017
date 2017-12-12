@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 from fbprophet import Prophet
 from datetime import datetime, timedelta
-from connection_information import connect
+from connect_to_db import connect
 from detect_anomalies import detect
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 

@@ -5,7 +5,7 @@ import json
 
 import requests
 
-from connection_information import connect
+from connect_to_db import connect
 
 cursor = connect()
 

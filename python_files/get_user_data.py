@@ -1,6 +1,6 @@
 # A utility script for calling information from the Users table.
 
-from connection_information import connect
+from connect_to_db import connect
 
 cursor = connect()
 

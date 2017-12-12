@@ -2,15 +2,15 @@ import json
 
 import requests
 
-import retrieve_user_info
-from connection_information import connect
-from sensor_dictionaries import ListOfAllSensors
+import get_user_data
+from connect_to_db import connect
+from get_dictionaries import ListOfAllSensors
 
 cursor = connect()
 
 user_id = 1
 
-api_token = retrieve_user_info.get_api_token(user_id)
+api_token = get_user_data.get_api_token(user_id)
 
 sensors = ListOfAllSensors(api_token)
 sql_partial = 'INSERT INTO Devices (sensor_serial, UserID, sensor_name, sensor_location) VALUE ("{}", "{}", "{}", "{}");'

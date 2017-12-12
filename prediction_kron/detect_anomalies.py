@@ -4,7 +4,7 @@ import statistics
 import sys
 
 from dateutil import parser
-from connection_information import connect
+from connect_to_db import connect
 
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 

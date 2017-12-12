@@ -5,9 +5,9 @@ import datetime
 
 import pandas as pd
 
-import retrieve_user_info
-import sensor_dictionaries
-from connection_information import connect
+import get_user_data
+import get_dictionaries
+from connect_to_db import connect
 
 cursor = connect()
 
@@ -39,8 +39,8 @@ def generate_report(user_id):
     dict_of_temps = {}
     dict_for_inserting = {}
 
-    interval_times = retrieve_user_info.get_interval_times(user_id)  # [0, 6, 12 ,18]
-    sensors = sensor_dictionaries.ListOfUserSensors(user_id)
+    interval_times = get_user_data.get_interval_times(user_id)  # [0, 6, 12 ,18]
+    sensors = get_dictionaries.ListOfUserSensors(user_id)
 
     sql_get_dates_incomplete = "SELECT * FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}';"
     sql_insert_report_incomplete = "INSERT INTO Report(UserID, report_date, report_json) VALUE ('{}','{}', '{}')"
