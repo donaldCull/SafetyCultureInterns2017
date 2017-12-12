@@ -1,10 +1,10 @@
-
+import retrieve_user_info
 from python_files.connection_information import connect
-from python_files.sensor_dict_collection import ListOfSensors
+from python_files.sensor_dictionaries import ListOfAllSensors
 
 cursor = connect()
 
-sensor_codes = ListOfSensors()
+sensor_codes = ListOfAllSensors(retrieve_user_info.get_api_token("1"))
 
 list_of_sql_queries = []
 

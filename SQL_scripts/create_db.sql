@@ -1,26 +1,33 @@
-DROP DATABASE sensorsData;
-CREATE DATABASE sensorsData; 
-USE sensorsData;
+DROP DATABASE SenseTemp;
+CREATE DATABASE SenseTemp;
+USE SenseTemp;
 
-CREATE TABLE DevicesList(
-	pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID),
-    sens_name VARCHAR(20),
-    sens_serial VARCHAR(10),
-    sens_location VARCHAR(20)
+CREATE TABLE Devices(
+	sensor_serial VARCHAR(10) NOT NULL, PRIMARY KEY (sensor_serial),
+    UserID INT NOT NULL,
+	sensor_name VARCHAR(20),
+    sensor_location VARCHAR(20)
+);
+
+CREATE TABLE Users(
+	UserID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (UserID),
+    api_token VARCHAR(50),
+    intervals VARCHAR(11)
 );
 
 CREATE TABLE Report(
-	pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID),
+	Report_ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (Report_ID),
+    UserID INT NOT NULL,
     report_date VARCHAR(10),
-    report_json VARCHAR(2000)	#string of cvs location, buld strings are bad form and files are impossible
+    report_json VARCHAR(10000)
 );
 
-CREATE TABLE Incidents(
-	pID int NOT NULL AUTO_INCREMENT, PRIMARY KEY (pID),
+CREATE TABLE Incident(
+	incid_ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (incid_ID),
     incid_serial VARCHAR(10),
     incid_location VARCHAR(20),
     incid_name VARCHAR (20),
     incid_date_start VARCHAR(10),
     incid_time_start VARCHAR(8),
-    incid_temp VARCHAR(5),
+    incid_temp VARCHAR(5)
 );

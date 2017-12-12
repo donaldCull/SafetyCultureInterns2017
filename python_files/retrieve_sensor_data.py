@@ -1,21 +1,25 @@
+# Set to run on the Crontab every minute.
+# Gets the most recent data from each sensor.
+
 import json
+import os
 import sys
 from datetime import datetime, timedelta
 
-import os
 import requests
 
+import retrieve_user_info
 from connection_information import connect
-from sensor_dict_collection import ListOfSensors
+from sensor_dictionaries import ListOfAllSensors
 
 # Local path, will have to be changed for the cron directory
 sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/www/data')
 
 previous_time = {}
-timezone_adjustment = 10
+timezone_adjustment = 10  # TODO: automatically get right timezone
 
-API_TOKEN = "24DB3A5F73B12DC450FAF2718D78EB1B"  # TODO: Get from users tables in DB
-sensors = ListOfSensors()
+API_TOKEN = retrieve_user_info.get_api_token("1")
+sensors = ListOfAllSensors(API_TOKEN)
 
 cursor = connect()
 
