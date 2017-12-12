@@ -13,10 +13,10 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
 #data_table{
     text-align: center;
 }
-
 
 #data_table_no_data_selected{
     text-align: center;
@@ -24,7 +24,6 @@
     margin-top: 10%;
     color: #C2C2C2;
 }
-
 
 #date_search_month_box{
     padding-top: 10px;

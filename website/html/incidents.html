@@ -47,7 +47,7 @@
     <div class="row">
 
         <!-- left side of page-->
-        <div class="col-2" id="col4">
+        <div class="col-2 bg-primary" id="col4">
 
 
             <!-- Modal -->
@@ -78,11 +78,15 @@
 
 
             <!-- list of report_id_list/incidents-->
-            <div class="list-group-flush bg-primary" id="reports_menu">
+            <div class="list-group-flush" id="reports_menu">
 
 
             </div>
 
+            <div id="reports_menu_buttons">
+                <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-light btn-sm btn-block" id="search_reports">Search</button>
+                <button type="button" class="btn btn-outline-light btn-sm btn-block" onclick="window.print()">Print</button>
+            </div>
         </div>
 
         <!-- right side of page-->
