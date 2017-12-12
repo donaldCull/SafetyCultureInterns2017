@@ -18,8 +18,8 @@ sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/predict
 # DevicesList field names - pID, sens_name, sens_serial, sens_location
 
 DAYS_PRIOR = 14
-todays_date = datetime.now().date()
-two_weeks_ago = todays_date - timedelta(days=DAYS_PRIOR)
+tomorrows_date = datetime.now().date() + timedelta(days=1)
+two_weeks_ago = tomorrows_date - timedelta(days=DAYS_PRIOR)
 
 
 cursor = connect()
@@ -37,7 +37,7 @@ incomplete_sensor_details_select_sql = "SELECT sensor_date_time, sensor_temp FRO
 sensor_file_names = []
 date_frame_header_names = ['ds','y']
 for sensor_code in sensor_codes:
-    complete_sensor_details_select_sql = incomplete_sensor_details_select_sql.format(sensor_code['sens_serial'], two_weeks_ago, todays_date)
+    complete_sensor_details_select_sql = incomplete_sensor_details_select_sql.format(sensor_code['sens_serial'], two_weeks_ago, tomorrows_date)
     cursor.execute(complete_sensor_details_select_sql)
     sensor_data = cursor.fetchall()
     rows= []
@@ -58,17 +58,23 @@ for sensor_code in sensor_codes:
 forecast_filenames = []
 
 for sensor_file_name in sensor_file_names:
-    data_frame = pd.read_csv(sensor_file_name)
+    historical_sensor_data = pd.read_csv(os.path.dirname(__file__) + '/' + sensor_file_name)
+
     # change first column to datetime
-    data_frame['ds'] = pd.DatetimeIndex(data_frame['ds'])
+    historical_sensor_data['ds'] = pd.DatetimeIndex(historical_sensor_data['ds'])
+    yesterday = datetime.now().date() - timedelta(days=1)
+    # get all the data from yesterday to 2 weeks ago
+    training_data = historical_sensor_data[(historical_sensor_data['ds'] < str(yesterday))]
+    training_data.to_csv(os.path.dirname(__file__) + '/' + sensor_file_name, index_label=False, index=False, header=('Timestamp', 'Temps'))
+    # get all the data
+    testing_data = historical_sensor_data
 
-    model = Prophet(changepoint_prior_scale=0.01).fit(data_frame)
+    testing_model = Prophet(changepoint_prior_scale=0.01).fit(testing_data)
     # produce timestamps 4hrs into the future with 5 minute increments
-    future_times = model.make_future_dataframe(periods=48, freq='5min', include_history=False)
+    future_times = testing_model.make_future_dataframe(periods=48, freq='5min', include_history=False)
     # use the model to predict temps for these times
-    forecast = model.predict(future_times)
+    forecast = testing_model.predict(future_times)
 
-    # predictions stored in a csv file and overwritten each time? Or update a database with predictions
     # Write the date and temp to file
     forecast.to_csv(os.path.dirname(__file__) + '/Forecast-' + sensor_file_name, columns=('ds', 'yhat'), index_label=False, index=False,
                     header=('Timestamp', 'Temps'), float_format='%.2f')
