@@ -3,7 +3,7 @@
 import csv
 from dateutil import parser
 EMPTY = '--'
-csv_filenames = ['49C2A9TH01-as-of-20171207.csv', '49C013TH01-as-of-20171207.csv', '4852F6TH01-as-of-20171207.csv']
+csv_filenames = ['49C2A9TH01-as-of-20171212.csv', '49C013TH01-as-of-20171212.csv', '4852F6TH01-as-of-20171212.csv']
 altered_csv = []
 for csv_filename in csv_filenames:
     with open(csv_filename) as csvfile:

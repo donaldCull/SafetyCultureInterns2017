@@ -4,6 +4,7 @@ import statistics
 import sys
 
 from dateutil import parser
+
 from connection_information import connect
 from generate_email_alert import send_email
 

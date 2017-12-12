@@ -2,10 +2,11 @@ import csv
 
 from prediction_kron.connection_information import connect
 
-csv_filename = 'altered-49C013TH01-as-of-20171207.csv'
+csv_filename = 'altered-49C013TH01-as-of-20171212.csv'
 table_name = '49C013TH01'
 
-cursor = connect()
+import python_files.utility_db_functions as udb
+cursor = udb.connect()
 sql_partial = 'INSERT INTO ' + '{} (sensor_date_time, sensor_temp, sensor_humid) VALUE ("{}", "{}", "{}");'
 with open('../CSV/' + csv_filename) as csvFile:
     readCSV = csv.reader(csvFile)
