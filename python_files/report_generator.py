@@ -63,7 +63,7 @@ def generate_report(user_id):
     for sensor_code in sensors.values():
         print("\nFor sensor: " + sensor_code)
 
-        # Clear lists for each day # TODO: Better way to clear?
+        # Clear lists for each day # TODO: Better way to clear lots of lists
         mon_temps.clear()
         tue_temps.clear()
         wed_temps.clear()
@@ -75,7 +75,8 @@ def generate_report(user_id):
         for day in list_of_dates:
             print("\n" + "Date: " + str(day.date()))
 
-            # Clearing more lists that will be looped through again # TODO: Same here, is there a better way to clear lots of lists.
+            # Clearing more lists that will be looped through again
+            # TODO: Same here, is there a better way to clear lots of lists
             closest_time.clear()
             index_of_value.clear()
             indexes_for_sensor.clear()
@@ -120,7 +121,6 @@ def generate_report(user_id):
             except (ValueError, IndexError):
                 pass
 
-            # TODO: Put this in another loop (tried, day_temps.append )
             try:
                 if day.date().isoweekday() == 1:  # monday
                     for o, i in enumerate(list_closest_times):

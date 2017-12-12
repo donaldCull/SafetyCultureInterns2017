@@ -16,7 +16,7 @@ from sensor_dictionaries import ListOfAllSensors
 sys.path.append('sftp://ec2-user@ec2-52-90-110-172.compute-1.amazonaws.com/var/www/data')
 
 previous_time = {}
-timezone_adjustment = 10
+timezone_adjustment = 10  # TODO: automatically get right timezone
 
 API_TOKEN = retrieve_user_info.get_api_token("1")
 sensors = ListOfAllSensors(API_TOKEN)
