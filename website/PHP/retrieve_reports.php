@@ -12,7 +12,7 @@ $q = $_REQUEST["q"];
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
-$sql = "SELECT * FROM Report WHERE pID=$q";
+$sql = "SELECT * FROM Report WHERE Report_ID=$q";
 
 //$result = mysqli_query($conn, $sql);
 
