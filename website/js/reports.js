@@ -14,16 +14,13 @@ window.onload = function start() {
     // runs the following functions when the pages load
 
     get_sensors(function (){
-        get_report(function () {
             getting_num_reports(function () {
-
                 get_sensor_names();
                 search_dates = report_dates;
-                report_menu_creation();
+                sensor_menu_creation()
 
             });
         });
-    });
 };
 
 
@@ -93,7 +90,8 @@ function get_sensors(callback) {
 function report_menu_creation() {
     // creates the side menu items based on the number of reports we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("data_table").innerHTML = "<p id=\"data_table_no_data_selected\">No data selected<br>Please select from menu</p>";
+    document.getElementById("reports_menu").innerHTML += "<a onclick='sensor_menu_creation()' class=\"list-group-item list-group-item-action bg-transparent border-light small text-light \">Back</a>";
+
 
 
     var active = "";
@@ -109,12 +107,13 @@ function report_menu_creation() {
 function sensor_menu_creation() {
     // creates the menu items for each of the sensors we have
     document.getElementById("reports_menu").innerHTML = "";
-    document.getElementById("reports_menu").innerHTML += "<a onclick='report_menu_creation()' class=\"list-group-item list-group-item-action bg-transparent border-light small text-light \">Back</a>";
+    document.getElementById("data_table").innerHTML = "<p id=\"data_table_no_data_selected\">No data selected<br>Please select from menu</p>";
+
     var active = "";
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
-        var label = "" + sensors[i];
+        var label = "" + sensor_names[i]["sens_location"] + " - " + sensor_names[i]["sens_name"];
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small" + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
@@ -300,10 +299,10 @@ function on_sensor_click(this_object) {
     }
     $(this_object).addClass("active");
 
-
     current_sensor = this_object.id;
 
-    update_table();
+    report_menu_creation();
+
 
 
 }
@@ -312,15 +311,15 @@ function on_sensor_click(this_object) {
 function on_report_click(this_object) {
     // changes the list button item state when clicked
 
-    sensor_menu_creation();
+
 
     // updates the reports table
-    current_sensor = sensors[0];
     report_id = parseInt(this_object.id);
     report_id += 1;
     get_report(function () {
-
+        update_table();
     });
+
 
 }
 
