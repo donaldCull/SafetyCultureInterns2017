@@ -1,13 +1,38 @@
-# Call this file to generate a dictionary of all sensors with temperature's and humidity's attached to them
-# Returns dict of sensors: {"[SENSOR NAME]": "[SENSOR CODE]", "[SENSOR NAME]": "[SENSOR CODE]"}
+# Functions to call and receive data from db, usually pass in UserID to recieve data
 
 import json
 
+import pymysql
 import requests
 
-from connect_to_db import connect
+
+def connect():
+    connection = pymysql.connect(host="localhost", user="root", password="password", db="SenseTemp",
+                                 charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor, autocommit=True)
+
+    return connection.cursor()
+
 
 cursor = connect()
+
+
+def get_interval_times(user_id):
+    sql_select_intervals_from_user = "SELECT intervals FROM Users WHERE UserID = {}".format(str(user_id))
+
+    cursor.execute(sql_select_intervals_from_user)
+    intervals = cursor.fetchall()
+    # print(intervals[0]['intervals'].split(","))
+    return intervals[0]['intervals'].split(",")
+
+
+def get_api_token(user_id):
+    sql_select_api_token_from_user = "SELECT api_token FROM Users WHERE UserID = {}".format(str(user_id))
+
+    # print(sql_select_api_token_from_user)
+    cursor.execute(sql_select_api_token_from_user)
+    api_token = cursor.fetchall()
+    # print(api_token)
+    return api_token[0]['api_token']
 
 
 # Returns all sensors from API for user specified (by passing in their api_token)
