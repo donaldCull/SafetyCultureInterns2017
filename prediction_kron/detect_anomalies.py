@@ -60,7 +60,7 @@ def detect():
     forecast_filenames = []
     forecasts = []
     anomaly_email_alerts = []
-    incomplete_incident_sql = 'INSERT INTO Incidents (incid_serial, incid_location, incid_name, incid_date_start, incid_time_start, incid_temp) VALUE ("{}", "{}", "{}","{}", "{}", "{}");'
+    incomplete_incident_sql = 'INSERT INTO Incident (incid_serial, incid_location, incid_name, incid_date_start, incid_time_start, incid_temp) VALUE ("{}", "{}", "{}","{}", "{}", "{}");'
     with open(os.path.dirname(__file__) + '/sensor_forecast_filenames.csv') as file:
         reader = csv.reader(file)
         for row in reader:
