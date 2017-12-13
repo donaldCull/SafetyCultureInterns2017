@@ -17,7 +17,8 @@ window.onload = function start() {
         getting_num_reports(function () {
             get_sensor_names();
             search_dates = report_dates;
-            sensor_menu_creation()
+            sensor_menu_creation();
+            page_loader();
 
         });
     });
@@ -429,4 +430,10 @@ function on_reset_serch_dates_click() {
     search_dates = [];
     search_dates = report_dates;
     report_menu_creation();
+}
+
+function page_loader() {
+    document.getElementById("main_container").style.visibility = "visible";
+    document.getElementById("nav_bar").style.visibility = "visible";
+    document.getElementById("loader").style.visibility = "hidden";
 }
