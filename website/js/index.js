@@ -3,12 +3,4 @@ function on_login_click() {
     var password = document.getElementById("login_password").value;
 
 
-    if(true){//username === "user@TempSpace.com" && password.length >= 5){
-        console.log("Success");
-        window.location.href = 'html/reports.html';
-    }
-    else {
-        document.getElementById("error_text").style.visibility = "visible";
-    }
-
 }

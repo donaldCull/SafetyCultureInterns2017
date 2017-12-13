@@ -1,12 +1,14 @@
-#jumbotron{
-    margin: auto;
-    width: 50%;
-    text-align: center;
+#nav_bar{
+    margin-top: 3vh;
 }
-#sign_in_form{
-    width: 50%;
-    margin: auto;
+#dropdown_form{
+    width: 250px;
 }
-#error_text{
-    visibility: hidden;
+
+#username_input{
+    margin-right: 5px;
+
+}
+#password_input{
+    margin-right: 5px;
 }

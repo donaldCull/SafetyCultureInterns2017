@@ -15,36 +15,39 @@
 <body class="bg-primary">
 
 
-<div class="jumbotron bg-transparent text-light" id="jumbotron">
-    <h1 class="display-3">TempSpace</h1>
-    <p class="lead">The best temperature management system in the world</p>
-    <hr class="my-4">
+<div class="container">
 
-    <p class="lead">
+    <nav class="navbar navbar-light bg-transparent text-light justify-content-between" id="nav_bar">
+        <a class="navbar-brand">TempSpace</a>
 
 
-
-    <form id="sign_in_form">
-
-        <div class="form-group">
-            <label for="login_email">Email address</label>
-            <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="login_password">Password</label>
-            <input type="password" class="form-control" id="login_password" placeholder="Password">
-        </div>
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="text" id="username_input" class="form-control form-control-sm bg-light" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group">
+                <input type="text" id="password_input" class="form-control form-control-sm bg-light" placeholder="Password" aria-label="Password">
+            </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm">Login</button>
+        </form>
 
 
 
 
+    </nav>
 
-        <button type="reset" class="btn btn-outline-light"  onclick="on_login_click()">Login</button>
 
-    <small id="error_text" class="form-text text-secondary">*email or password is wrong</small>
 
-    <small id="emailHelp" class="form-text text-light">New here? <a href="html/new_user.html" class="text-light">create an account</a></small>
-    </form>
+    <div class="jumbotron bg-transparent">
+        <h1 class="display-3">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+
 
 
 
