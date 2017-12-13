@@ -1,5 +1,4 @@
 import csv
-
 import os
 import pandas as pd
 import sys
@@ -9,19 +8,9 @@ from connection_information import connect
 from detect_anomalies import detect
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 
-
-# 9) If anomaly detected generate email
-# 10) Run locally every 5 minutes to test
-# 11) Make kron tab and integrate into webserver
-
-
-# DevicesList field names - pID, sens_name, sens_serial, sens_location
-
 DAYS_PRIOR = 14
 tomorrows_date = datetime.now().date() + timedelta(days=1)
 two_weeks_ago = tomorrows_date - timedelta(days=DAYS_PRIOR)
-
-
 cursor = connect()
 # Find what sensors are in the device list dynamically
 sensor_code_select_sql = "SELECT sensor_serial,sensor_name, sensor_location FROM Devices;"
