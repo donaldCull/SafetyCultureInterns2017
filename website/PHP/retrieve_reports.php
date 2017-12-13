@@ -23,11 +23,3 @@ while ($row = $result->fetch_assoc()){
 }
 $myJSON = json_encode($results_array);
 echo $myJSON;
-
-
-
-//$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-//mysqli_free_result($result);
-//
-//$myJSON = json_encode($row);
-//echo $myJSON;
