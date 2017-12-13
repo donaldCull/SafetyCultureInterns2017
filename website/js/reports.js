@@ -43,11 +43,11 @@ function get_sensor_names() {
     // gets the names of each of the sensors in the data
     var count = 0;
     for (var i = 0; i < sensor_names.length; i++) {
-        if (sensor_names[count]["sens_serial"] === undefined){
+        if (sensor_names[count]["sensor_serial"] === undefined){
             break;
         }
         else {
-            sensors[count] = sensor_names[count]["sens_serial"];
+            sensors[count] = sensor_names[count]["sensor_serial"];
         }
         count++;
     }
@@ -97,7 +97,7 @@ function report_menu_creation() {
     for (var i = 0; i < search_dates.length; i++) {
         var link = "#";
         var id = "" + (Object.keys(search_dates)[i]);
-        var label = "" + search_dates[i].report_date + " - #" + i;
+        var label = "" + search_dates[i].report_date;
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small " + active + "\" id=\"" + id + "\">" + label + "</a>";
     }
 }
@@ -112,7 +112,7 @@ function sensor_menu_creation() {
     for (var i = 0; i <sensors.length; i++){
         var link = "#";
         var id = "" + sensors[i];
-        var label = "" + sensor_names[i]["sens_location"] + " - " + sensor_names[i]["sens_name"];
+        var label = "" + sensor_names[i]["sensor_location"] + " - " + sensor_names[i]["sensor_name"];
         document.getElementById("reports_menu").innerHTML += "<a onclick='on_sensor_click(this)' href=\"" + link + "\" class=\"list-group-item list-group-item-action bg-transparent border-light text-light small" + active + "\" id=\"" + id + "\">" + label + "</a>";
         active = "";
     }
@@ -215,10 +215,10 @@ function convert_time(time_24h) {
         time_24h -= 12;
         return_time = time_24h + ":00pm"
     }
-    else if (time_24h === 0){
+    else if (time_24h == 0){
         return_time = "12:00am"
     }
-    else if (time_24h === 12){
+    else if (time_24h == 12){
         return_time = "12:00pm"
     }
 

@@ -103,7 +103,7 @@ function update_table() {
     document.getElementById("report_table_head_tr").appendChild(theader1);
 
     var theader2 = document.createElement("TH");
-    x = document.createTextNode("#0000" + raw_data[current_report].pID);
+    x = document.createTextNode("#0000" + raw_data[current_report].incid_ID);
     theader2.appendChild(x);
     document.getElementById("report_table_head_tr").appendChild(theader2);
 
@@ -204,8 +204,8 @@ function on_sensor_click(this_object) {
     for (var i = 0; i < raw_data.length; i++){
         if (raw_data[i].incid_serial === current_sensor){
             var link = "#";
-            var id = "" + raw_data[i].pID;
-            var label = "" + raw_data[i].incid_date_start + " - #" + raw_data[i].pID;
+            var id = "" + raw_data[i].incid_ID;
+            var label = "" + raw_data[i].incid_date_start;
             document.getElementById("reports_menu").innerHTML += "<a onclick='on_report_click(this)' " +
                 "href=\"" + link + "\" class=\"list-group-item small list-group-item-action bg-transparent border-light text-light small \" id=\"" + id + "\">" + label + "</a>"
         }
