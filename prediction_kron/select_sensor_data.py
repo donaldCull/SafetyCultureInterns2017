@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 from fbprophet import Prophet
 from datetime import datetime, timedelta
-from connect_to_db import connect
+from connection_information import connect
 from detect_anomalies import detect
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 
@@ -24,20 +24,20 @@ two_weeks_ago = tomorrows_date - timedelta(days=DAYS_PRIOR)
 
 cursor = connect()
 # Find what sensors are in the device list dynamically
-sensor_code_select_sql = "SELECT sens_serial,sens_name, sens_location FROM DevicesList;"
+sensor_code_select_sql = "SELECT sensor_serial,sensor_name, sensor_location FROM Devices;"
 cursor.execute(sensor_code_select_sql)
 sensor_codes = cursor.fetchall()
 
 with open(os.path.dirname(__file__) + '/sensor_details.txt', 'w') as file:
     for sensor_code in sensor_codes:
-        file.write("{},{},{}\n".format(sensor_code['sens_serial'], sensor_code['sens_name'], sensor_code['sens_location']))
+        file.write("{},{},{}\n".format(sensor_code['sensor_serial'], sensor_code['sensor_name'], sensor_code['sensor_location']))
 
 incomplete_sensor_details_select_sql = "SELECT sensor_date_time, sensor_temp FROM {} WHERE sensor_date_time BETWEEN '{}' AND '{}'"
 # Select date and time from each sensor table
 sensor_file_names = []
 date_frame_header_names = ['ds','y']
 for sensor_code in sensor_codes:
-    complete_sensor_details_select_sql = incomplete_sensor_details_select_sql.format(sensor_code['sens_serial'], two_weeks_ago, tomorrows_date)
+    complete_sensor_details_select_sql = incomplete_sensor_details_select_sql.format(sensor_code['sensor_serial'], two_weeks_ago, tomorrows_date)
     cursor.execute(complete_sensor_details_select_sql)
     sensor_data = cursor.fetchall()
     rows= []
@@ -48,8 +48,8 @@ for sensor_code in sensor_codes:
         entry = [timestamp, temp]
         rows.append(entry)
 # write date and time into individual sensor csvs
-    with open(os.path.dirname(__file__) + '/' +sensor_code['sens_serial']+'.csv' ,'w') as file:
-        sensor_file_names.append(sensor_code['sens_serial'] + '.csv')
+    with open(os.path.dirname(__file__) + '/' +sensor_code['sensor_serial']+'.csv' ,'w') as file:
+        sensor_file_names.append(sensor_code['sensor_serial'] + '.csv')
         writer = csv.writer(file)
         for entry in range(len(rows)):
             writer.writerow(rows[entry])
