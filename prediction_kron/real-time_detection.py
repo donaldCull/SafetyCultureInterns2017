@@ -1,4 +1,6 @@
 import sys
+import os
+import csv
 from connection_information import connect
 import statistics
 from datetime import timedelta
@@ -49,4 +51,7 @@ for sensor_serial_code in sensor_serial_codes:
                                                                                                                 latest_timestamp, latest_sensor_recording,
                                                                                                                 next_timestamp, next_sensor_recording, time_diff)
             print(detection_template)
-            send_email(detection_template)
+            with open(os.path.dirname(__file__) + '/reported_sensors.csv', 'w') as file:
+                writer = csv.writer(file)
+                writer.writerow([sensor_serial_code['sensor_serial'], latest_timestamp])
+            # send_email(detection_template)
