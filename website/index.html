@@ -5,56 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="icons/twitter_mark.png">
+    <link rel="icon" href="http://ec2-52-87-157-17.compute-1.amazonaws.com/website_images/twitter_mark.png">
     <title>#Interns2017</title>
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- My css below -->
     <link href="css/index.css" rel="stylesheet">
 </head>
 
-<body class="bg-primary">
-
-
-<div class="jumbotron bg-transparent text-light" id="jumbotron">
-    <h1 class="display-3">TempSpace</h1>
-    <p class="lead">The best temperature management system in the world</p>
-    <hr class="my-4">
-
-    <p class="lead">
+<body>
 
 
 
-    <form id="sign_in_form">
+<div id="bg_div_1" class="bg-transparent">
+<div class="container_custom">
 
-        <div class="form-group">
-            <label for="login_email">Email address</label>
-            <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp" placeholder="Email">
+    <nav class="navbar bg-transparent text-light justify-content-between" id="nav_bar">
+        <a class="navbar-brand">TempSpace</a>
+
+
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="text" id="username_input" class="form-control form-control-sm bg-light" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group">
+                <input type="text" id="password_input" class="form-control form-control-sm bg-light" placeholder="Password" aria-label="Password">
+            </div>
+            <button type="button" onclick="on_login_click()" class="btn btn-outline-light btn-sm">Login</button>
+        </form>
+
+    </nav>
+
+
+
+    <div class="jumbotron bg-transparent " id="jumbotron">
+        <h1 class="display-6 text-light">TempSpace</h1>
+        <p class="lead text-light">The best temperature monitoring system in the world</p>
+        <p class="lead">
+            <a class="btn btn-light btn-lg text-primary" href="#bg_div_4"  role="button">Buy Now!</a>
+        </p>
+    </div>
+
+</div>
+</div>
+
+
+<div id="bg_div_2" class="bg-light">
+<div class="container_custom">
+
+    <div class="jumbotron bg-transparent" id="jumbotron2">
+        <h1 class="display-6 text-primary">Automatic Reporting</h1>
+        <p class="lead text-primary">Dont fill out reports yourself, let our system do it for you... automatically</p>
+
+    </div>
+
+
+</div>
+</div>
+
+<div id="bg_div_3" class="bg-transparent">
+    <div class="container_custom">
+
+        <div class="jumbotron bg-transparent" id="jumbotron3">
+            <h1 class="display-6 text-light">Real Error Detection</h1>
+            <p class="lead text-light">Dont rely on archaic detection techniques, get advanced predictions with tempspace</p>
+
+
         </div>
-        <div class="form-group">
-            <label for="login_password">Password</label>
-            <input type="password" class="form-control" id="login_password" placeholder="Password">
+
+
+    </div>
+</div>
+
+
+<div id="bg_div_4" class="bg-light">
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Small</h6>
+                    <h2 class="card-title text-primary">$10 p/m</h2>
+                    <p class="card-text ">For small business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 5 sensors</li>
+                    <li class="list-group-item">Basic customer suport</li>
+                    <li class="list-group-item">We can tolerate you</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Medium</h6>
+                    <h2 class="card-title text-primary">$50 p/m</h2>
+                    <p class="card-text ">For bigger business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 20 sensors</li>
+                    <li class="list-group-item">Better customer suport</li>
+                    <li class="list-group-item">We like you slightly better</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Large</h6>
+                    <h2 class="card-title text-primary">$500 p/m</h2>
+                    <p class="card-text ">For the biggest business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 10,000 sensors</li>
+                    <li class="list-group-item">Priority customer support</li>
+                    <li class="list-group-item">We like you the best</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
         </div>
 
-
-
-
-
-        <button type="reset" class="btn btn-outline-light"  onclick="on_login_click()">Login</button>
-
-    <small id="error_text" class="form-text text-secondary">*email or password is wrong</small>
-
-    <small id="emailHelp" class="form-text text-light">New here? <a href="html/new_user.html" class="text-light">create an account</a></small>
-    </form>
-
-
-
-
+    </div>
 
 </div>
 
 
 
-
+<div id="bg_div_5" class="bg-dark text-light">
+    <p>#interns2017</p>
+</div>
 
 
 
