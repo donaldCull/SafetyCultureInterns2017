@@ -1,11 +1,7 @@
 import sys
-import os
-import csv
 from connection_information import connect
 import statistics
-from datetime import timedelta, datetime
-from dateutil import parser
-from generate_email_alert import send_email
+from datetime import timedelta
 
 last_time_reported = []
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
@@ -35,16 +31,15 @@ for sensor_serial_code in sensor_details:
     latest_sensor_recording = sensor_temps[-1]
     latest_sensor_recording_index = sensor_temps.index(sensor_temps[-1])
     latest_timestamp = sensor_timestamps[-1]
-    print("Sensor {} has threshold {} - {} degrees and current temp is {} at {}".format(sensor_serial_code['sensor_serial'], sensor_serial_code['min_threshold'], sensor_serial_code['max_threshold'], latest_sensor_recording, latest_timestamp))
 
 # Check if the latest reading is within threshold
-    if latest_sensor_recording >= sensor_serial_code['min_threshold'] or latest_sensor_recording <= sensor_serial_code['max_threshold']:
+    if latest_sensor_recording >= sensor_serial_code['min_threshold'] and latest_sensor_recording <= sensor_serial_code['max_threshold']:
         # initialise values in case the next value is under the threshold
         next_sensor_recording = latest_sensor_recording
         next_timestamp = latest_timestamp
         # Go backwards from the latest observation and check how long the anomaly has lasted
         for index in range(len(sensor_temps)-1, -1, -1):
-            if sensor_temps[index] >= sensor_serial_code['min_threshold'] or sensor_temps[index] <= sensor_serial_code['max_threshold']:
+            if sensor_temps[index] >= sensor_serial_code['min_threshold'] and sensor_temps[index] <= sensor_serial_code['max_threshold']:
                 next_sensor_recording = sensor_temps[index]
                 next_timestamp = sensor_timestamps[index]
             else:
@@ -52,23 +47,11 @@ for sensor_serial_code in sensor_details:
 
 
         time_diff = latest_timestamp - next_timestamp
+        print(sensor_serial_code['sensor_name'],time_diff)
         # open reported sensors and check if the sensor has already been reported on lately
-        reported_sensors = {}
-        with open(os.path.dirname(__file__) + '/reported_sensors.csv') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                reported_sensors[row[0]] = parser.parse(row[1])
-        # if the anomaly has lasted for more than 1 hour and an email hasnt been sent in the last hour #Potential to extract sensitivity from db
-        if time_diff > timedelta(hours=1) and reported_sensors[sensor_serial_code['sensor_serial']] > datetime.now() - timedelta(hours=1):
+        if time_diff > timedelta(hours=1):
             detection_template = "Anomaly detected in {} by {} ({}) at {} with a temperature of {} which started at {} with a temperature of {}. Temperature has been out of bounds for {}".format(sensor_serial_code['sensor_location'],
                                                                                                                 sensor_serial_code['sensor_name'],sensor_serial_code['sensor_serial'],
                                                                                                                 latest_timestamp, latest_sensor_recording,next_timestamp, next_sensor_recording, time_diff)
             print(detection_template)
-            send_email(detection_template)
-            last_time_reported.append([sensor_serial_code['sensor_serial'], latest_timestamp])
-# check if there were any anomalies reported and write them to the csv to be checked next time
-if len(last_time_reported) != 0:
-    with open(os.path.dirname(__file__) + '/reported_sensors.csv', 'w') as file:
-        writer = csv.writer(file)
-        writer.writerows(last_time_reported)
-
+            # send_email(detection_template)
