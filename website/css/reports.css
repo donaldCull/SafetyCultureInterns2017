@@ -5,6 +5,8 @@
 
 #nav_bar{
     height: 60px;
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
 }
 
 #col4 {
@@ -13,6 +15,8 @@
     height: -webkit-calc(100vh - 60px);
     height: -moz-calc(100vh - 60px);
     height: calc(100vh - 60px);
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
 }
 
 #col8{

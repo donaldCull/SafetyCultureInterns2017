@@ -56,11 +56,12 @@
             <div class="list-group-flush" id="reports_menu">
                 <a href="user_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">User Settings</a>
                 <a href="device_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Device Settings</a>
-                <a onclick="" class="list-group-item list-group-item-action bg-transparent border-light text-light small"></a>
+                <br>
                 <a onclick="" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Devices:</a>
-                <a onclick="sensor_on_click(this)" id="1" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Food Fridge</a>
-                <a onclick="sensor_on_click(this)" id="2" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Drinks Fridge</a>
-                <a onclick="sensor_on_click(this)" id="3" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Ambient Temperature</a>
+
+                <a href="#" onclick="sensor_on_click(this)" id="1" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Food Fridge</a>
+                <a href="#" onclick="sensor_on_click(this)" id="2" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Drinks Fridge</a>
+                <a href="#" onclick="sensor_on_click(this)" id="3" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Ambient Temperature</a>
 
 
             </div>
@@ -70,6 +71,11 @@
 
         <!-- right side of page-->
         <div class="col" id="col8">
+            <div id="save_message">
+
+
+            </div>
+
 
         <fieldset>
 
@@ -120,7 +126,7 @@
                 </div>
 
 
-                <a class="btn btn-primary btn-sm" id="save_button" href="#" role="button">Save</a>
+                <a onclick="save_btn_click()" class="btn btn-primary btn-sm" id="save_button" href="#" role="button">Save</a>
 
 
         </form>

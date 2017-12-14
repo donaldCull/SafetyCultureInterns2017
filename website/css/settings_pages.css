@@ -70,3 +70,17 @@
 #save_button{
     float: right;
 }
+
+#nav_bar{
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+}
+
+#col4{
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+}
+
+#save_message{
+    width: 30vw;
+}

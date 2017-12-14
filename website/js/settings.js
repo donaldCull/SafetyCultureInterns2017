@@ -1,5 +1,6 @@
 function sensor_on_click(this_object) {
     var id = this_object.id;
+    document.getElementById("save_message").innerHTML = "";
 
 
     if (id === "1"){
@@ -38,4 +39,13 @@ function sensor_on_click(this_object) {
 
     }
 
+}
+
+function save_btn_click() {
+    document.getElementById("save_message").innerHTML = '<div class="alert alert-primary alert-dismissible fade show" role="alert">\n' +
+        '                    <strong>Saved</strong> *but not really\n' +
+        '                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+        '                        <span aria-hidden="true">&times;</span>\n' +
+        '                    </button>\n' +
+        '                </div>';
 }
