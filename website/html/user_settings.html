@@ -66,15 +66,75 @@
         <div class="col" id="col8">
 
 
-            <form>
+            <form id="settings_form" class="">
+
+                <fieldset disabled id="form_fieldset">
+
+
+                <div class="form-group">
+                    <label for="settings_form_input_2">Email:</label>
+                    <input type="email" class="form-control form-control-sm" id="settings_form_input_2" aria-describedby="emailHelp" placeholder="user@TempSpace.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="settings_form_input_3">Password:</label>
+                    <input type="email" class="form-control form-control-sm" id="settings_form_input_3" aria-describedby="emailHelp" placeholder="************">
+                </div>
+
+                    <div class="">
+                        <label for="validationCustom012">API key:</label>
+                        <input type="text" class="form-control" id="validationCustom012" placeholder="Last name" value="24DB3A5F73B12DC450FAF2718D78EB1B" required>
+                    </div>
+
+                    <br>
 
 
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">First name:</label>
+                            <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Donald" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last name:</label>
+                            <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Cull" required>
+                        </div>
 
 
 
+                    </div>
 
-                <a class="btn btn-primary" href="user_settings.html" role="button">Save</a>
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom03">City</label>
+                            <input type="text" class="form-control" id="validationCustom03" placeholder="Townsville" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom04">State</label>
+                            <input type="text" class="form-control" id="validationCustom04" placeholder="QLD" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom05">Zip</label>
+                            <input type="text" class="form-control" id="validationCustom05" placeholder="4810" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+
+                <a onclick="" class="btn btn-primary btn-sm disabled" href="user_settings.html" role="button">Change</a>
+                <a class="btn btn-primary btn-sm disabled" href="user_settings.html" role="button">Save</a>
             </form>
 
 
@@ -87,7 +147,7 @@
 </div>
 
 
-
+<script src="../js/settings.js"></script>
 <!-- Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>

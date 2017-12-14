@@ -22,3 +22,8 @@
     padding-left: 5vw;
     padding-top: 5vh;
 }
+
+#settings_form{
+    max-width: 30vw;
+}
+
