@@ -76,8 +76,8 @@ def detect():
                 row[1] = float(row[1])
                 forecasts.append(row)
 
+            print("sensor {} latest prediction at {} with temp of {}".format(sensor_names[index], forecasts[0][0], forecasts[1][1]))
             for temp in forecasts:
-
                 if temp[1] >= thresholds[index]:
                     detected_sensor = sensor_names[index]
                     start_detection_date = temp[0].date()

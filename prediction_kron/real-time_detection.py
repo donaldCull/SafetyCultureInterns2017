@@ -9,6 +9,7 @@ from generate_email_alert import send_email
 
 last_time_reported = []
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
+# start retrieve sensor data
 cursor = connect()
 
 get_user_sensors_sql = "SELECT sensor_serial, sensor_name, sensor_location FROM Devices;"
@@ -19,7 +20,7 @@ for sensor_serial_code in sensor_serial_codes:
     get_sensor_data_sql = "SELECT sensor_date_time, sensor_temp FROM {};".format(sensor_serial_code['sensor_serial'])
     cursor.execute(get_sensor_data_sql)
     raw_sensor_data = cursor.fetchall()
-
+# Summarise each sensor's temp data
     sensor_timestamps = []
     sensor_temps = []
     for row in raw_sensor_data:
@@ -30,13 +31,13 @@ for sensor_serial_code in sensor_serial_codes:
     temp_std_dev = statistics.stdev(sensor_temps)
     two_std_dev = temp_std_dev + temp_std_dev
     sensor_temp_threshold = temp_mean_sensor + temp_std_dev
-
+# Get latest reading from each sensor
     latest_sensor_recording = sensor_temps[-1]
     latest_sensor_recording_index = sensor_temps.index(sensor_temps[-1])
     latest_timestamp = sensor_timestamps[-1]
-    print("Sensor {} has threshold {} and current temp is {}".format(sensor_serial_code['sensor_serial'], sensor_temp_threshold, latest_sensor_recording))
+    print("Sensor {} has threshold {:.2f} and current temp is {} at {}".format(sensor_serial_code['sensor_serial'], sensor_temp_threshold, latest_sensor_recording, latest_timestamp))
 
-
+# Check if the latest reading is within threshold
     if latest_sensor_recording >= sensor_temp_threshold:
         # initialise values in case the next value is under the threshold
         next_sensor_recording = latest_sensor_recording

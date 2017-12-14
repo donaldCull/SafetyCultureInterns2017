@@ -78,6 +78,8 @@ with open(os.path.dirname(__file__) + '/sensor_filenames.csv', 'w') as file:
     for sensor_file_name in sensor_file_names:
         writer.writerow([sensor_file_name])
 
+
+
 detect()
 
 
