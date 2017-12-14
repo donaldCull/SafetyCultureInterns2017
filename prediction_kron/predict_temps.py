@@ -30,12 +30,8 @@ for sensor, sensor_serial_code in enumerate(sensor_details):
     anomalies = []
     for index, row in forecast.iterrows():
         # check if there is anomaly
-
         if float(row['yhat']) >= sensor_serial_code['min_threshold'] and float(row['yhat']) <= sensor_serial_code['max_threshold']:
-            # print("Sensor:{} at {} with temperature of {}.  Threshold is {} - {} degrees".format(sensor_serial_code['sensor_serial'], row['ds'], row['yhat']
-            #                                                                                      ,sensor_serial_code['min_threshold'], sensor_serial_code['max_threshold']))
             anomalies.append([row['ds'],row['yhat']])
-            # Check if the anomaly has lasted an hour
     if len(anomalies) != 0:
         anomaly_start = anomalies[0][0]
         anomaly_start_temp = anomalies[0][1]
