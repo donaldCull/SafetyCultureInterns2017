@@ -12,11 +12,11 @@ sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/predict
 # start retrieve sensor data
 cursor = connect()
 
-get_user_sensors_sql = "SELECT sensor_serial, sensor_name, sensor_location FROM Devices;"
+get_user_sensors_sql = "SELECT sensor_serial, sensor_name, sensor_location, min_threshold, max_threshold FROM Devices;"
 cursor.execute(get_user_sensors_sql)
-sensor_serial_codes = cursor.fetchall()
+sensor_details = cursor.fetchall()
 
-for sensor_serial_code in sensor_serial_codes:
+for sensor_serial_code in sensor_details:
     get_sensor_data_sql = "SELECT sensor_date_time, sensor_temp FROM {};".format(sensor_serial_code['sensor_serial'])
     cursor.execute(get_sensor_data_sql)
     raw_sensor_data = cursor.fetchall()
@@ -35,16 +35,16 @@ for sensor_serial_code in sensor_serial_codes:
     latest_sensor_recording = sensor_temps[-1]
     latest_sensor_recording_index = sensor_temps.index(sensor_temps[-1])
     latest_timestamp = sensor_timestamps[-1]
-    print("Sensor {} has threshold {:.2f} and current temp is {} at {}".format(sensor_serial_code['sensor_serial'], sensor_temp_threshold, latest_sensor_recording, latest_timestamp))
+    print("Sensor {} has threshold {} - {} degrees and current temp is {} at {}".format(sensor_serial_code['sensor_serial'], sensor_serial_code['min_threshold'], sensor_serial_code['max_threshold'], latest_sensor_recording, latest_timestamp))
 
 # Check if the latest reading is within threshold
-    if latest_sensor_recording >= sensor_temp_threshold:
+    if latest_sensor_recording >= sensor_serial_code['min_threshold'] or latest_sensor_recording <= sensor_serial_code['max_threshold']:
         # initialise values in case the next value is under the threshold
         next_sensor_recording = latest_sensor_recording
         next_timestamp = latest_timestamp
         # Go backwards from the latest observation and check how long the anomaly has lasted
         for index in range(len(sensor_temps)-1, -1, -1):
-            if sensor_temps[index] >= sensor_temp_threshold:
+            if sensor_temps[index] >= sensor_serial_code['min_threshold'] or sensor_temps[index] <= sensor_serial_code['max_threshold']:
                 next_sensor_recording = sensor_temps[index]
                 next_timestamp = sensor_timestamps[index]
             else:
@@ -58,7 +58,7 @@ for sensor_serial_code in sensor_serial_codes:
             reader = csv.reader(file)
             for row in reader:
                 reported_sensors[row[0]] = parser.parse(row[1])
-        # if the anomaly has lasted for more than 1 hour and an email hasnt been sent in the last hour
+        # if the anomaly has lasted for more than 1 hour and an email hasnt been sent in the last hour #Potential to extract sensitivity from db
         if time_diff > timedelta(hours=1) and reported_sensors[sensor_serial_code['sensor_serial']] > datetime.now() - timedelta(hours=1):
             detection_template = "Anomaly detected in {} by {} ({}) at {} with a temperature of {} which started at {} with a temperature of {}. Temperature has been out of bounds for {}".format(sensor_serial_code['sensor_location'],
                                                                                                                 sensor_serial_code['sensor_name'],sensor_serial_code['sensor_serial'],
