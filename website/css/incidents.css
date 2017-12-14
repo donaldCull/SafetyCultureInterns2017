@@ -67,12 +67,12 @@
     left: 50%;
     top: 50%;
     z-index: 1;
-    width: 50px;
-    height: 50px;
+    width: 120px;
+    height: 120px;
     margin: -75px 0 0 -75px;
     border: 10px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 10px solid #D65D28;
+    border-top: 10px solid #1786DD;
     -webkit-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
 }
