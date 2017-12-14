@@ -30,11 +30,12 @@ for sensor_serial_code in sensor_serial_codes:
     temp_std_dev = statistics.stdev(sensor_temps)
     two_std_dev = temp_std_dev + temp_std_dev
     sensor_temp_threshold = temp_mean_sensor + temp_std_dev
-    print("Sensor {} has threshold {}".format(sensor_serial_code['sensor_serial'], sensor_temp_threshold))
 
     latest_sensor_recording = sensor_temps[-1]
     latest_sensor_recording_index = sensor_temps.index(sensor_temps[-1])
     latest_timestamp = sensor_timestamps[-1]
+    print("Sensor {} has threshold {} and current temp is {}".format(sensor_serial_code['sensor_serial'], sensor_temp_threshold, latest_sensor_recording))
+
 
     if latest_sensor_recording >= sensor_temp_threshold:
         # initialise values in case the next value is under the threshold
@@ -52,7 +53,7 @@ for sensor_serial_code in sensor_serial_codes:
         time_diff = latest_timestamp - next_timestamp
         # open reported sensors and check if the sensor has already been reported on lately
         reported_sensors = {}
-        with open('reported_sensors.csv') as file:
+        with open(os.path.dirname(__file__) + '/reported_sensors.csv') as file:
             reader = csv.reader(file)
             for row in reader:
                 reported_sensors[row[0]] = parser.parse(row[1])
