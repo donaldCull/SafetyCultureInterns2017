@@ -27,3 +27,46 @@
     max-width: 30vw;
 }
 
+#settings_container{
+    max-width: 75vw;
+    margin: auto;
+
+
+}
+
+
+#device_settings_form{
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+
+}
+
+.device_settings_inputs{
+    margin-bottom: 2vh;
+}
+#top_buttons{
+    margin-bottom: 2vh;
+    min-height: 30px;
+}
+
+#button_left{
+    float: left;
+}
+
+#button_right{
+    float: right;
+    margin-right: 4vw;
+}
+
+#save_setting_devices{
+    float: right;
+}
+
+#sensor_setting_form{
+    width: 30vw;
+}
+
+#save_button{
+    float: right;
+}

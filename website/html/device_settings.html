@@ -54,8 +54,14 @@
 
             <!-- list of report_id_list/incidents-->
             <div class="list-group-flush" id="reports_menu">
-                <a href="device_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Device Settings</a>
                 <a href="user_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">User Settings</a>
+                <a href="device_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Device Settings</a>
+                <a onclick="" class="list-group-item list-group-item-action bg-transparent border-light text-light small"></a>
+                <a onclick="" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Devices:</a>
+                <a onclick="sensor_on_click(this)" id="1" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Food Fridge</a>
+                <a onclick="sensor_on_click(this)" id="2" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Drinks Fridge</a>
+                <a onclick="sensor_on_click(this)" id="3" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Kitchen - Ambient Temperature</a>
+
 
             </div>
 
@@ -65,14 +71,66 @@
         <!-- right side of page-->
         <div class="col" id="col8">
 
+        <fieldset>
+
+            <form id="sensor_setting_form">
+                <h4 id="form_title">Kitchen - Food Fridge:</h4>
+
+            <div class="form-group">
+                <label>Threshold:</label>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Min</label>
+                        <input  id="min" type="text" class="form-control form-control-sm"  placeholder="2">
+
+                    </div>
+                    <div class="col-6">
+                        <label>Max</label>
+                        <input  id="max" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="3">
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="form-group">
+                    <label for="sensitivity">Time Until Notification:</label>
+                    <select class="form-control form-control-sm" id="sensitivity">
+                        <option>1min</option>
+                        <option>5min</option>
+                        <option>30min</option>
+                        <option>1hr</option>
+                        <option>2hr</option>
+                        <option>4hr</option>
+
+
+                    </select>
+                </div>
 
 
 
 
+                <div class="form-group">
+                    <label for="notify">Notify Who:</label>
+                    <select class="form-control form-control-sm" id="notify">
+                        <option>user@TempSpace.com</option>
+                        <option>don@interns2017.com</option>
+                        <option>kieran@interns2017.com</option>
+                        <option>chris@interns2017.com</option>
+                    </select>
+                </div>
 
 
-                <a class="btn btn-primary btn-sm" href="user_settings.html" role="button">Save</a>
-            </form>
+                <a class="btn btn-primary btn-sm" id="save_button" href="#" role="button">Save</a>
+
+
+        </form>
+
+
+        </fieldset>
+
+            </div>
+
+
 
 
 

@@ -54,8 +54,8 @@
 
             <!-- list of report_id_list/incidents-->
             <div class="list-group-flush" id="reports_menu">
-                <a href="device_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Device Settings</a>
                 <a href="user_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">User Settings</a>
+                <a href="device_settings.html" class="list-group-item list-group-item-action bg-transparent border-light text-light small">Device Settings</a>
 
             </div>
 
@@ -67,8 +67,8 @@
 
 
             <form id="settings_form" class="">
-
-                <fieldset disabled id="form_fieldset">
+                <h4 id="form_title">User Settings:</h4>
+                <fieldset>
 
 
                 <div class="form-group">
@@ -83,7 +83,7 @@
 
                     <div class="">
                         <label for="validationCustom012">API key:</label>
-                        <input type="text" class="form-control" id="validationCustom012" placeholder="Last name" value="24DB3A5F73B12DC450FAF2718D78EB1B" required>
+                        <input type="text" class="form-control form-control-sm" id="validationCustom012" placeholder="Last name" value="24DB3A5F73B12DC450FAF2718D78EB1B" required>
                     </div>
 
                     <br>
@@ -93,11 +93,11 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">First name:</label>
-                            <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Donald" required>
+                            <input type="text" class="form-control form-control-sm" id="validationCustom01" placeholder="First name" value="Donald" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom02">Last name:</label>
-                            <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Cull" required>
+                            <input type="text" class="form-control form-control-sm" id="validationCustom02" placeholder="Last name" value="Cull" required>
                         </div>
 
 
@@ -108,21 +108,21 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom03">City</label>
-                            <input type="text" class="form-control" id="validationCustom03" placeholder="Townsville" required>
+                            <input type="text" class="form-control form-control-sm" id="validationCustom03" placeholder="Townsville" required>
                             <div class="invalid-feedback">
                                 Please provide a valid city.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom04">State</label>
-                            <input type="text" class="form-control" id="validationCustom04" placeholder="QLD" required>
+                            <input type="text" class="form-control form-control-sm" id="validationCustom04" placeholder="QLD" required>
                             <div class="invalid-feedback">
                                 Please provide a valid state.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom05">Zip</label>
-                            <input type="text" class="form-control" id="validationCustom05" placeholder="4810" required>
+                            <input type="text" class="form-control form-control-sm" id="validationCustom05" placeholder="4810" required>
                             <div class="invalid-feedback">
                                 Please provide a valid zip.
                             </div>
@@ -133,8 +133,7 @@
                 </fieldset>
 
 
-                <a onclick="" class="btn btn-primary btn-sm disabled" href="user_settings.html" role="button">Change</a>
-                <a class="btn btn-primary btn-sm disabled" href="user_settings.html" role="button">Save</a>
+                <a class="btn btn-primary btn-sm" id="save_button" href="user_settings.html" role="button">Save</a>
             </form>
 
 
