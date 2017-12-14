@@ -49,12 +49,12 @@ def detect():
         threshold = sensor_mean + two_std_dev
         thresholds.append(round(threshold, 2))
         sensor_temps.clear()
-    for index, sensor_result in enumerate(range(len(sensor_means))):
-        print("Sensor {}: mean {}, std. {}, 2std. {}, threshold {}".format(sensor_names[index],
-                                                                           sensor_means[sensor_result],
-                                                                           std_devs[sensor_result],
-                                                                           two_std_devs[sensor_result],
-                                                                           thresholds[sensor_result]))
+    # for index, sensor_result in enumerate(range(len(sensor_means))):
+        # print("Sensor {}: mean {}, std. {}, 2std. {}, threshold {}".format(sensor_names[index],
+        #                                                                    sensor_means[sensor_result],
+        #                                                                    std_devs[sensor_result],
+        #                                                                    two_std_devs[sensor_result],
+        #                                                                    thresholds[sensor_result]))
 
     # search the sensor predictions to determine if there is a breach
     forecast_filenames = []
@@ -76,7 +76,7 @@ def detect():
                 row[1] = float(row[1])
                 forecasts.append(row)
 
-            print("sensor {} latest prediction at {} with temp of {}".format(sensor_names[index], forecasts[0][0], forecasts[1][1]))
+            print("sensor {} latest prediction at {} with temp of {} threshold {}".format(sensor_names[index], forecasts[0][0], forecasts[1][1], thresholds[index]))
             for temp in forecasts:
                 if temp[1] >= thresholds[index]:
                     detected_sensor = sensor_names[index]

@@ -6,6 +6,7 @@ from fbprophet import Prophet
 from datetime import datetime, timedelta
 from connection_information import connect
 from detect_anomalies import detect
+from suppress_prophet_output import suppress_stdout_stderr
 sys.path.append('sftp://ec2-52-207-83-62.compute-1.amazonaws.com/var/www/prediction')
 
 DAYS_PRIOR = 14
@@ -57,8 +58,8 @@ for sensor_file_name in sensor_file_names:
     training_data.to_csv(os.path.dirname(__file__) + '/' + sensor_file_name, index_label=False, index=False, header=('Timestamp', 'Temps'))
     # get all the data
     testing_data = historical_sensor_data
-
-    testing_model = Prophet(changepoint_prior_scale=0.01).fit(testing_data)
+    with suppress_stdout_stderr():
+        testing_model = Prophet(changepoint_prior_scale=0.01).fit(testing_data)
     # produce timestamps 4hrs into the future with 5 minute increments
     future_times = testing_model.make_future_dataframe(periods=48, freq='5min', include_history=False)
     # use the model to predict temps for these times
