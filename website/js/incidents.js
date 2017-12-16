@@ -10,7 +10,9 @@ window.onload = function start() {
     // runs the following functions when the pages load
     get_raw_data(function () {
         sensors_menu();
+        page_loader();
         document.getElementById("search_reports").style.visibility = "visible";
+
     });
 };
 
@@ -223,4 +225,10 @@ function on_report_click(obj) {
     }
     $(obj).addClass("active");
     update_table();
+}
+
+function page_loader() {
+    document.getElementById("main_container").style.visibility = "visible";
+    document.getElementById("nav_bar").style.visibility = "visible";
+    document.getElementById("loader").style.visibility = "hidden";
 }
