@@ -1,30 +1,80 @@
-#reports_menu{
-    overflow: scroll;
-    max-height: 500px;
+#nav_bar{
+    padding-top: 3vh;
+}
+#dropdown_form{
+    width: 250px;
 }
 
-#col4{
-    margin-top: 3%;
+#username_input{
+    margin-right: 5px;
+
+}
+#password_input{
+    margin-right: 5px;
+
 }
 
-#col8{
-    margin-top: 6%;
+#jumbotron{
+padding-top: 20vh;
 }
 
-#data_table{
-    margin-right: 2%;
-    margin-left: 2%;
+#bg_div_1{
+    margin: 0;
+    padding: 0;
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+    height: 95vh;
+
 }
 
-#sensor_report_select{
-    margin-bottom: 10px;
+#bg_div_2{
+    margin: 0;
+    padding: 0;
+
+    padding-top: 20vh;
+    padding-bottom: 20vh;
 }
 
-#print_download_btns{
-    float: right;
-    margin-right: 2%;
+#jumbotron2{
+    text-align: right;
+
+
 }
 
-#sensor_select_btn{
-    float: left;
+#bg_div_3{
+    margin: 0;
+    padding: 0;
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+
+}
+
+#jumbotron3{
+    text-align: left;
+
+}
+
+#bg_div_4{
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    padding-right: 15vh;
+    padding-left: 15vh;
+    color: #757575;
+}
+#bg_div_5{
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    text-align: center;
+
+}
+
+.container_custom{
+    width: 80vw;
+    margin: auto;
+}
+
+body{
+
 }

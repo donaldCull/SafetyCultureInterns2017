@@ -1,170 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://safetyculture.com/assets/images/twitter/twitter_mark.png">
+    <link rel="icon" href="http://ec2-52-87-157-17.compute-1.amazonaws.com/website_images/twitter_mark.png">
     <title>#Interns2017</title>
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- My css below -->
     <link href="css/index.css" rel="stylesheet">
-    <link href="css/print_report.css" rel="stylesheet" media="print">
 </head>
 
-<body class="bg-light">
-<script src="js/index.js"></script>
+<body>
 
 
-<!-- top page navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav_bar">
 
-    <a class="navbar-brand" href="#">Insert Name Here</a>
+<div id="bg_div_1" class="bg-transparent">
+<div class="container_custom">
 
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <div class="dropdown">
-        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            user@insnmhere.com.au
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Account Settings</a>
-            <a class="dropdown-item" href="#">User Settings</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Log out</a>
-        </div>
+    <nav class="navbar bg-transparent text-light justify-content-between" id="nav_bar">
+        <a class="navbar-brand">TempSpace</a>
+
+
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="text" id="username_input" class="form-control form-control-sm bg-light" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group">
+                <input type="text" id="password_input" class="form-control form-control-sm bg-light" placeholder="Password" aria-label="Password">
+            </div>
+            <button type="button" onclick="on_login_click()" class="btn btn-outline-light btn-sm">Login</button>
+        </form>
+
+    </nav>
+
+
+
+    <div class="jumbotron bg-transparent " id="jumbotron">
+        <h1 class="display-4 text-light">Monitoring, Perfection</h1>
+        <p class="lead text-light">The best temperature monitoring system in the world</p>
+        <p class="lead">
+            <a class="btn btn-light btn-lg text-primary" href="#bg_div_4"  role="button">Buy Now!</a>
+        </p>
     </div>
-</nav>
+
+</div>
+</div>
 
 
-<!-- container for rest of main-->
-<div class="container-fluid" id="main_container">
-    <div class="row">
+<div id="bg_div_2" class="bg-light">
+<div class="container_custom">
+
+    <div class="jumbotron bg-transparent" id="jumbotron2">
+        <h1 class="display-6 text-primary">Automatic Reporting</h1>
+        <p class="lead text-primary">Dont fill out reports yourself, let our system do it for you... automatically</p>
+
+    </div>
 
 
-        <!-- left side of page-->
-        <div class="col-3" id="col4">
+</div>
+</div>
 
-            <!-- tab navigation-->
-            <ul class="nav nav-tabs" id="nav_tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="incidents.html">Incidents</a>
-                </li>
+<div id="bg_div_3" class="bg-transparent">
+    <div class="container_custom">
 
-            </ul>
+        <div class="jumbotron bg-transparent" id="jumbotron3">
+            <h1 class="display-6 text-light">Real Error Detection</h1>
+            <p class="lead text-light">Dont rely on archaic detection techniques, get advanced predictions with TempSpace</p>
 
-            <!-- list of reports/incidents-->
-            <div class="list-group" id="reports_menu">
-            </div>
 
         </div>
 
 
-        <!-- right side of page-->
-        <div class="col-9" id="col8">
-
-            <div id="data_table">
-
-                <table class="table table-hover table-bordered" id="report_table">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">8am</th>
-                        <th scope="col">11am</th>
-                        <th scope="col">2pm</th>
-                        <th scope="col">10pm</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">Monday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Tuesday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Wednesday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Thursday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Friday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Saturday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sunday</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- buttons below table -->
-                <div class="dropdown" id="sensor_select_btn">
-
-                    <!-- dropdown for sensors -->
-                    <button class="btn-sm btn-outline-primary dropdown-toggle" type="button" id="sensor_report_select"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Drinks Fridge
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Ambient Temperature</a>
-                        <a class="dropdown-item" href="#">Food Fridge</a>
-                    </div>
-                </div>
-
-
-                <!-- download and print buttons -->
-                <div id="print_download_btns">
-                    <button type="button" class="btn btn-primary disabled">Download</button>
-                    <button onclick="window.print();return false;" type="button" class="btn btn-primary">Print
-                    </button>
-
-
-                </div>
-
-
-            </div>
-
-        </div>
     </div>
 </div>
 
 
+<div id="bg_div_4" class="bg-light">
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Small</h6>
+                    <h2 class="card-title text-primary">$10 p/m</h2>
+                    <p class="card-text ">For small business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 5 sensors</li>
+                    <li class="list-group-item">Basic customer suport</li>
+                    <li class="list-group-item">We can tolerate you</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Medium</h6>
+                    <h2 class="card-title text-primary">$50 p/m</h2>
+                    <p class="card-text ">For bigger business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 20 sensors</li>
+                    <li class="list-group-item">Better customer suport</li>
+                    <li class="list-group-item">We like you slightly better</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+            <div class="card text-center">
+
+
+                <div class="card-body">
+                    <h6 class="card-title ">Large</h6>
+                    <h2 class="card-title text-primary">$500 p/m</h2>
+                    <p class="card-text ">For the biggest business</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Support for up to 10,000 sensors</li>
+                    <li class="list-group-item">Priority customer support</li>
+                    <li class="list-group-item">We like you the best</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Buy Now!</a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div id="bg_div_5" class="bg-dark text-light">
+    <p>#interns2017</p>
+</div>
+
+
+
+
+
+
+
+<script src="js/index.js"></script>
 <!-- Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>

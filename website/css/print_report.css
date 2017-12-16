@@ -2,6 +2,7 @@ nav, #col4, #nav_bar, #print_download_btns, #sensor_select_btn{
     display: none;
 }
 
-@page land {size: landscape;}
 
-.landscape {page: land;}
+@page {
+    size: landscape;
+}

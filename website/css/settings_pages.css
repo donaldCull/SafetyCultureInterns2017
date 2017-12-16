@@ -1,0 +1,86 @@
+#reports_menu{
+    overflow: scroll;
+    max-height: 87%;
+}
+
+#nav_bar{
+    height: 60px;
+}
+
+#col4 {
+    padding-left: 0;
+    padding-right: 0;
+    height: -webkit-calc(100vh - 60px);
+    height: -moz-calc(100vh - 60px);
+    height: calc(100vh - 60px);
+}
+
+#col8{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 5vw;
+    padding-top: 5vh;
+}
+
+#settings_form{
+    max-width: 30vw;
+}
+
+#settings_container{
+    max-width: 75vw;
+    margin: auto;
+
+
+}
+
+
+#device_settings_form{
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+
+}
+
+.device_settings_inputs{
+    margin-bottom: 2vh;
+}
+#top_buttons{
+    margin-bottom: 2vh;
+    min-height: 30px;
+}
+
+#button_left{
+    float: left;
+}
+
+#button_right{
+    float: right;
+    margin-right: 4vw;
+}
+
+#save_setting_devices{
+    float: right;
+}
+
+#sensor_setting_form{
+    width: 30vw;
+}
+
+#save_button{
+    float: right;
+}
+
+#nav_bar{
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+}
+
+#col4{
+    background-image: url("../website_images/b303660a.png");
+    background-attachment: fixed;
+}
+
+#save_message{
+    width: 30vw;
+}
